@@ -26,7 +26,7 @@ process.chdir(__dirname);
 (function() {
   var sails;
   try {
-    sails = require('node_modules/sails');
+    sails = require('sails');
   } catch (e) {
     console.error('To run an app using `node app.js`, you usually need to have a version of `sails` installed in the same directory as your app.');
     console.error('To do that, run `npm install sails`');
@@ -43,7 +43,7 @@ process.chdir(__dirname);
     rc = require('rc');
   } catch (e0) {
     try {
-      rc = require('node_modules/rc');
+      rc = require('rc');
     } catch (e1) {
       console.error('Could not find dependency: `rc`.');
       console.error('Your `.sailsrc` file(s) will be ignored.');

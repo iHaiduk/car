@@ -24,6 +24,15 @@ var cssFilesToInject = [
     'styles/style.css',
 ];
 
+var jsFilesToHead = [
+
+    // Load sails.io before everything else
+    'vendor/modernizr/modernizr.js',
+    'vendor/fastclick/fastclick.js'
+    // will be injected here in no particular order.
+    //'js/**/*.js'
+];
+
 
 // Client-side javascript files to inject in order
 // (uses Grunt-style wildcard/glob/splat expressions)
@@ -68,7 +77,10 @@ module.exports.cssFilesToInject = cssFilesToInject.map(function(path) {
   return '.tmp/public/' + path;
 });
 module.exports.jsFilesToInject = jsFilesToInject.map(function(path) {
-  return '.tmp/public/' + path;
+    return '.tmp/public/' + path;
+});
+module.exports.jsFilesToHead = jsFilesToHead.map(function(path) {
+    return '.tmp/public/' + path;
 });
 module.exports.templateFilesToInject = templateFilesToInject.map(function(path) {
   return 'assets/' + path;

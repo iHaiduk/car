@@ -15,24 +15,38 @@ module.exports = function(grunt) {
 
 	grunt.config.set('sails-linker', {
 		devJs: {
-			options: {
-				startTag: '<!--SCRIPTS-->',
-				endTag: '<!--SCRIPTS END-->',
-				fileTmpl: '<script src="%s"></script>',
-				appRoot: '.tmp/public'
-			},
-			files: {
-				'.tmp/public/**/*.html': require('../pipeline').jsFilesToInject,
-				'views/**/*.html': require('../pipeline').jsFilesToInject,
-				'views/**/*.ejs': require('../pipeline').jsFilesToInject
-			}
-		},
+            options: {
+                startTag: '<!--SCRIPTS-->',
+                endTag: '<!--SCRIPTS END-->',
+                fileTmpl: '<script src="%s" type="application/javascript"></script>',
+                appRoot: '.tmp/public'
+            },
+            files: {
+                '.tmp/public/**/*.html': require('../pipeline').jsFilesToInject,
+                'views/**/*.html': require('../pipeline').jsFilesToInject,
+                'views/**/*.ejs': require('../pipeline').jsFilesToInject
+            }
+        },
+
+        devJsUp: {
+            options: {
+                startTag: '<!--SCRIPTS UP-->',
+                endTag: '<!--SCRIPTS UP END-->',
+                fileTmpl: '<script src="%s" type="application/javascript"></script>',
+                appRoot: '.tmp/public'
+            },
+            files: {
+                '.tmp/public/**/*.html': require('../pipeline').jsFilesToHead,
+                'views/**/*.html': require('../pipeline').jsFilesToHead,
+                'views/**/*.ejs': require('../pipeline').jsFilesToHead
+            }
+        },
 
 		devJsRelative: {
 			options: {
 				startTag: '<!--SCRIPTS-->',
 				endTag: '<!--SCRIPTS END-->',
-				fileTmpl: '<script src="%s"></script>',
+				fileTmpl: '<script src="%s" type="application/javascript"></script>',
 				appRoot: '.tmp/public',
 				relative: true
 			},
@@ -61,7 +75,7 @@ module.exports = function(grunt) {
 			options: {
 				startTag: '<!--SCRIPTS-->',
 				endTag: '<!--SCRIPTS END-->',
-				fileTmpl: '<script src="%s"></script>',
+				fileTmpl: '<script src="%s" type="application/javascript"></script>',
 				appRoot: '.tmp/public',
 				relative: true
 			},
@@ -76,7 +90,7 @@ module.exports = function(grunt) {
 			options: {
 				startTag: '<!--STYLES-->',
 				endTag: '<!--STYLES END-->',
-				fileTmpl: '<link rel="stylesheet" href="%s">',
+				fileTmpl: '<link type="text/css" rel="stylesheet" href="%s">',
 				appRoot: '.tmp/public'
 			},
 
@@ -91,7 +105,7 @@ module.exports = function(grunt) {
 			options: {
 				startTag: '<!--STYLES-->',
 				endTag: '<!--STYLES END-->',
-				fileTmpl: '<link rel="stylesheet" href="%s">',
+				fileTmpl: '<link type="text/css" rel="stylesheet" href="%s">',
 				appRoot: '.tmp/public',
 				relative: true
 			},
@@ -107,7 +121,7 @@ module.exports = function(grunt) {
 			options: {
 				startTag: '<!--STYLES-->',
 				endTag: '<!--STYLES END-->',
-				fileTmpl: '<link rel="stylesheet" href="%s">',
+				fileTmpl: '<link type="text/css" rel="stylesheet" href="%s">',
 				appRoot: '.tmp/public'
 			},
 			files: {
@@ -121,7 +135,7 @@ module.exports = function(grunt) {
 			options: {
 				startTag: '<!--STYLES-->',
 				endTag: '<!--STYLES END-->',
-				fileTmpl: '<link rel="stylesheet" href="%s">',
+				fileTmpl: '<link type="text/css" rel="stylesheet" href="%s">',
 				appRoot: '.tmp/public',
 				relative: true
 			},

@@ -1,0 +1,384 @@
+
+<!-- START Page content-->
+<section class="main-content">
+<h3>Настройки</h3>
+<div class="panel panel-default panel-demo">
+<div class="panel-heading">Настройки пользователя
+    <a href="javascript:void(0);" data-perform="panel-collapse" data-toggle="tooltip" title="" class="pull-right" data-original-title="Показать панель" aria-describedby="tooltip960531">
+        <em class="fa fa-plus"></em>
+    </a>
+</div>
+<div class="panel-body panel-wrapper collapse" id="view_setting_user">
+<form action="/" method="POST">
+<div data-toggle="wizard" class="form-wizard wizard-horizontal">
+<!-- START wizard steps indicator-->
+<ol class="row wizard-nolabels">
+    <li class="col-lg-3 col-xs-12 text-center">
+        <h4>Параметры аккаунта</h4>
+        <small class="text-muted">Данные что связаны с Вашим аккаунтом</small>
+    </li>
+    <li class="col-lg-3 col-xs-12 text-center">
+        <h4>Личные данные</h4>
+        <small class="text-muted">Личные данные пользователя</small>
+    </li>
+    <li class="col-lg-3 col-xs-12 text-center">
+        <h4>Смена пароля</h4>
+        <small class="text-muted">Настройки по изменению пароля</small>
+    </li>
+    <li class="col-lg-3 col-xs-12 text-center">
+        <h4>Аватар</h4>
+        <small class="text-muted">Общие настройки пользователя и смена аватара</small>
+    </li>
+</ol>
+<!-- END wizard steps indicator-->
+<!-- START Wizard Step inputs -->
+<div>
+    <fieldset>
+        <!-- START row -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Псевдоним</label>
+                    <div class="controls">
+                        <input type="text" name="username" placeholder="Для отображения на сайте" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Номер телефона</label>
+                    <div class="controls">
+                        <input type="text" data-toggle="masked" data-inputmask="'mask': '(999) 999-9999'" placeholder="Номер телефона для быстрой связи" class="form-control">
+                        <span class="help-block">Формат ввода: '(999) 999-9999"'</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END row -->
+    </fieldset>
+</div>
+<!-- END Wizard Step inputs -->
+<!-- START Wizard Step inputs -->
+<div>
+    <fieldset>
+        <!-- START row -->
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Имя</label>
+                    <input type="text" name="first-name" placeholder="Ваше имя" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Фамилия</label>
+                    <input type="text" name="last-name" placeholder="Ваша фамилия" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Город</label>
+                    <select class="chosen-select">
+                        <optgroup label="Alaskan/Hawaiian Time Zone">
+                            <option value="AK">Alaska</option>
+                            <option value="HI">Hawaii</option>
+                        </optgroup>
+                        <optgroup label="Pacific Time Zone">
+                            <option value="CA">California</option>
+                            <option value="NV">Nevada</option>
+                            <option value="OR">Oregon</option>
+                            <option value="WA">Washington</option>
+                        </optgroup>
+                        <optgroup label="Mountain Time Zone">
+                            <option value="AZ">Arizona</option>
+                            <option value="CO">Colorado</option>
+                            <option value="ID">Idaho</option>
+                            <option value="MT">Montana</option>
+                            <option value="NE">Nebraska</option>
+                            <option value="NM">New Mexico</option>
+                            <option value="ND">North Dakota</option>
+                            <option value="UT">Utah</option>
+                            <option value="WY">Wyoming</option>
+                        </optgroup>
+                        <optgroup label="Central Time Zone">
+                            <option value="AL">Alabama</option>
+                            <option value="AR">Arkansas</option>
+                            <option value="IL">Illinois</option>
+                            <option value="IA">Iowa</option>
+                            <option value="KS">Kansas</option>
+                            <option value="KY">Kentucky</option>
+                            <option value="LA">Louisiana</option>
+                            <option value="MN">Minnesota</option>
+                            <option value="MS">Mississippi</option>
+                            <option value="MO">Missouri</option>
+                            <option value="OK">Oklahoma</option>
+                            <option value="SD">South Dakota</option>
+                            <option value="TX">Texas</option>
+                            <option value="TN">Tennessee</option>
+                            <option value="WI">Wisconsin</option>
+                        </optgroup>
+                        <optgroup label="Eastern Time Zone">
+                            <option value="CT">Connecticut</option>
+                            <option value="DE">Delaware</option>
+                            <option value="FL">Florida</option>
+                            <option value="GA">Georgia</option>
+                            <option value="IN">Indiana</option>
+                            <option value="ME">Maine</option>
+                            <option value="MD">Maryland</option>
+                            <option value="MA">Massachusetts</option>
+                            <option value="MI">Michigan</option>
+                            <option value="NH">New Hampshire</option>
+                            <option value="NJ">New Jersey</option>
+                            <option value="NY">New York</option>
+                            <option value="NC">North Carolina</option>
+                            <option value="OH">Ohio</option>
+                            <option value="PA">Pennsylvania</option>
+                            <option value="RI">Rhode Island</option>
+                            <option value="SC">South Carolina</option>
+                            <option value="VT">Vermont</option>
+                            <option value="VA">Virginia</option>
+                            <option value="WV">West Virginia</option>
+                        </optgroup>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <!-- END row -->
+    </fieldset>
+</div>
+<!-- END Wizard Step inputs -->
+<!-- START Wizard Step inputs -->
+<div>
+    <fieldset>
+        <!-- START row -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Пароль</label>
+                    <input type="password" name="password" placeholder="" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Повторить пароль</label>
+                    <input type="password" name="password2" placeholder="" class="form-control">
+                </div>
+            </div>
+        </div>
+        <!-- END row -->
+    </fieldset>
+    <div class="text-right">
+        <button type="button" class="btn btn-success">Изменить</button>
+    </div>
+</div>
+<!-- END Wizard Step inputs -->
+<!-- START Wizard Step inputs -->
+<div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-sm-4 col-xs-4 text-right">
+                    <p>
+                        <strong>Псевдоним</strong>
+                    </p>
+                </div>
+                <div class="col-sm-5 col-xs-4">
+                    <p>Glavar</p>
+                </div>
+                <div class="col-sm-3 col-xs-4">
+                    <label class="switch" title="Отображать псевдоним вместо имени">
+                        <input type="checkbox" checked="true">
+                        <span></span>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 col-xs-6 text-right">
+                    <p>
+                        <strong>Имя</strong>
+                    </p>
+                </div>
+                <div class="col-sm-8 col-xs-6">
+                    <p>Игорь</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 col-xs-6 text-right">
+                    <p>
+                        <strong>Фамилия</strong>
+                    </p>
+                </div>
+                <div class="col-sm-8 col-xs-6">
+                    <p>Гайдук</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 col-xs-4 text-right">
+                    <p>
+                        <strong>Город</strong>
+                    </p>
+                </div>
+                <div class="col-sm-5 col-xs-4">
+                    <p>Киев</p>
+                </div>
+                <div class="col-sm-3 col-xs-4">
+                    <label class="switch" title="Отображать свой город для всех">
+                        <input type="checkbox" checked="true">
+                        <span></span>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 col-xs-4 text-right">
+                    <p>
+                        <strong>Номер телефона</strong>
+                    </p>
+                </div>
+                <div class="col-sm-5 col-xs-4">
+                    <p>+38 (093) 167 3185</p>
+                </div>
+                <div class="col-sm-3 col-xs-4">
+                    <label class="switch" title="Отображать номер телефона для всех">
+                        <input type="checkbox">
+                        <span></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-3 col-xs-4">
+                    <img style="width: 128px; height: 128px;" src="/img/user/04.jpg" alt="Image" class="media-object img-rounded">
+                </div>
+                <div class="col-md-9 col-xs-8">
+                    <div id="upload-drop" class="box-placeholder text-center">
+                        <p>
+                            <em class="fa fa-cloud-upload fa-2x"></em>
+                        </p>Перетащите картинку для загрузки или <a href="#" class="form-file">выбирите файл<input id="upload-select" type="file" name="upfile"></a>
+                    </div>
+                    <div id="progressbar" class="progress hidden">
+                        <div role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" class="progress-bar"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END Wizard Step inputs -->
+</div>
+</form>
+</div>
+</div>
+<div class="panel panel-default panel-demo">
+    <div class="panel-heading">Настройки типа автомобиля
+        <a href="javascript:void(0);" data-perform="panel-collapse" data-toggle="tooltip" title="" class="pull-right" data-original-title="Показать панель" aria-describedby="tooltip960531">
+            <em class="fa fa-plus"></em>
+        </a>
+    </div>
+    <div class="panel-body panel-wrapper collapse in" id="view_setting_car">
+        <form action="/" method="POST" class="form-horizontal">
+            <div data-toggle="wizard" class="form-wizard wizard-horizontal">
+                <!-- START wizard steps indicator-->
+                <ol class="row wizard-nolabels">
+                    <li class="col-lg-6 col-xs-12 text-center">
+                        <h4>VIN код</h4>
+                        <small class="text-muted">Автоматический поиск характеристик по коду</small>
+                    </li>
+                    <li class="col-lg-6 col-xs-12 text-center">
+                        <h4>Расширеные характеристики</h4>
+                        <small class="text-muted">Проверка и изменение параметров автомобиля</small>
+                    </li>
+                </ol>
+                <!-- END wizard steps indicator-->
+                <!-- START Wizard Step inputs -->
+                <div>
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label">VIN</label>
+                            <div class="col-sm-11">
+                                <input type="text" class="form-control">
+                                <span class="help-block m-b-none">Будьте внимательны при заполнении кода. Он должен состоять из 17 символов.</span>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <!-- END Wizard Step inputs -->
+                <!-- START Wizard Step inputs -->
+                <div>
+                    <h4 class="text-center">Информация о автомобиле</h4>
+                    <hr>
+                    <fieldset>
+                        <!-- START row -->
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <dl class="dl-horizontal">
+                                    <dt>Производитель</dt>
+                                    <dd>Porsche</dd>
+                                    <dt>Модель</dt>
+                                    <dd>Cayenne Turbo S 2014 New</dd>
+                                </dl>
+                            </div>
+                            <div class="col-sm-4">
+                                <dl class="dl-horizontal">
+                                    <dt>Год выпуска</dt>
+                                    <dd>2014</dd>
+                                    <dt>Класс</dt>
+                                    <dd>Кроссовер</dd>
+                                </dl>
+                            </div>
+                            <div class="col-sm-4">
+                                <dl class="dl-horizontal">
+                                    <dt>Тип(ы) кузова</dt>
+                                    <dd>5‑дв. SUV (5‑мест.)</dd>
+                                    <dt>Двигатель</dt>
+                                    <dd>382 л.с</dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <hr>
+                        <h4 class="text-center">Отличия</h4>
+                        <hr>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Моя комплектация автомобиля отличаеться из-за</label>
+                                <div class="col-sm-10">
+                                    <label class="checkbox c-checkbox c-checkbox-rounded">
+                                        <input id="roundedcheckbox10" type="checkbox">
+                                        <span class="fa fa-check"></span>Профилактики</label>
+                                    <label class="checkbox c-checkbox c-checkbox-rounded">
+                                        <input id="roundedcheckbox20" type="checkbox">
+                                        <span class="fa fa-check"></span>Износа</label>
+                                    <label class="checkbox c-checkbox c-checkbox-rounded">
+                                        <input id="roundedcheckbox30" type="checkbox">
+                                        <span class="fa fa-check"></span>Обновление</label>
+                                    <label class="checkbox c-checkbox c-checkbox-rounded">
+                                        <input id="roundedcheckbox40" type="checkbox">
+                                        <span class="fa fa-check"></span>Аварии</label>
+                                    <label class="checkbox c-checkbox c-checkbox-rounded">
+                                        <input id="roundedcheckbox50" type="checkbox">
+                                        <span class="fa fa-check"></span>Другое</label>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Отличие в данных
+                                    <br>
+                                    <small>(Опишите что отличаеться от комплектации)</small>
+                                </label>
+                                <div class="col-sm-10">
+                                    <textarea data-uk-markdownarea="{mode:'split', maxsplitsize:600}">This is some *sample* text</textarea>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <!-- END row -->
+                    </fieldset>
+                </div>
+                <!-- END Wizard Step inputs -->
+            </div>
+        </form>
+    </div>
+</div>
+</section>
+<!-- END Page content-->

@@ -23,9 +23,14 @@
     <link type="text/css" rel="stylesheet" href="/vendor/fontawesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="/vendor/animo/animate+animo.css">
     <link type="text/css" rel="stylesheet" href="/vendor/csspinner/csspinner.min.css">
+    <!--STYLES END-->
+    <% if (styles) { %>
+    <% for (i = 0; i < styles.length; i++) { %>
+    <link type="text/css" rel="stylesheet" href="/<%- styles[i] %>">
+    <% } %>
+    <% } %>
     <link type="text/css" rel="stylesheet" href="/styles/app.css">
     <link type="text/css" rel="stylesheet" href="/styles/style.css">
-    <!--STYLES END-->
     <!--SCRIPTS UP-->
     <script src="/vendor/modernizr/modernizr.js" type="application/javascript"></script>
     <script src="/vendor/fastclick/fastclick.js" type="application/javascript"></script>
@@ -36,7 +41,9 @@
   <section class="wrapper">
         <%- include includes/navigation.ejs %>
         <%- include includes/aside.ejs %>
+      <section>
         <%- body %>
+      </section>
   </section>
     <!--SCRIPTS-->
     <script src="/js/dependencies/sails.io.js" type="application/javascript"></script>
@@ -48,7 +55,15 @@
     <script src="/vendor/animo/animo.min.js" type="application/javascript"></script>
     <script src="/vendor/sparklines/jquery.sparkline.min.js" type="application/javascript"></script>
     <script src="/vendor/slimscroll/jquery.slimscroll.min.js" type="application/javascript"></script>
-    <script src="/js/app.js" type="application/javascript"></script>
+    <script src="/vendor/validation/jquery.validate.js" type="application/javascript"></script>
+    <script src="/vendor/validation/additional-methods.js" type="application/javascript"></script>
     <!--SCRIPTS END-->
+    <!-- SCRIPT CUSTOM -->
+      <% if (scripts) { %>
+      <% for (i = 0; i < scripts.length; i++) { %>
+      <script src="/<%- scripts[i] %>" type="application/javascript"></script>
+      <% } %>
+      <% } %>
+    <script src="/js/app.js" type="application/javascript"></script>
   </body>
 </html>

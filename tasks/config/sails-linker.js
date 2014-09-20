@@ -57,19 +57,33 @@ module.exports = function(grunt) {
 			}
 		},
 
-		prodJs: {
-			options: {
-				startTag: '<!--SCRIPTS-->',
-				endTag: '<!--SCRIPTS END-->',
-				fileTmpl: '<script src="%s"></script>',
-				appRoot: '.tmp/public'
-			},
-			files: {
-				'.tmp/public/**/*.html': ['.tmp/public/min/production.min.js'],
-				'views/**/*.html': ['.tmp/public/min/production.min.js'],
-				'views/**/*.ejs': ['.tmp/public/min/production.min.js']
-			}
-		},
+        prodJs: {
+            options: {
+                startTag: '<!--SCRIPTS-->',
+                endTag: '<!--SCRIPTS END-->',
+                fileTmpl: '<script src="%s"></script>',
+                appRoot: '.tmp/public'
+            },
+            files: {
+                '.tmp/public/**/*.html': ['.tmp/public/min/production.min.js'],
+                'views/**/*.html': ['.tmp/public/min/production.min.js'],
+                'views/**/*.ejs': ['.tmp/public/min/production.min.js']
+            }
+        },
+
+        promoJs: {
+            options: {
+                startTag: '<!--SCRIPTS PROMO-->',
+                endTag: '<!--SCRIPTS PROMO END-->',
+                fileTmpl: '<script src="%s"></script>',
+                appRoot: '.tmp/public'
+            },
+            files: {
+                '.tmp/public/**/*.html': require('../pipeline').jsFilesToPromo,
+                'views/**/*.html': require('../pipeline').jsFilesToPromo,
+                'views/**/*.ejs': require('../pipeline').jsFilesToPromo
+            }
+        },
 
 		prodJsRelative: {
 			options: {
@@ -86,20 +100,34 @@ module.exports = function(grunt) {
 			}
 		},
 
-		devStyles: {
-			options: {
-				startTag: '<!--STYLES-->',
-				endTag: '<!--STYLES END-->',
-				fileTmpl: '<link type="text/css" rel="stylesheet" href="%s">',
-				appRoot: '.tmp/public'
-			},
+        devStyles: {
+            options: {
+                startTag: '<!--STYLES-->',
+                endTag: '<!--STYLES END-->',
+                fileTmpl: '<link type="text/css" rel="stylesheet" href="%s">',
+                appRoot: '.tmp/public'
+            },
 
-			files: {
-				'.tmp/public/**/*.html': require('../pipeline').cssFilesToInject,
-				'views/**/*.html': require('../pipeline').cssFilesToInject,
-				'views/**/*.ejs': require('../pipeline').cssFilesToInject
-			}
-		},
+            files: {
+                '.tmp/public/**/*.html': require('../pipeline').cssFilesToInject,
+                'views/**/*.html': require('../pipeline').cssFilesToInject,
+                'views/**/*.ejs': require('../pipeline').cssFilesToInject
+            }
+        },
+        promoStyles: {
+            options: {
+                startTag: '<!--STYLES PROMO-->',
+                endTag: '<!--STYLES PROMO END-->',
+                fileTmpl: '<link type="text/css" rel="stylesheet" href="%s">',
+                appRoot: '.tmp/public'
+            },
+
+            files: {
+                '.tmp/public/**/*.html': require('../pipeline').cssFilesToPromo,
+                'views/**/*.html': require('../pipeline').cssFilesToPromo,
+                'views/**/*.ejs': require('../pipeline').cssFilesToPromo
+            }
+        },
 
 		devStylesRelative: {
 			options: {

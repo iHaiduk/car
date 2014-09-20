@@ -15,20 +15,30 @@
 // (if you're using LESS with the built-in default config, you'll want
 //  to change `assets/styles/importer.less` instead.)
 var cssFilesToInject = [
-  //'styles/**/*.css',
+    //'styles/**/*.css',
     'styles/bootstrap.css',
     'vendor/fontawesome/css/font-awesome.min.css',
     'vendor/animo/animate+animo.css',
     'vendor/csspinner/csspinner.min.css',
+    //'styles/app.css',
+    //'styles/style.css',
+];
+
+var cssFilesToPromo = [
+    //'styles/**/*.css',
+    'styles/bootstrap.css',
+    'vendor/fontawesome/css/font-awesome.min.css',
+    'vendor/animo/animate+animo.css',
     'styles/app.css',
-    'styles/style.css',
+    'styles/landing.css',
 ];
 
 var jsFilesToHead = [
 
     // Load sails.io before everything else
     'vendor/modernizr/modernizr.js',
-    'vendor/fastclick/fastclick.js'
+    'vendor/fastclick/fastclick.js',
+    //'vendor/validation/localization/*.js'
     // will be injected here in no particular order.
     //'js/**/*.js'
 ];
@@ -48,12 +58,21 @@ var jsFilesToInject = [
     'vendor/animo/animo.min.js',
     'vendor/sparklines/jquery.sparkline.min.js',
     'vendor/slimscroll/jquery.slimscroll.min.js',
-    'js/app.js',
+    'vendor/validation/jquery.validate.js',
+    'vendor/validation/additional-methods.js',
+    //'js/app.js',
   // All of the rest of your client-side js files
   // will be injected here in no particular order.
   //'js/**/*.js'
 ];
 
+var jsFilesToPromo = [
+    'js/dependencies/sails.io.js',
+    'vendor/jquery/jquery.min.js',
+    'vendor/bootstrap/js/bootstrap.min.js',
+    'vendor/animo/animo.min.js',
+    'js/pages.js',
+];
 
 // Client-side HTML templates are injected using the sources below
 // The ordering of these templates shouldn't matter.
@@ -69,14 +88,19 @@ var templateFilesToInject = [
 ];
 
 
-
 // Prefix relative paths to source files so they point to the proper locations
 // (i.e. where the other Grunt tasks spit them out, or in some cases, where
 // they reside in the first place)
 module.exports.cssFilesToInject = cssFilesToInject.map(function(path) {
-  return '.tmp/public/' + path;
+    return '.tmp/public/' + path;
+});
+module.exports.cssFilesToPromo = cssFilesToPromo.map(function(path) {
+    return '.tmp/public/' + path;
 });
 module.exports.jsFilesToInject = jsFilesToInject.map(function(path) {
+    return '.tmp/public/' + path;
+});
+module.exports.jsFilesToPromo = jsFilesToPromo.map(function(path) {
     return '.tmp/public/' + path;
 });
 module.exports.jsFilesToHead = jsFilesToHead.map(function(path) {

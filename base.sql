@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS `auto_engineCompressorType` (
   `idModel` int(10) unsigned NOT NULL,
   `name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `Индекс 3` (`name`),
   KEY `FK_auto_engineCompressorType_auto_model` (`idModel`),
   CONSTRAINT `FK_auto_engineCompressorType_auto_model` FOREIGN KEY (`idModel`) REFERENCES `auto_model` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='engineCompressorType';
@@ -36,6 +37,7 @@ CREATE TABLE IF NOT EXISTS `auto_engineCylinder` (
   `idModel` int(10) unsigned NOT NULL,
   `count` int(2) DEFAULT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `Индекс 3` (`count`),
   KEY `FK_auto_engineCylinder_auto_model` (`idModel`),
   CONSTRAINT `FK_auto_engineCylinder_auto_model` FOREIGN KEY (`idModel`) REFERENCES `auto_model` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='engineCompressorType';
@@ -51,6 +53,7 @@ CREATE TABLE IF NOT EXISTS `auto_engineFuelType` (
   `idModel` int(10) unsigned NOT NULL,
   `name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `Индекс 3` (`name`),
   KEY `FK_auto_engineFuelType_auto_model` (`idModel`),
   CONSTRAINT `FK_auto_engineFuelType_auto_model` FOREIGN KEY (`idModel`) REFERENCES `auto_model` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='engineCompressorType';
@@ -66,6 +69,7 @@ CREATE TABLE IF NOT EXISTS `auto_engineSize` (
   `idModel` int(10) unsigned NOT NULL,
   `count` float DEFAULT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `Индекс 3` (`count`),
   KEY `FK_auto_engineSize_auto_model` (`idModel`),
   CONSTRAINT `FK_auto_engineSize_auto_model` FOREIGN KEY (`idModel`) REFERENCES `auto_model` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='engineCompressorType';
@@ -81,6 +85,7 @@ CREATE TABLE IF NOT EXISTS `auto_engineType` (
   `idModel` int(10) unsigned NOT NULL,
   `name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `Индекс 3` (`name`),
   KEY `FK_auto_engineType_auto_model` (`idModel`),
   CONSTRAINT `FK_auto_engineType_auto_model` FOREIGN KEY (`idModel`) REFERENCES `auto_model` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -94,11 +99,14 @@ CREATE TABLE IF NOT EXISTS `auto_engineType` (
 CREATE TABLE IF NOT EXISTS `auto_make` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='производитель автомобилей';
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `Индекс 2` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='производитель автомобилей';
 
--- Дамп данных таблицы car.auto_make: ~0 rows (приблизительно)
+-- Дамп данных таблицы car.auto_make: ~1 rows (приблизительно)
 /*!40000 ALTER TABLE `auto_make` DISABLE KEYS */;
+INSERT IGNORE INTO `auto_make` (`id`, `name`) VALUES
+	(1, 'test');
 /*!40000 ALTER TABLE `auto_make` ENABLE KEYS */;
 
 
@@ -108,6 +116,7 @@ CREATE TABLE IF NOT EXISTS `auto_model` (
   `id_make` int(10) unsigned NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `Индекс 3` (`name`),
   KEY `Make Name` (`id_make`),
   CONSTRAINT `FK__auto_make` FOREIGN KEY (`id_make`) REFERENCES `auto_make` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='модели автомобилей';
@@ -123,6 +132,7 @@ CREATE TABLE IF NOT EXISTS `auto_style` (
   `idModel` int(10) unsigned NOT NULL,
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `Индекс 3` (`name`),
   KEY `FK_auto_style_auto_model` (`idModel`),
   CONSTRAINT `FK_auto_style_auto_model` FOREIGN KEY (`idModel`) REFERENCES `auto_model` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='тип автомобиля: седан, кроссовер ...';
@@ -138,6 +148,7 @@ CREATE TABLE IF NOT EXISTS `auto_transmissionType` (
   `idModel` int(10) unsigned NOT NULL,
   `name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `Индекс 3` (`name`),
   KEY `FK_auto_transmissionType_auto_model` (`idModel`),
   CONSTRAINT `FK_auto_transmissionType_auto_model` FOREIGN KEY (`idModel`) REFERENCES `auto_model` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='тип трансмисии';
@@ -163,6 +174,7 @@ CREATE TABLE IF NOT EXISTS `auto_vin` (
   `engineSize` int(10) unsigned NOT NULL COMMENT 'объем двигателя',
   `style` int(1) unsigned NOT NULL COMMENT 'тип автомобиля(седан)',
   PRIMARY KEY (`id`),
+  UNIQUE KEY `Индекс 12` (`vin`),
   KEY `FK_auto_vin_auto_make` (`makeName`),
   KEY `FK_auto_vin_auto_model` (`modelName`),
   KEY `FK_auto_vin_auto_year` (`modelYearId`),
@@ -196,6 +208,7 @@ CREATE TABLE IF NOT EXISTS `auto_year` (
   `idModel` int(10) unsigned NOT NULL,
   `year` int(4) DEFAULT NULL,
   UNIQUE KEY `Индекс 2` (`id`),
+  UNIQUE KEY `Индекс 3` (`year`),
   KEY `Индекс 1` (`idModel`),
   CONSTRAINT `FK__auto_model` FOREIGN KEY (`idModel`) REFERENCES `auto_model` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='год выпуска';

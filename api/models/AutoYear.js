@@ -30,7 +30,8 @@ module.exports = {
         },
         year: {
             type: "integer",
-            size: 4
+            size: 4,
+            unique: true
         },
         idModel: {
             model:'AutoModel'

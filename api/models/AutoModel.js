@@ -28,9 +28,9 @@ module.exports = {
             primaryKey: true,
             autoIncrement: true
         },
-        year: {
-            type: "integer",
-            size: 4
+        name: {
+            type: "string",
+            unique: true
         },
         id_make: {
             model:'AutoMake'

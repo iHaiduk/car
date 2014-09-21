@@ -33,7 +33,16 @@ module.exports = {
         res.view();
     },
     vinGet: function(req, res){
-        var request = require('request');
+
+        AutoMake.findByName("test",function (err, users) {
+            console.log(err, users);
+            /*if (err) {
+                res.send(400);
+            } else {
+                res.send(users);
+            }*/
+        });
+        /*var request = require('request');
         request('https://api.edmunds.com/v1/api/toolsrepository/vindecoder?vin=1N4AL3AP4DC295509&fmt=json&api_key=zsx3jzwjkk9ke7zq4ze9mjp3', function (error, response, request) {
             if (!error && response.statusCode == 200) {
                 request = JSON.parse(request).styleHolder[0];
@@ -42,7 +51,7 @@ module.exports = {
                 });
                 return res.send(200, request); // Print the google web page.
             }
-        })
+        })*/
     }
 };
 

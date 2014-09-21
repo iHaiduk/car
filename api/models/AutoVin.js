@@ -30,7 +30,8 @@ module.exports = {
         },
         vin: {
             type: "varchar",
-            size: 17
+            size: 17,
+            unique: true
         },
         makeId: 'integer',
         makeName: {

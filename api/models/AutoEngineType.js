@@ -28,7 +28,10 @@ module.exports = {
             primaryKey: true,
             autoIncrement: true
         },
-        name: "string",
+        name: {
+            type: "string",
+            unique: true
+        },
         idModel: {
             model:'AutoModel'
         },

@@ -296,9 +296,15 @@
                     <fieldset>
                         <div class="form-group">
                             <label class="col-sm-1 control-label">VIN</label>
-                            <div class="col-sm-11">
-                                <input type="text" class="form-control">
+                            <div class="col-sm-9">
+                                <input type="text" maxlength="17" min="17" max="17" id="vinId" class="form-control">
                                 <span class="help-block m-b-none">Будьте внимательны при заполнении кода. Он должен состоять из 17 символов.</span>
+                            </div>
+                            <div class="col-sm-2">
+                                <button type="button" id="vinSend" class="btn btn-labeled btn-danger btn-success">
+                                   <span class="btn-label"><i class="fa fa-times"></i></span>
+                                    OK
+                                </button>
                             </div>
                         </div>
                     </fieldset>

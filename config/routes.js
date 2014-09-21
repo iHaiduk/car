@@ -43,7 +43,10 @@ module.exports.routes = {
         controller: 'SettingsController',
         action: 'index'
     },
-
+    '/vin/get': {
+        controller: 'SettingsController',
+        action: 'vinGet'
+    },
     '/user/new':{
         controller: 'UserController',
         action: 'new'

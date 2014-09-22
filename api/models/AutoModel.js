@@ -28,12 +28,11 @@ module.exports = {
             primaryKey: true,
             autoIncrement: true
         },
-        year: {
-            type: "integer",
-            size: 4
-        },
         id_make: {
             model:'AutoMake'
+        },
+        idYear: {
+            model:'AutoYear'
         },
         AutoEngineCompressorType:{
             collection: 'AutoEngineCompressorType',

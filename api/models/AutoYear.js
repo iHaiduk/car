@@ -33,7 +33,8 @@ module.exports = {
             size: 4
         },
         idModel: {
-            model:'AutoModel'
+            collection: 'AutoModel',
+            via: 'idYear'
         },
         AutoVin:{
             collection: 'AutoVin',

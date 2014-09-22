@@ -29,6 +29,9 @@ module.exports = {
             autoIncrement: true
         },
         name: "string",
+        idMake: "integer",
+        country: "string",
+        make_uid: "string",
         models:{
             collection: 'AutoModel',
             via: 'id_make'

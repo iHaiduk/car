@@ -43,7 +43,7 @@ module.exports.routes = {
         controller: 'SettingsController',
         action: 'index'
     },
-    '/vin/get': {
+    '/get/vin': {
         controller: 'SettingsController',
         action: 'vinGet'
     },

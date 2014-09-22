@@ -43,7 +43,7 @@ process.chdir(__dirname);
     rc = require('rc');
   } catch (e0) {
     try {
-      rc = require('sails/node_modules/rc');
+      rc = require('rc');
     } catch (e1) {
       console.error('Could not find dependency: `rc`.');
       console.error('Your `.sailsrc` file(s) will be ignored.');

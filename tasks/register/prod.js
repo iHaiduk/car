@@ -1,6 +1,15 @@
 module.exports = function (grunt) {
 	grunt.registerTask('prod', [
-		'compileAssets',
+        'sails-linker:devJs',
+        'sails-linker:devJsUp',
+        'sails-linker:devStyles',
+        'sails-linker:promoStyles',
+        'sails-linker:promoJs',
+        'sails-linker:devTpl',
+        'sails-linker:devJsJade',
+        'sails-linker:devStylesJade',
+        'sails-linker:devTplJade'
+		/*'compileAssets',
 		'concat',
 		'uglify',
 		'cssmin',
@@ -9,6 +18,6 @@ module.exports = function (grunt) {
 		'sails-linker:devTpl',
 		'sails-linker:prodJsJade',
 		'sails-linker:prodStylesJade',
-		'sails-linker:devTplJade'
+		'sails-linker:devTplJade'*/
 	]);
 };

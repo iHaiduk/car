@@ -28,7 +28,10 @@ module.exports = {
             primaryKey: true,
             autoIncrement: true
         },
-        count: "float",
+        count: {
+            type: "float",
+            unique: true
+        },
         idModel: {
             model:'AutoModel'
         },

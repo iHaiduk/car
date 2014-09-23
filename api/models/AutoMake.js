@@ -28,17 +28,10 @@ module.exports = {
             primaryKey: true,
             autoIncrement: true
         },
-<<<<<<< HEAD
         name: "string",
         idMake: "integer",
         country: "string",
         make_uid: "string",
-=======
-        name: {
-            type: "string",
-            unique: true
-        },
->>>>>>> 0c5c054fb5918777a179c3d7f91a5a80ae24a2a1
         models:{
             collection: 'AutoModel',
             via: 'id_make'

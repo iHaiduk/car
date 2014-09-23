@@ -32,7 +32,7 @@ module.exports = {
         ];
         res.view();
     },
-<<<<<<< HEAD
+
     vinGet: function(req, res) {
         /*console.log(req.query)
         return;*/
@@ -207,28 +207,6 @@ module.exports = {
          console.log(year,time);
          //if(year<=2015) setTimeout(tet, time);
          });*/
-=======
-    vinGet: function(req, res){
-
-        AutoMake.findByName("test",function (err, users) {
-            console.log(err, users);
-            /*if (err) {
-                res.send(400);
-            } else {
-                res.send(users);
-            }*/
-        });
-        /*var request = require('request');
-        request('https://api.edmunds.com/v1/api/toolsrepository/vindecoder?vin=1N4AL3AP4DC295509&fmt=json&api_key=zsx3jzwjkk9ke7zq4ze9mjp3', function (error, response, request) {
-            if (!error && response.statusCode == 200) {
-                request = JSON.parse(request).styleHolder[0];
-                Marques.create({name: "test"}, function userCreated(err, user) {
-                    console.log(err, user)
-                });
-                return res.send(200, request); // Print the google web page.
-            }
-        })*/
->>>>>>> 0c5c054fb5918777a179c3d7f91a5a80ae24a2a1
     }
 };
 

@@ -35,42 +35,6 @@ module.exports = {
         certified: "integer",
         idYear: {
             model:'AutoYear'
-        },
-        AutoEngineCompressorType:{
-            collection: 'AutoEngineCompressorType',
-            via: 'idModel'
-        },
-        AutoEngineCylinder:{
-            collection: 'AutoEngineCylinder',
-            via: 'idModel'
-        },
-        AutoEngineFuelType:{
-            collection: 'AutoEngineFuelType',
-            via: 'idModel'
-        },
-        AutoEngineSize:{
-            collection: 'AutoEngineSize',
-            via: 'idModel'
-        },
-        AutoEngineType:{
-            collection: 'AutoEngineType',
-            via: 'idModel'
-        },
-        AutoStyle:{
-            collection: 'AutoStyle',
-            via: 'idModel'
-        },
-        AutoTransmissionType:{
-            collection: 'AutoTransmissionType',
-            via: 'idModel'
-        },
-        AutoYear:{
-            collection: 'AutoYear',
-            via: 'idModel'
-        },
-        AutoVin:{
-            collection: 'AutoVin',
-            via: 'modelName'
         }
     }
 };

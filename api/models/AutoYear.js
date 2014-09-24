@@ -36,10 +36,6 @@ module.exports = {
         idModel: {
             collection: 'AutoModel',
             via: 'idYear'
-        },
-        AutoVin:{
-            collection: 'AutoVin',
-            via: 'modelYearId'
         }
     }
 };

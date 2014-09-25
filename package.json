@@ -4,6 +4,7 @@
     "description": "Car project",
     "main": "app.js",
     "dependencies": {
+        "async": "^0.9.0",
         "sails": "^0.10.5",
         "sails-disk": "^0.10.3",
         "sails-mysql" : "^0.10.6",

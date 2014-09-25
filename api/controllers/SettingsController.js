@@ -39,7 +39,7 @@ module.exports = {
         // http://fastcodenote.blogspot.com/2013/09/nodejs-async.html
 
         var async = require("async");
-        var taskNamed = {
+        /*var taskNamed = {
             viewsNumber: function (callback) {
                 AutoYear.findOneByYear(1940).exec(callback);
             }
@@ -50,6 +50,29 @@ module.exports = {
         async.series(taskNamed, function (err, results) {
             // Результат будет объектом
             console.log(results); // {viewsNumber: 231, growFactor: 24}
+        });*/
+
+        async.waterfall([
+            function(callback){
+                callback(null, 'один', 'два');
+            },
+            function(arg1, arg2, callback){
+                // Тут arg1 равен "один"
+                // , а arg2 равен "два"
+                // что соответствует второму и третьему параметру текщего колбека
+                // , а первый конечно же мы не забыли - это err но в этом случае
+                // ошибок нет поэтому null
+                console.log(arg1, arg2);
+                callback(null, 'три');
+            },
+            function(arg1, callback){
+                // Здесь же arg1 будет равен уже "три"
+                console.log(arg1);
+                callback(null, 'Готово');
+            }
+        ], function (err, result) {
+            console.log(err, result);
+            // Сейчас результат будет равен 'Готово'
         });
 
         res.send('vinGet');

@@ -36,7 +36,21 @@ module.exports = {
     vinGet: function(req, res) {
         var year_start = 1940;
 
-        AutoYear.findOneByYear(year_start).exec(sails.controllers.settings.test);
+        // http://fastcodenote.blogspot.com/2013/09/nodejs-async.html
+
+        var async = require("async");
+        var taskNamed = {
+            viewsNumber: function (callback) {
+                AutoYear.findOneByYear(1940).exec(callback);
+            }
+            , growFactor: function (callback) {
+                callback(null, 1212412);
+            }
+        };
+        async.series(taskNamed, function (err, results) {
+            // Результат будет объектом
+            console.log(results); // {viewsNumber: 231, growFactor: 24}
+        });
 
         res.send('vinGet');
 

@@ -52,27 +52,23 @@ module.exports = {
             console.log(results); // {viewsNumber: 231, growFactor: 24}
         });*/
 
-        async.waterfall([
-            function(callback){
-                callback(null, 'один', 'два');
-            },
-            function(arg1, arg2, callback){
-                // Тут arg1 равен "один"
-                // , а arg2 равен "два"
-                // что соответствует второму и третьему параметру текщего колбека
-                // , а первый конечно же мы не забыли - это err но в этом случае
-                // ошибок нет поэтому null
-                console.log(arg1, arg2);
-                callback(null, 'три');
-            },
-            function(arg1, callback){
-                // Здесь же arg1 будет равен уже "три"
-                console.log(arg1);
-                callback(null, 'Готово');
-            }
-        ], function (err, result) {
-            console.log(err, result);
-            // Сейчас результат будет равен 'Готово'
+        var model = [{"model_id":"48585","model_make_id":"alfa-romeo","model_name":"6C","model_trim":"","model_year":"1940","model_body":null,"model_engine_position":"Front","model_engine_cc":"2442","model_engine_cyl":"6","model_engine_type":"in-line","model_engine_valves_per_cyl":"2","model_engine_power_ps":"90","model_engine_power_rpm":"4600","model_engine_torque_nm":null,"model_engine_torque_rpm":null,"model_engine_bore_mm":"72.0","model_engine_stroke_mm":"100.0","model_engine_compression":null,"model_engine_fuel":"Gasoline","model_top_speed_kph":null,"model_0_to_100_kph":null,"model_drive":"Rear","model_transmission_type":"Manual","model_seats":"5","model_doors":"4","model_weight_kg":"1500","model_length_mm":"4880","model_width_mm":"1840","model_height_mm":"1510","model_wheelbase_mm":"3010","model_lkm_hwy":null,"model_lkm_mixed":null,"model_lkm_city":null,"model_fuel_cap_l":"77","model_sold_in_us":"0","model_co2":null,"model_make_display":null,"make_display":"Alfa Romeo","make_country":"Italy"}/*,{"model_id":"47982","model_make_id":"buick","model_name":"Century","model_trim":"","model_year":"1940","model_body":"Sedan","model_engine_position":"Front","model_engine_cc":"5247","model_engine_cyl":"8","model_engine_type":"in-line","model_engine_valves_per_cyl":null,"model_engine_power_ps":"167","model_engine_power_rpm":"3200","model_engine_torque_nm":null,"model_engine_torque_rpm":null,"model_engine_bore_mm":"86.3","model_engine_stroke_mm":"108.2","model_engine_compression":null,"model_engine_fuel":"Gasoline","model_top_speed_kph":"153","model_0_to_100_kph":null,"model_drive":"Rear","model_transmission_type":null,"model_seats":"5","model_doors":"4","model_weight_kg":null,"model_length_mm":null,"model_width_mm":null,"model_height_mm":null,"model_wheelbase_mm":null,"model_lkm_hwy":null,"model_lkm_mixed":null,"model_lkm_city":null,"model_fuel_cap_l":null,"model_sold_in_us":"1","model_co2":null,"model_make_display":null,"make_display":"Buick","make_country":"USA"},{"model_id":"108","model_make_id":"abarth","model_name":"1300","model_trim":"Abarth","model_year":"1965","model_body":null,"model_engine_position":"Rear","model_engine_cc":"1280","model_engine_cyl":"4","model_engine_type":"in-line","model_engine_valves_per_cyl":null,"model_engine_power_ps":"139","model_engine_power_rpm":"7600","model_engine_torque_nm":null,"model_engine_torque_rpm":null,"model_engine_bore_mm":null,"model_engine_stroke_mm":null,"model_engine_compression":null,"model_engine_fuel":"Gasoline","model_top_speed_kph":null,"model_0_to_100_kph":null,"model_drive":"Rear","model_transmission_type":null,"model_seats":"2","model_doors":"2","model_weight_kg":"630","model_length_mm":"3560","model_width_mm":"1490","model_height_mm":"1140","model_wheelbase_mm":"2100","model_lkm_hwy":null,"model_lkm_mixed":null,"model_lkm_city":null,"model_fuel_cap_l":"30","model_sold_in_us":"0","model_co2":null,"model_make_display":null,"make_display":"Abarth","make_country":"Italy"}*/];
+
+        model.forEach(function(val,i){
+            async.waterfall([
+                function(callback){
+                    AutoYear.findOneByYear(parseInt(val.model_year),callback);
+                },
+                function(year, callback){
+                    console.log(year);
+                    AutoMake.findOneByMake_uid(val.model_make_id, function(err, res){
+                        callback(null, year, res);
+                    });
+                }
+            ], function (err, result) {
+                console.log(err, result);
+                // Сейчас результат будет равен 'Готово'
+            });
         });
 
         res.send('vinGet');

@@ -35,6 +35,10 @@ module.exports = {
         certified: "integer",
         idYear: {
             model:'AutoYear'
+        },
+        params:{
+            collection: 'AutoParam',
+            via: 'model_id'
         }
     }
 };

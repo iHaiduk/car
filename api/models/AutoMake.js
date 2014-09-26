@@ -35,7 +35,10 @@ module.exports = {
         models:{
             collection: 'AutoModel',
             via: 'id_make'
+        },
+        params:{
+            collection: 'AutoParam',
+            via: 'model_make_id'
         }
     }
 };
-

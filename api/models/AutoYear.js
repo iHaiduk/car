@@ -36,6 +36,10 @@ module.exports = {
         idModel: {
             collection: 'AutoModel',
             via: 'idYear'
+        },
+        params:{
+            collection: 'AutoParam',
+            via: 'model_year'
         }
     }
 };

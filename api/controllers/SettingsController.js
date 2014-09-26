@@ -65,8 +65,8 @@ module.exports = {
                         callback(null, year, res);
                     });
                 }
-            ], function (err, result) {
-                console.log(err, result);
+            ], function (err, result, car) {
+                console.log(err, result, car);
                 // Сейчас результат будет равен 'Готово'
             });
         });

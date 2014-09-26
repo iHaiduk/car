@@ -32,6 +32,7 @@ module.exports = {
         idMake: "integer",
         country: "string",
         make_uid: "string",
+        certified: "integer",
         models:{
             collection: 'AutoModel',
             via: 'id_make'

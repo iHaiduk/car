@@ -4,7 +4,7 @@
 module.exports = {
 
     connection: 'someMysqlServer',
-    tableName: 'auto_make',
+    tableName: 'auto_param',
     schema: true,
 
     // Disables Automatic ID generation
@@ -24,10 +24,10 @@ module.exports = {
             primaryKey: true,
             autoIncrement: true
         },
-        model: {
+        model_id: {
             model:'AutoModel'
         },
-        model_make: {
+        model_make_id: {
             model:'AutoMake'
         },
         model_year: {

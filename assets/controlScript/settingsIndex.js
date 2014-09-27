@@ -1,7 +1,8 @@
 $(document).ready(function(){
 
     var vinSend = $("#vinSend");
-    $("#vinId" ).on("keyup focusout",function(){
+    var vinId = $("#vinId");
+    vinId.on("keyup focusout",function(){
         var text = $(this).val();
         var alNumRegex = /^([a-zA-Z0-9]+)$/; //only letters and numbers
         $(this).parent().removeClass("has-success has-error");
@@ -16,12 +17,11 @@ $(document).ready(function(){
         }
     });
     vinSend.click(function(){
-        var self = $(this);
-        if(self.hasClass("has-success")){
+        if($(this).hasClass("btn-success")){
             $.ajax({
-                url: "/vin/get",
+                url: "/get/vin",
                 type: "GET",
-                data: {vin: self.val()},
+                data: {vin: vinId.val()},
                 dataType: "json",
                 success: function(data){
                     console.log(data)

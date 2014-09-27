@@ -39,6 +39,9 @@ module.exports = {
         params:{
             collection: 'AutoParam',
             via: 'model_id'
+        },
+        vin:{
+            collection: 'AutoVin'
         }
     }
 };

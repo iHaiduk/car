@@ -40,6 +40,10 @@ module.exports = {
         params:{
             collection: 'AutoParam',
             via: 'model_make_id'
+        },
+        vin:{
+            collection: 'AutoVin',
+            via: 'idMake'
         }
     }
 };

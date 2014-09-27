@@ -45,7 +45,7 @@ module.exports.routes = {
     },
     '/get/vin': {
         controller: 'SettingsController',
-        action: 'vinGet'
+        action: 'getVin'
     },
     '/user/new':{
         controller: 'UserController',

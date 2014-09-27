@@ -40,6 +40,10 @@ module.exports = {
         params:{
             collection: 'AutoParam',
             via: 'model_year'
+        },
+        vin:{
+            collection: 'AutoVin',
+            via: 'idYear'
         }
     }
 };

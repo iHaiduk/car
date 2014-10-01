@@ -5539,6 +5539,9 @@ button.close {
   margin-top: -3px;
   padding: 5px 0;
 }
+.slider .tooltip.top{
+    opacity: 0.65;
+}
 .tooltip.right {
   margin-left: 3px;
   padding: 0 5px;

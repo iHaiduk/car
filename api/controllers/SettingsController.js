@@ -35,8 +35,9 @@ module.exports = {
     getVin: function(req, res) {
         //var code = "1N4AL3AP4DC295509";
         var code = req.query.vin;
-        Car.getInfoVin(code, function(res){
-            //console.log(res);
+        Car.getInfoVin(code, function(result){
+            //console.log(result, res);
+            res.json(result);
         });
     }
 };

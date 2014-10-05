@@ -30,7 +30,9 @@ module.exports = {
             "vendor/validation/jquery.validate.js",
             "controlScript/settingsIndex.js"
         ];
-        res.view();
+        var make = AutoMake.find();
+        //res.view();
+        res.view('settings/index', {make: make});
     },
     getVin: function(req, res) {
         //var code = "1N4AL3AP4DC295509";

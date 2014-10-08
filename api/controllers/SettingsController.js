@@ -30,9 +30,49 @@ module.exports = {
             "vendor/validation/jquery.validate.js",
             "controlScript/settingsIndex.js"
         ];
-        var make = AutoMake.find();
+
+        async.waterfall([
+            function (callback) {
+                AutoMake.find().populate('models',{sort: "name"}).sort('name').exec(callback);
+            },
+            function (make, callback) {
+                make.forEach(function(val, i){
+                    make[i].models = unique(make[i].models);
+                });
+                //console.log(make[0].models);
+                callback(null, make);
+            }
+        ], function (err, results) {
+            //console.log(err, results);
+            res.view('settings/index', {makes : results});
+        });
+        /*async.series({
+                makes: function(callback){
+                    AutoMake.find().sort('name').exec(function(){});
+                },
+                models: function(callback){
+                    AutoModel.find().sort('name').exec(function(err, res){
+                        callback(null, unique(res));
+                    });
+                }
+            },
+            function(err, results) {
+                console.log(err, results);
+                res.view('settings/index', results);
+            });*/
+        /*{
+            one: function(callback){
+                AutoMake.find().sort('name').exec(callback);
+            },
+            two: function(callback){
+                AutoModel.find().sort('name').exec(callback);
+            }
+        },*/
+        /*var make = AutoMake.find().sort('name').exec(function(i, val){
+            //console.log(i, val);
+            res.view('settings/index', {make: val, test : "A"});
+        });*/
         //res.view();
-        res.view('settings/index', {make: make});
     },
     getVin: function(req, res) {
         //var code = "1N4AL3AP4DC295509";
@@ -43,4 +83,19 @@ module.exports = {
         });
     }
 };
+
+function unique(arr) {
+    var obj = {},
+        objs = [];
+    var k = 0;
+    for(var i=0; i<arr.length; i++) {
+        var str = arr[i].name;
+        if(obj[str]==undefined) {
+            objs[k] = arr[i];
+            k++;
+        }
+        obj[str] = true; // запомнить строку в виде свойства объекта
+    }
+    return objs; // или собрать ключи перебором для IE<9
+}
 

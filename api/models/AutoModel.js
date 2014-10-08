@@ -31,7 +31,10 @@ module.exports = {
         id_make: {
             model:'AutoMake'
         },
-        name: "string",
+        name: {
+            type: "string",
+            unique: true
+        },
         certified: "integer",
         idYear: {
             model:'AutoYear'

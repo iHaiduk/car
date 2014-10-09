@@ -340,20 +340,15 @@
                                     <dt>Модель</dt>
                                     <dd>
                                         <select class="chosen-select">
-                                            <% for(var i=0; i<makes.length; i++) { %>
-                                                <optgroup label="<%= makes[i].name %>">
-                                                    <% for(var k=0; k<makes[i].models.length; k++) { %>
-                                                    <%if(makes[i].models[k]) { %>
-                                                    <option value="<%= makes[i].models[k].id %>"><%= makes[i].models[k].name %></option>
-                                                    <% }} %>
-                                                </optgroup>
+                                            <% for(var i=0; i<models.length; i++) {%>
+                                                <option value="<%= models[i].id %>"><%= models[i].name %></option>
                                             <% } %>
                                         </select>
                                     </dd>
                                 </dl>
                             </div>
                             <div class="col-sm-4">
-                                <dl class="dl-horizontal">
+                                <dl class="dl-horizontal" id="settings_year">
                                     <dt>Год выпуска</dt>
                                     <dd>
                                         <input type="text" value="" data-slider-min="1940" data-slider-max="2015" data-slider-step="1" data-slider-value="2014" data-slider-orientation="horizontal" class="slider slider-horizontal form-control">

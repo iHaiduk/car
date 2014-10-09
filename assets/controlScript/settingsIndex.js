@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+    // Settings Page
     var vinSend = $("#vinSend");
     var vinId = $("#vinId");
     vinId.on("keyup focusout",function(){
@@ -29,4 +30,8 @@ $(document).ready(function(){
             });
         }
     });
+    /*$('.slider').slider({
+        min: 1940,
+        max: 2015
+    });*/
 });

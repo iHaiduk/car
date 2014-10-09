@@ -1,4 +1,4 @@
-/**
+ /**
  * Created by Ihor on 27.09.2014.
  */
 exports.getInfoVin = function(code, myCallback) {

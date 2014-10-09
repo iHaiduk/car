@@ -13,6 +13,7 @@ module.exports = {
             "vendor/datetimepicker/css/bootstrap-datetimepicker.min.css",
             "vendor/codemirror/lib/codemirror.css",
             "vendor/tagsinput/bootstrap-tagsinput.css",
+            "styles/style.css",
         ];
         res.locals.scripts = [
             "vendor/formwizard/js/bwizard.min.js",
@@ -32,47 +33,24 @@ module.exports = {
         ];
 
         async.waterfall([
-            function (callback) {
-                AutoMake.find().populate('models',{sort: "name"}).sort('name').exec(callback);
-            },
-            function (make, callback) {
-                make.forEach(function(val, i){
-                    make[i].models = unique(make[i].models);
-                });
-                //console.log(make[0].models);
-                callback(null, make);
-            }
-        ], function (err, results) {
-            //console.log(err, results);
-            res.view('settings/index', {makes : results});
-        });
-        /*async.series({
-                makes: function(callback){
-                    AutoMake.find().sort('name').exec(function(){});
+                function(callback){
+                    AutoMake.find().sort('name').exec(callback);
                 },
-                models: function(callback){
-                    AutoModel.find().sort('name').exec(function(err, res){
-                        callback(null, unique(res));
+                function(makes, callback){
+                    AutoYear.findOneByYear(2014,function(err, year){
+                        callback(null, makes, year);
+                    });
+                },
+                function(makes, year, callback){
+                    console.log(year);
+                    AutoModel.find({id_make: makes[0].id, idYear: year.id}).sort('name').exec(function(err, res){
+                        callback(null, makes, unique(res));
                     });
                 }
-            },
-            function(err, results) {
-                console.log(err, results);
-                res.view('settings/index', results);
-            });*/
-        /*{
-            one: function(callback){
-                AutoMake.find().sort('name').exec(callback);
-            },
-            two: function(callback){
-                AutoModel.find().sort('name').exec(callback);
-            }
-        },*/
-        /*var make = AutoMake.find().sort('name').exec(function(i, val){
-            //console.log(i, val);
-            res.view('settings/index', {make: val, test : "A"});
-        });*/
-        //res.view();
+            ],
+            function(err, makes, models) {
+                res.view('settings/index', {makes : makes, models: models});
+            });
     },
     getVin: function(req, res) {
         //var code = "1N4AL3AP4DC295509";

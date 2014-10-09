@@ -4,3 +4,17 @@
     margin-top: -6px;
     margin-right: -15px;
 }
+.chosen-container {
+    min-width: 120px;
+}
+#settings_year .tooltip-min, #settings_year .tooltip-max{
+    display: none;
+}
+#settings_year .slider-horizontal{
+    width: 100%;
+    min-width: 120px;
+    z-index: 2;
+}
+#settings_year .slider-handle{
+    z-index: 2;
+}

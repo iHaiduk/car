@@ -7,10 +7,19 @@
 .chosen-container {
     min-width: 120px;
 }
+#settings_info dt{
+    width: 40%;
+    padding: 10px 0;
+    height: 20px;
+}
+#settings_info dd{
+    margin-left: 45%;
+    height: 40px;
+}
 #settings_year .tooltip-min, #settings_year .tooltip-max{
     display: none;
 }
-#settings_year .slider-horizontal{
+#settings_year .slider-horizontal, #input-tags + .selectize-control{
     width: 100%;
     min-width: 120px;
     z-index: 2;

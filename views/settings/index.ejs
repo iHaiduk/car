@@ -302,7 +302,7 @@
                             </div>
                             <div class="col-sm-2">
                                 <button type="button" id="vinSend" class="btn btn-labeled btn-danger btn-success">
-                                   <span class="btn-label"><i class="fa fa-times"></i></span>
+                                    <span class="btn-label"><i class="fa fa-times"></i></span>
                                     OK
                                 </button>
                             </div>
@@ -314,7 +314,7 @@
                 <div>
                     <h4 class="text-center">Информация об автомобиле</h4>
                     <hr>
-                    <fieldset>
+                    <fieldset id="settings_info">
                         <!-- START row -->
                         <div class="row">
                             <div class="col-sm-4">
@@ -322,27 +322,34 @@
                                     <dt>Производитель</dt>
                                     <dd>
                                         <% var test = "A"%>
-                                        <select class="chosen-select">
+                                        <input type="text" id="input-tags">
+                                        <!--<select class="chosen-select">
                                             <optgroup label="<%= test%>">
-                                            <% for(var i=0; i<makes.length; i++) {
+                                                <%
+                                                if(makes){
+                                                for(var i=0; i<makes.length; i++) {
                                                 if(test != makes[i].name[0]){
                                                     test = makes[i].name[0]; %>
                                             </optgroup>
-                                                <optgroup label="<%= test%>">
-                                            <%
+                                            <optgroup label="<%= test%>">
+                                                <%
                                                 }
-                                            %>
-                                            <option value="<%= makes[i].id %>"><%= makes[i].name %></option>
-                                            <% } %>
+                                                %>
+                                                <option value="<%= makes[i].id %>"><%= makes[i].name %></option>
+                                                <% }
+                                                } %>
                                             </optgroup>
-                                        </select>
+                                        </select>-->
                                     </dd>
                                     <dt>Модель</dt>
                                     <dd>
                                         <select class="chosen-select">
-                                            <% for(var i=0; i<models.length; i++) {%>
-                                                <option value="<%= models[i].id %>"><%= models[i].name %></option>
-                                            <% } %>
+                                            <%
+                                            if(models){
+                                            for(var i=0; i<models.length; i++) {%>
+                                            <option value="<%= models[i].id %>"><%= models[i].name %></option>
+                                            <% }
+                                            } %>
                                         </select>
                                     </dd>
                                 </dl>

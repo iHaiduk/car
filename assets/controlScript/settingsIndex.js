@@ -30,6 +30,16 @@ $(document).ready(function(){
             });
         }
     });
+    $('#input-tags').selectize({
+        delimiter: ',',
+        persist: false,
+        create: function(input) {
+            return {
+                value: input,
+                text: input
+            }
+        }
+    });
     /*$('.slider').slider({
         min: 1940,
         max: 2015

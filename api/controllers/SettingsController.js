@@ -13,7 +13,8 @@ module.exports = {
             "vendor/datetimepicker/css/bootstrap-datetimepicker.min.css",
             "vendor/codemirror/lib/codemirror.css",
             "vendor/tagsinput/bootstrap-tagsinput.css",
-            "styles/style.css",
+            "vendor/selectize/selectize.bootstrap3.css",
+            "styles/style.css"
         ];
         res.locals.scripts = [
             "vendor/formwizard/js/bwizard.min.js",
@@ -29,6 +30,7 @@ module.exports = {
             "vendor/tagsinput/bootstrap-tagsinput.min.js",
             "vendor/inputmask/jquery.inputmask.bundle.min.js",
             "vendor/validation/jquery.validate.js",
+            "vendor/selectize/selectize.js",
             "controlScript/settingsIndex.js"
         ];
 
@@ -42,7 +44,6 @@ module.exports = {
                     });
                 },
                 function(makes, year, callback){
-                    console.log(year);
                     AutoModel.find({id_make: makes[0].id, idYear: year.id}).sort('name').exec(function(err, res){
                         callback(null, makes, unique(res));
                     });
@@ -58,6 +59,16 @@ module.exports = {
         Car.getInfoVin(code, function(result){
             //console.log(result, res);
             res.json(result);
+        });
+    },
+    getModels: function(req, res) {
+        var make = parseInt(req.query.make),
+            year = req.query.year;
+        AutoYear.findOneByYear(year,function(err, year){
+            console.log(year);
+            /*AutoModel.find({id_make: make, idYear: year.id}).sort('name').exec(function(err, resul){
+                res.json(resul);
+            });*/
         });
     }
 };

@@ -1,8 +1,9 @@
 $(document).ready(function(){
 
     // Settings Page
-    var vinSend = $("#vinSend");
-    var vinId = $("#vinId");
+    var vinSend = $("#vinSend"),
+        vinId = $("#vinId"),
+        yearSlide = $(".slider").slider();
     vinId.on("keyup focusout",function(){
         var text = $(this).val();
         var alNumRegex = /^([a-zA-Z0-9]+)$/; //only letters and numbers
@@ -30,18 +31,22 @@ $(document).ready(function(){
             });
         }
     });
-    $('#input-tags').selectize({
-        delimiter: ',',
-        persist: false,
-        create: function(input) {
-            return {
-                value: input,
-                text: input
-            }
-        }
+
+    yearSlide.on('slideStop', function(){
+        $.get("/get/models/make/"+$("#make_select").val()+"/year/"+yearSlide.slider('getValue')+"/",function(result){
+            console.log(result);
+        })
+    }).on('slide', function(){
+        $("#settings_year h6").text(yearSlide.slider('getValue'));
     });
-    /*$('.slider').slider({
-        min: 1940,
-        max: 2015
+/*
+    var mySlider = new Slider(".slider", {
+        // initial options object
+        slide: function(){
+            console.log($(this).getValue());
+        },
+        slideStop: function(){
+            console.log($(this).getValue());
+        }
     });*/
 });

@@ -312,7 +312,7 @@
                 <!-- END Wizard Step inputs -->
                 <!-- START Wizard Step inputs -->
                 <div>
-                    <h4 class="text-center">Информация об автомобиле</h4>
+                    <h4 class="text-center">Информация об автомобиле(-ях)</h4>
                     <hr>
                     <fieldset id="settings_info">
                         <!-- START row -->
@@ -322,12 +322,9 @@
                                     <dt>Производитель</dt>
                                     <dd>
                                         <% var test = "A"%>
-                                        <input type="text" id="input-tags">
-                                        <!--<select class="chosen-select">
+                                        <select class="chosen-select" id="make_select">
                                             <optgroup label="<%= test%>">
-                                                <%
-                                                if(makes){
-                                                for(var i=0; i<makes.length; i++) {
+                                                <% for(var i=0; i<makes.length; i++) {
                                                 if(test != makes[i].name[0]){
                                                     test = makes[i].name[0]; %>
                                             </optgroup>
@@ -336,11 +333,23 @@
                                                 }
                                                 %>
                                                 <option value="<%= makes[i].id %>"><%= makes[i].name %></option>
-                                                <% }
-                                                } %>
+                                                <% } %>
                                             </optgroup>
-                                        </select>-->
+                                        </select>
                                     </dd>
+                                </dl>
+                            </div>
+                            <div class="col-sm-3">
+                                <dl class="dl-horizontal" id="settings_year">
+                                    <dt>Год выпуска</dt>
+                                    <dd class="padding"><h6 class="text-center">2014</h6>
+                                        <input type="text" value="" data-slider-min="1940" data-slider-max="2015" data-slider-step="1" data-slider-value="2014" data-slider-orientation="horizontal" class="slider slider-horizontal form-control">
+
+                                    </dd>
+                                </dl>
+                            </div>
+                            <div class="col-sm-5">
+                                <dl class="dl-horizontal">
                                     <dt>Модель</dt>
                                     <dd>
                                         <select class="chosen-select">
@@ -354,26 +363,9 @@
                                     </dd>
                                 </dl>
                             </div>
-                            <div class="col-sm-4">
-                                <dl class="dl-horizontal" id="settings_year">
-                                    <dt>Год выпуска</dt>
-                                    <dd>
-                                        <input type="text" value="" data-slider-min="1940" data-slider-max="2015" data-slider-step="1" data-slider-value="2014" data-slider-orientation="horizontal" class="slider slider-horizontal form-control">
-                                    </dd>
-                                    <dt>Класс</dt>
-                                    <dd>Кроссовер</dd>
-                                </dl>
-                            </div>
-                            <div class="col-sm-4">
-                                <dl class="dl-horizontal">
-                                    <dt>Тип(ы) кузова</dt>
-                                    <dd>5‑дв. SUV (5‑мест.)</dd>
-                                    <dt>Двигатель</dt>
-                                    <dd>382 л.с</dd>
-                                </dl>
-                            </div>
                         </div>
-                        <hr>
+                    </fieldset>
+                    <fieldset>
                         <h4 class="text-center">Отличия</h4>
                         <hr>
                         <fieldset>
@@ -419,3 +411,6 @@
 </div>
 </section>
 <!-- END Page content-->
+<script>
+
+</script>

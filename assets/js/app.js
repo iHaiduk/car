@@ -2558,7 +2558,7 @@
       .popover();
 
     // Bootstrap slider
-    $('.slider').slider();
+    //$('.slider').slider();
 
     // Chosen
     $(".chosen-select").chosen({

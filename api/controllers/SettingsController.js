@@ -62,13 +62,13 @@ module.exports = {
         });
     },
     getModels: function(req, res) {
-        var make = parseInt(req.query.make),
-            year = req.query.year;
+        var make = parseInt(req.params.make),
+            year = parseInt(req.params.year);
         AutoYear.findOneByYear(year,function(err, year){
-            console.log(year);
-            /*AutoModel.find({id_make: make, idYear: year.id}).sort('name').exec(function(err, resul){
+            console.log(make, year);
+            AutoModel.find({id_make: make, idYear: year.id}).sort('name').exec(function(err, resul){
                 res.json(resul);
-            });*/
+            });
         });
     }
 };

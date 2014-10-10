@@ -9,12 +9,15 @@
 }
 #settings_info dt{
     width: 40%;
-    padding: 10px 0;
-    height: 20px;
+    padding: 8px 0 0 0;
+    height: 32px;
 }
 #settings_info dd{
     margin-left: 45%;
     height: 40px;
+}
+#settings_info dd.padding{
+    padding: 8px 0 0 0;
 }
 #settings_year .tooltip-min, #settings_year .tooltip-max{
     display: none;
@@ -26,4 +29,7 @@
 }
 #settings_year .slider-handle{
     z-index: 2;
+}
+#settings_year h6{
+    margin: -10px 0 -3px 0;
 }

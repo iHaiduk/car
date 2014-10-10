@@ -321,21 +321,14 @@
                                 <dl class="dl-horizontal">
                                     <dt>Производитель</dt>
                                     <dd>
-                                        <% var test = "A"%>
-                                        <select class="chosen-select" id="make_select">
-                                            <optgroup label="<%= test%>">
-                                                <% for(var i=0; i<makes.length; i++) {
-                                                if(test != makes[i].name[0]){
-                                                    test = makes[i].name[0]; %>
-                                            </optgroup>
-                                            <optgroup label="<%= test%>">
-                                                <%
-                                                }
-                                                %>
-                                                <option value="<%= makes[i].id %>"><%= makes[i].name %></option>
-                                                <% } %>
-                                            </optgroup>
-                                        </select>
+                                        <% var make_list = "";
+                                        for(var i=0; i<makes.length; i++) {
+
+                                            make_list += makes[i].name+",";
+                                        }
+                                        %>
+                                        <input type="text" id="selected_make" value="<%= make_list.substr(0, make_list.length-1) %>" autofocus="off" autocomplete="off">
+
                                     </dd>
                                 </dl>
                             </div>

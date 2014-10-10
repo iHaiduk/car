@@ -62,14 +62,20 @@ module.exports = {
         });
     },
     getModels: function(req, res) {
-        var make = parseInt(req.params.make),
-            year = parseInt(req.params.year);
-        AutoYear.findOneByYear(year,function(err, year){
+        var condition = {};
+        if(req.params.make != undefined)
+            condition["make"] = parseInt(req.params.make);
+        if(req.params.year != undefined)
+            condition["year"] = parseInt(req.params.year);
+
+        console.log(condition);
+
+        /*AutoYear.findOneByYear(year,function(err, year){
             console.log(make, year);
             AutoModel.find({id_make: make, idYear: year.id}).sort('name').exec(function(err, resul){
                 res.json(resul);
             });
-        });
+        });*/
     }
 };
 

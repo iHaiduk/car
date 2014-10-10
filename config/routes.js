@@ -47,7 +47,7 @@ module.exports.routes = {
         controller: 'SettingsController',
         action: 'getVin'
     },
-    '/get/models/make/:make/year/:year': {
+    '/get/models/:make/:year': {
         controller: 'SettingsController',
         action: 'getModels'
     },

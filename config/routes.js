@@ -47,6 +47,10 @@ module.exports.routes = {
         controller: 'SettingsController',
         action: 'getVin'
     },
+    '/get/makes/': {
+        controller: 'SettingsController',
+        action: 'getMakes'
+    },
     '/get/models/:make/:year': {
         controller: 'SettingsController',
         action: 'getModels'

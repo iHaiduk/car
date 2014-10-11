@@ -42,7 +42,7 @@
     background-clip: content-box;
     border-radius: 10px;
 }
-#controll_make .label{
+#controll_make .label, #controll_model .label{
     padding: 0.5em .6em .5em;
     font-size: 90%;
 }

@@ -2574,3 +2574,17 @@
   });
 
 }(jQuery, window, document));
+
+
+function loadData(url, data, type, callback){
+    type = type ? "POST" : "GET";
+    $.ajax({
+        url: url,
+        type: type,
+        data: data,
+        dataType: "json",
+        success: function(data){
+            return callback(data);
+        }
+    })
+}

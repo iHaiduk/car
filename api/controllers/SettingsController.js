@@ -34,30 +34,36 @@ module.exports = {
             "controlScript/settingsIndex.js"
         ];
 
-        async.waterfall([
+        /*async.waterfall([
                 function(callback){
                     AutoMake.find().sort('name').exec(callback);
-                },/*
+                },*//*
                 function(makes, callback){
                     AutoYear.findOneByYear(2014,function(err, year){
                         callback(null, makes, year);
                     });
-                },*/
-                function(makes, callback){
+                },*//*
+                *//*function(makes, callback){
                     AutoModel.find({id_make: makes[0].id}).sort('name').exec(function(err, res){
                         callback(null, makes, unique(res));
                     });
                 }
             ],
             function(err, makes, models) {
-                res.view('settings/index', {makes : makes, models: models});
-            });
+         res.view('settings/index', {makes : makes, models: models});
+            });*/
+        res.view('settings/index');
     },
     getVin: function(req, res) {
         //var code = "1N4AL3AP4DC295509";
         var code = req.query.vin | "1N4AL3AP4DC295509";
         Car.getInfoVin(code, function(result){
             //console.log(result, res);
+            res.json(result);
+        });
+    },
+    getMakes: function(req, res) {
+        AutoMake.find().sort('name').exec(function(err,result){
             res.json(result);
         });
     },
@@ -68,7 +74,7 @@ module.exports = {
         async.waterfall([
                 function(callback){
                     if(req.params.make!= undefined)
-                        AutoMake.findOneByName(req.params.make).sort('name').exec(callback);
+                        callback(null,req.params.make)
                     else
                         callback(null,null)
                 },function(make, callback){
@@ -82,7 +88,7 @@ module.exports = {
             ],
             function(err, make, year) {
                 if(make != null)
-                    condition["id_make"] = make.id;
+                    condition["id_make"] = make;
                 if(year != null)
                     condition["idYear"] = year.id;
 

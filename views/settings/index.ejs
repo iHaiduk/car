@@ -321,13 +321,7 @@
                                 <dl class="dl-horizontal" id="controll_make">
                                     <dt>Производитель</dt>
                                     <dd>
-                                        <% var make_list = "";
-                                        for(var i=0; i<makes.length; i++) {
-
-                                            make_list += makes[i].name+",";
-                                        }
-                                        %>
-                                        <input type="text" id="selected_make" value="<%= make_list.substr(0, make_list.length-1) %>" autofocus="off" autocomplete="off">
+                                        <input type="text" id="selected_make" autofocus="off" autocomplete="off">
                                     </dd>
                                 </dl>
                             </div>
@@ -340,16 +334,10 @@
                                 </dl>
                             </div>
                             <div class="col-sm-5">
-                                <dl class="dl-horizontal">
+                                <dl class="dl-horizontal" id="controll_model">
                                     <dt>Модель</dt>
                                     <dd>
-                                        <% var models_list = "";
-                                        for(var i=0; i<models.length; i++) {
-
-                                            models_list += models[i].name+",";
-                                        }
-                                        %>
-                                        <input type="text" id="selected_models" value="<%= models_list.substr(0, models_list.length-1) %>" autofocus="off" autocomplete="off">
+                                        <input type="text" id="selected_models" autofocus="off" autocomplete="off">
                                     </dd>
                                 </dl>
                             </div>

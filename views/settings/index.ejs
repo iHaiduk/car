@@ -318,7 +318,7 @@
                         <!-- START row -->
                         <div class="row">
                             <div class="col-sm-4">
-                                <dl class="dl-horizontal">
+                                <dl class="dl-horizontal" id="controll_make">
                                     <dt>Производитель</dt>
                                     <dd>
                                         <% var make_list = "";
@@ -328,16 +328,14 @@
                                         }
                                         %>
                                         <input type="text" id="selected_make" value="<%= make_list.substr(0, make_list.length-1) %>" autofocus="off" autocomplete="off">
-
                                     </dd>
                                 </dl>
                             </div>
                             <div class="col-sm-3">
                                 <dl class="dl-horizontal" id="settings_year">
                                     <dt>Год выпуска</dt>
-                                    <dd class="padding"><h6 class="text-center">2014</h6>
+                                    <dd class="padding"><h6 class="text-center">xxxx</h6>
                                         <input type="text" value="" data-slider-min="1940" data-slider-max="2015" data-slider-step="1" data-slider-value="2014" data-slider-orientation="horizontal" class="slider slider-horizontal form-control">
-
                                     </dd>
                                 </dl>
                             </div>

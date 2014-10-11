@@ -55,27 +55,42 @@ module.exports = {
     },
     getVin: function(req, res) {
         //var code = "1N4AL3AP4DC295509";
-        var code = req.query.vin;
+        var code = req.query.vin | "1N4AL3AP4DC295509";
         Car.getInfoVin(code, function(result){
             //console.log(result, res);
             res.json(result);
         });
     },
     getModels: function(req, res) {
+
         var condition = {};
-        if(req.params.make != undefined)
-            condition["make"] = parseInt(req.params.make);
-        if(req.params.year != undefined)
-            condition["year"] = parseInt(req.params.year);
 
-        console.log(condition);
+        async.waterfall([
+                function(callback){
+                    if(req.params.make!= undefined)
+                        AutoMake.findOneByName(req.params.make).sort('name').exec(callback);
+                    else
+                        callback(null,null)
+                },function(make, callback){
+                    if(req.params.year!= undefined)
+                        AutoYear.findOneByYear(req.params.year).exec(function(err, year){
+                            callback(null,make, year)
+                        });
+                    else
+                        callback(null,make, null)
+                }
+            ],
+            function(err, make, year) {
+                if(make != null)
+                    condition["id_make"] = make.id;
+                if(year != null)
+                    condition["idYear"] = year.id;
+                console.log(condition)
 
-        /*AutoYear.findOneByYear(year,function(err, year){
-            console.log(make, year);
-            AutoModel.find({id_make: make, idYear: year.id}).sort('name').exec(function(err, resul){
-                res.json(resul);
+                AutoModel.find(condition).sort('name').exec(function(err, resul){
+                    res.json(unique(resul));
+                });
             });
-        });*/
     }
 };
 

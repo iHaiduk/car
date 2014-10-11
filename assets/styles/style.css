@@ -31,5 +31,18 @@
     z-index: 2;
 }
 #settings_year h6{
-    margin: -10px 0 -3px 0;
+    margin: -10px 0 -3px 25%;
+    font-weight: bold;
+    line-height: 1;
+    color: #ffffff;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #00afd1;
+    width: 50%;
+    background-clip: content-box;
+    border-radius: 10px;
+}
+#controll_make .label{
+    padding: 0.5em .6em .5em;
+    font-size: 90%;
 }

@@ -34,7 +34,7 @@ $(document).ready(function(){
         }
     });
     yearSlide.on('slideStop', function(){
-        $.get("/get/models/make/"+$("#make_select").val()+"/year/"+yearSlide.slider('getValue')+"/",function(result){
+        $.get("/get/models/"+$("#selected_make").val()+"/"+yearSlide.slider('getValue')+"/",function(result){
             console.log(result);
         })
     }).on('slide', function(){
@@ -54,19 +54,20 @@ $(document).ready(function(){
         },
         maxItems: 1,
         render: {
-            render: {
-                option: function(item, escape) {
-                    return '<div>' +
-                    '<span class="title">' +data.text +
-                    '</span>' +
-                    '</div>';
-                }
-            },
-            item: function(data, escape) {
-                console.log(escape(data.text), data)
-                //if(firstLit != )
-                //<div data-group="B" class="optgroup"><div class="optgroup-header">B</div><div data-value="84" data-selectable="" class="option">Beijing</div><div data-value="5" data-selectable="" class="option">Bentley</div><div data-value="120" data-selectable="" class="option">Bizzarrini</div><div data-value="4" data-selectable="" class="option">BMW</div><div data-value="135" data-selectable="" class="option">Brilliance</div><div data-value="83" data-selectable="" class="option">Bristol</div><div data-value="6" data-selectable="" class="option">Bugatti</div><div data-value="11" data-selectable="" class="option">Buick</div></div>
-                return '<div>"' + escape(data.text) + '"</div>';
+                option: function(data, escape) {
+                    var make = escape(data.text);
+                    var text = "";
+                    if(firstLit != make[0]){
+                        if(firstLit!=null) text += "</div>";
+                        text += '<div data-value="" data-selectable="false" data-group="'+make[0]+'" class="optgroup">' +
+                        '<div class="optgroup-header">'+make[0]+'</div>';
+                        firstLit = make[0];
+                    }
+                    text += '<div data-value="' + make + '" data-selectable="" class="active-result group-option">' + make + '</div>';
+                    return text;
+                },
+            item:function(data, escape) {
+                return '<span class="tag label label-info">'+escape(data.text)+'</span>';
             }
         }
     });

@@ -37,14 +37,14 @@ module.exports = {
         async.waterfall([
                 function(callback){
                     AutoMake.find().sort('name').exec(callback);
-                },
+                },/*
                 function(makes, callback){
                     AutoYear.findOneByYear(2014,function(err, year){
                         callback(null, makes, year);
                     });
-                },
-                function(makes, year, callback){
-                    AutoModel.find({id_make: makes[0].id, idYear: year.id}).sort('name').exec(function(err, res){
+                },*/
+                function(makes, callback){
+                    AutoModel.find({id_make: makes[0].id}).sort('name').exec(function(err, res){
                         callback(null, makes, unique(res));
                     });
                 }
@@ -85,7 +85,6 @@ module.exports = {
                     condition["id_make"] = make.id;
                 if(year != null)
                     condition["idYear"] = year.id;
-                console.log(condition)
 
                 AutoModel.find(condition).sort('name').exec(function(err, resul){
                     res.json(unique(resul));

@@ -343,14 +343,13 @@
                                 <dl class="dl-horizontal">
                                     <dt>Модель</dt>
                                     <dd>
-                                        <select class="chosen-select">
-                                            <%
-                                            if(models){
-                                            for(var i=0; i<models.length; i++) {%>
-                                            <option value="<%= models[i].id %>"><%= models[i].name %></option>
-                                            <% }
-                                            } %>
-                                        </select>
+                                        <% var models_list = "";
+                                        for(var i=0; i<models.length; i++) {
+
+                                            models_list += models[i].name+",";
+                                        }
+                                        %>
+                                        <input type="text" id="selected_models" value="<%= models_list.substr(0, models_list.length-1) %>" autofocus="off" autocomplete="off">
                                     </dd>
                                 </dl>
                             </div>

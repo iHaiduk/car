@@ -41,7 +41,7 @@ $(document).ready(function(){
         $("#settings_year h6").text(yearSlide.slider('getValue'));
     });
 
-    $('#selected_make').selectize({
+    $('#selected_make, #selected_models').selectize({
         plugins: ['restore_on_backspace'],
         delimiter: ',',
         persist: false,

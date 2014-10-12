@@ -27,7 +27,9 @@
     "sails-mysql": "^0.10.6",
     "vin": "^0.0.2",
     "node-edmunds-api": "^0.0.0",
-    "nodemon" : "^1.2.1"
+    "utils-type": "^0.8.9",
+      // not install in ftp
+    "nodemon" : "^1.2.1",
   },
   "scripts": {
     "start": "node app.js",

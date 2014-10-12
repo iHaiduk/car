@@ -96,6 +96,32 @@ module.exports = {
                     res.json(unique(resul));
                 });
             });
+    },
+    getInfoModels: function(req, res) {
+        var id = req.params.id,
+            year = req.params.year,
+            type= req.params.type;
+        if(type == "id"){
+            async.waterfall([
+                   function(callback){
+                        if(req.params.year!= undefined)
+                            AutoYear.findOneByYear(req.params.year).exec(function(err, year){
+                                callback(null, year)
+                            });
+                        else
+                            callback(null, null)
+                    }
+                ],
+                function(err, year) {
+                    if(year == null)
+                        res.json({});
+                    else
+                        AutoParam.find({model_id: id, model_year: year.id}).exec(function(err, resul){
+                            console.log(err, resul)
+                            res.json(resul);
+                        });
+                });
+        }
     }
 };
 

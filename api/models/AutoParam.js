@@ -60,8 +60,6 @@ module.exports = {
         model_width_mm: "integer",
         model_height_mm: "integer",
         model_wheelbase_mm: "integer",
-        model_top_speed_mph: "integer",
-        model_weight_lbs: "integer",
         model_engine_valves_per_cyl: {type:"integer", size:2},
         model_engine_l: "float",
         model_engine_bore_mm: "float",

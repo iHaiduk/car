@@ -55,6 +55,10 @@ module.exports.routes = {
         controller: 'SettingsController',
         action: 'getModels'
     },
+    '/get/info/models/:type/:id/:year': {
+        controller: 'SettingsController',
+        action: 'getInfoModels'
+    },
     '/user/new':{
         controller: 'UserController',
         action: 'new'

@@ -7,16 +7,23 @@
 .chosen-container {
     min-width: 120px;
 }
-#settings_info dt{
-    width: 40%;
+#view_setting_car dt{
+    width: 110px;
     padding: 8px 0 0 0;
     height: 32px;
+    text-align: left;
 }
-#settings_info dd{
-    margin-left: 45%;
+#view_setting_car dd{
+    margin-left: 110px;
     height: 40px;
 }
-#settings_info dd.padding{
+#view_setting_car .col-sm-7 dt{
+    width: 150px;
+}
+#view_setting_car .col-sm-7 dd{
+    margin-left: 160px;
+}
+#view_setting_car dd.padding{
     padding: 8px 0 0 0;
 }
 #settings_year .tooltip-min, #settings_year .tooltip-max{

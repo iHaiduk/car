@@ -111,5 +111,3 @@ SettingsController
   };
 
 }).call(this);
-
-//# sourceMappingURL=SettingsController.js.map

@@ -52,8 +52,13 @@ process.chdir(__dirname);
       rc = function () { return {}; };
     }
   }
-
-
+// If coffeescript is not installed, ignore silently
+    try {
+        require('coffee-script'); //this happens too late
+        sails.log.verbose('Enabling CoffeeScript...');
+    } catch (e) {
+        sails.log.verbose('CoffeeScript not installed.');
+    }
   // Start server
   sails.lift(rc('sails'));
 })();

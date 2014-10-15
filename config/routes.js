@@ -62,6 +62,10 @@ module.exports.routes = {
     '/user/new':{
         controller: 'UserController',
         action: 'new'
+    },
+    '/test':{
+        controller: 'MemController',
+        action: 'main'
     }
 
     /***************************************************************************

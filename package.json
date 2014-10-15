@@ -28,7 +28,7 @@
     "vin": "^0.0.2",
     "node-edmunds-api": "^0.0.0",
     "utils-type": "^0.8.9",
-      // not install in ftp
+      "mc": "1.0.6",
     "nodemon" : "^1.2.1"
   },
   "scripts": {

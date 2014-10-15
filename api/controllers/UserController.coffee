@@ -1,9 +1,12 @@
-User =
+_User =
   login: (req, res) ->
-    passwordHash = require 'password-hash'
-    md5 = require 'MD5'
-    hashedPassword = passwordHash.generate 'password123', null, 1
-    console.log hashedPassword, md5 "test"
+    User.create
+      email: "ht_hiv@i.ua"
+      password: "9322022"
+      fio: "HIV"
+      phone: "+380919111938"
+    , (err, ret) ->
+      console.log err, ret
     return
     ###User.findOneByEmail(req.body.email).done (err, user) ->
       if err
@@ -36,4 +39,4 @@ User =
         , 404
       return###
 
-module.exports = User
+module.exports = _User

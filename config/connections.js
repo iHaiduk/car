@@ -21,6 +21,7 @@
 
 module.exports.connections = {
 
+    default: 'someMysqlServer',
   /***************************************************************************
   *                                                                          *
   * Local disk storage for DEVELOPMENT ONLY                                  *
@@ -28,9 +29,9 @@ module.exports.connections = {
   * Installed by default.                                                    *
   *                                                                          *
   ***************************************************************************/
-  localDiskDb: {
+  /*localDiskDb: {
     adapter: 'sails-disk'
-  },
+  },*/
 
   /***************************************************************************
   *                                                                          *
@@ -46,7 +47,7 @@ module.exports.connections = {
     user: 'root',
     password: '',
     database: 'car'
-  },
+  }
 
   /***************************************************************************
   *                                                                          *

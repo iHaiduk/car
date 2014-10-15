@@ -30,6 +30,7 @@ module.exports =
       "vendor/codemirror/lib/codemirror.css"
       "vendor/tagsinput/bootstrap-tagsinput.css"
       "vendor/selectize/selectize.bootstrap3.css"
+      "/cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css"
       "styles/style.css"
     ]
     res.locals.scripts = [
@@ -47,6 +48,7 @@ module.exports =
       "vendor/inputmask/jquery.inputmask.bundle.min.js"
       "vendor/validation/jquery.validate.js"
       "vendor/selectize/selectize.js"
+      "/cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"
       "controlScript/settingsIndex.js"
     ]
     res.view "settings/index"
@@ -63,8 +65,6 @@ module.exports =
   getMakes: (req, res) ->
     AutoMake.find().sort("name").exec (err, result) ->
       res.json result
-      return
-
     return
 
   getModels: (req, res) ->
@@ -116,7 +116,6 @@ module.exports =
             model_id: id
             model_year: year.id
           ).exec (err, resul) ->
-            console.log err, resul
             res.json resul
             return
 

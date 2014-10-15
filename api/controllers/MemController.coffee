@@ -1,7 +1,4 @@
 module.exports = main: (req, res) ->
-  mc = require("mc")
-  client = new mc.Client([
-    "127.0.0.1"
-  ])
-  client.connect ->
-    console.log "Connected to memcache on four hosts all on port 11211!" ;
+  AutoParam.find({limit: 1000}).populate("model_id", {limit: 1000, sort: "name"}).exec (req, result) ->
+    res.json(result)
+  return

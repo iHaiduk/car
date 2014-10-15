@@ -1,6 +1,7 @@
 
 <!-- START Page content-->
 <section class="main-content">
+
 <h3>Настройки</h3>
 <div class="panel panel-default panel-demo">
 <div class="panel-heading">Настройки пользователя
@@ -277,7 +278,6 @@
         </a>
     </div>
     <div class="panel-body panel-wrapper collapse in" id="view_setting_car">
-        <form action="/" method="POST" class="form-horizontal">
             <div data-toggle="wizard" class="form-wizard wizard-horizontal">
                 <!-- START wizard steps indicator-->
                 <ol class="row wizard-nolabels">
@@ -362,6 +362,51 @@
                                     Параметры не совпадают
                                 </div>
                             </div>
+                            <form id="profileForm">
+                                <div class="form-group">
+                                    <label>Email address</label>
+                                    <input type="text" class="form-control" name="email" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input type="password" class="form-control" name="password" />
+                                </div>
+                            </form>
+                            <form id="paramModelForm">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="box-placeholder">
+                                        <p class="text-center">Center aligned text.</p>
+                                            <input type="text" class="form-control" name="username" />
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="box-placeholder">
+                                        <p class="text-center">Center aligned text.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="box-placeholder">
+                                        <p class="text-center">Center aligned text.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="box-placeholder">
+                                        <p class="text-center">Center aligned text.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="box-placeholder">
+                                        <p class="text-center">Center aligned text.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="box-placeholder">
+                                        <p class="text-center">Center aligned text.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            </form>
                         </fieldset>
                     </fieldset>
                     <fieldset>
@@ -405,7 +450,6 @@
                 </div>
                 <!-- END Wizard Step inputs -->
             </div>
-        </form>
     </div>
 </div>
 </section>

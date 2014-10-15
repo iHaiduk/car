@@ -62,7 +62,7 @@
         vinSend.addClass("btn-danger").find("i").addClass("fa-times");
       }
     });
-    vinSend.click(function() {
+    vinSend.on("click", function() {
       if ($(this).hasClass("btn-success")) {
         $.ajax({
           url: "/get/vin",
@@ -159,6 +159,32 @@
       hideSelected: true,
       onChange: function(input) {
         "use strict";
+      }
+    });
+    $("#profileForm").bootstrapValidator({
+      feedbackIcons: {
+        valid: "glyphicon glyphicon-ok",
+        invalid: "glyphicon glyphicon-remove",
+        validating: "glyphicon glyphicon-refresh"
+      },
+      fields: {
+        email: {
+          validators: {
+            notEmpty: {
+              message: "The email address is required"
+            },
+            emailAddress: {
+              message: "The email address is not valid"
+            }
+          }
+        },
+        password: {
+          validators: {
+            notEmpty: {
+              message: "The password is required"
+            }
+          }
+        }
       }
     });
   });

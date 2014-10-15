@@ -51,7 +51,7 @@ $(document).ready ->
       vinSend.addClass("btn-danger").find("i").addClass "fa-times"
     return
 
-  vinSend.click ->
+  vinSend.on "click", ->
     if $(this).hasClass("btn-success")
       $.ajax
         url: "/get/vin"
@@ -141,5 +141,26 @@ $(document).ready ->
     onChange: (input) ->
       "use strict"
       return
+
+  $("#profileForm").bootstrapValidator
+    feedbackIcons:
+      valid: "glyphicon glyphicon-ok"
+      invalid: "glyphicon glyphicon-remove"
+      validating: "glyphicon glyphicon-refresh"
+
+    fields:
+      email:
+        validators:
+          notEmpty:
+            message: "The email address is required"
+
+          emailAddress:
+            message: "The email address is not valid"
+
+      password:
+        validators:
+          notEmpty:
+            message: "The password is required"
+
 
   return

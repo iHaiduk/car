@@ -5,20 +5,33 @@ User.js
 @docs        :: http://sailsjs.org/#!documentation/models
 ###
 module.exports =
+  connection: "someMysqlServer"
+  tableName: "users"
   schema: true
-  attributes:
-    name:
-      type: "string"
-      required: true
+  autoPK: false
 
-    title:
-      type: "string"
+  autoCreatedAt: false
+  autoUpdatedAt: false
+  attributes:
+    id:
+      type: "integer"
+      primaryKey: true
+      autoIncrement: true
 
     email:
-      type: "string"
-      required: true
-      email: true
+      type: "email"
       unique: true
+      required: true
 
     password:
-      type: "string"
+      type: 'string'
+      required: true
+      minLength: 6
+
+    fio:
+      type: 'string'
+      required: true
+
+    phone:
+      type: 'string'
+      size: 15

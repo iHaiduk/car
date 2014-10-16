@@ -8,6 +8,7 @@ exports.getInfoVin = (code, myCallback) ->
         if not res? or not res.idYear?
           callback()
         else
+          console.log res
           myCallback
             year: res.idYear
             make: res.idMake
@@ -18,6 +19,7 @@ exports.getInfoVin = (code, myCallback) ->
     (callback) ->
       vin = require("vin") # http://www.decodethis.com/
       vin.lookup code, (vehicle) ->
+        console.log vehicle
         if vehicle.model?
           myCallback
             year: vehicle.year
@@ -34,7 +36,8 @@ exports.getInfoVin = (code, myCallback) ->
       client.decodeVin
         vin: code
       , (err, res) ->
-        unless res.status is "NOT_FOUND"
+        console.log res
+        if res? and res.status? and res.status is "NOT_FOUND"
           myCallback
             year: res.years[0].year
             make: res.make.name

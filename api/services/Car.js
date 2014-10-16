@@ -12,6 +12,7 @@ Created by Ihor on 27.09.2014.
           if ((res == null) || (res.idYear == null)) {
             callback();
           } else {
+            console.log(res);
             myCallback({
               year: res.idYear,
               make: res.idMake,
@@ -23,6 +24,7 @@ Created by Ihor on 27.09.2014.
         var vin;
         vin = require("vin");
         return vin.lookup(code, function(vehicle) {
+          console.log(vehicle);
           if (vehicle.model != null) {
             myCallback({
               year: vehicle.year,
@@ -42,7 +44,8 @@ Created by Ihor on 27.09.2014.
         return client.decodeVin({
           vin: code
         }, function(err, res) {
-          if (res.status !== "NOT_FOUND") {
+          console.log(res);
+          if ((res != null) && (res.status != null) && res.status === "NOT_FOUND") {
             myCallback({
               year: res.years[0].year,
               make: res.make.name,

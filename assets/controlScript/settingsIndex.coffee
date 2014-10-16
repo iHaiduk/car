@@ -13,6 +13,10 @@ reloadModels = (yearSlide) ->
     return
   )
   return
+
+nospace = (str) ->
+  str.replace(/\s+/g,'');
+
 infoModels = (id, yearSlide) ->
   "use strict"
   type = ""
@@ -39,7 +43,12 @@ $(document).ready ->
   make_select = $(".make_select")
   firstLit = null
   vinId.on "keyup focusout", ->
-    text = $(this).val()
+    _this = $(this)
+    text = nospace _this.val()
+
+    console.log text
+
+    _this.val text[0..17]
     alNumRegex = /^([a-zA-Z0-9]+)$/
     $(this).parent().removeClass "has-success has-error"
     vinSend.removeClass("btn-danger btn-success").find("i").removeClass "fa-check fa-times"

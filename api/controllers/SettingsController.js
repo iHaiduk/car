@@ -32,11 +32,12 @@ SettingsController
     index: function(req, res) {
       res.locals.styles = ["vendor/slider/css/slider.css", "vendor/chosen/chosen.min.css", "vendor/datetimepicker/css/bootstrap-datetimepicker.min.css", "vendor/codemirror/lib/codemirror.css", "vendor/tagsinput/bootstrap-tagsinput.css", "vendor/selectize/selectize.bootstrap3.css", "/cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css", "styles/style.css"];
       res.locals.scripts = ["vendor/formwizard/js/bwizard.min.js", "vendor/codemirror/lib/codemirror.js", "vendor/codemirror/addon/mode/overlay.js", "vendor/codemirror/mode/markdown/markdown.js", "vendor/codemirror/mode/xml/xml.js", "vendor/codemirror/mode/gfm/gfm.js", "vendor/marked/marked.js", "vendor/parsley/parsley.min.js", "vendor/moment/min/moment-with-langs.min.js", "vendor/datetimepicker/js/bootstrap-datetimepicker.min.js", "vendor/tagsinput/bootstrap-tagsinput.min.js", "vendor/inputmask/jquery.inputmask.bundle.min.js", "vendor/validation/jquery.validate.js", "vendor/selectize/selectize.js", "/cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js", "controlScript/settingsIndex.js"];
+      req.setLocale('ua');
       res.view("settings/index");
     },
     getVin: function(req, res) {
       var code;
-      code = req.query.vin | "1N4AL3AP4DC295509";
+      code = req.query.vin;
       Car.getInfoVin(code, function(result) {
         res.json(result);
       });

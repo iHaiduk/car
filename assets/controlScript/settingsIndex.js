@@ -75,7 +75,7 @@
           url: "/get/vin",
           type: "GET",
           data: {
-            vin: $(this).val()
+            vin: vinId.val()
           },
           dataType: "json",
           success: function(data) {

@@ -46,7 +46,7 @@ Created by Ihor on 27.09.2014.
           vin: code
         }, function(err, res) {
           console.log("developer", res);
-          if ((res != null) && (res.status != null) && res.status === "NOT_FOUND") {
+          if ((res != null) && (res.status != null) && res.status !== "NOT_FOUND") {
             myCallback({
               year: res.years[0].year,
               make: res.make.name,

@@ -48,8 +48,22 @@
     width: 50%;
     background-clip: content-box;
     border-radius: 10px;
+    min-width: 45px;
 }
 #controll_make .label, #controll_model .label{
     padding: 0.5em .6em .5em;
     font-size: 90%;
+}
+#paramModelForm label{
+    cursor: pointer;
+}
+#paramModelForm .input-group-addon {
+    padding: 0 10px;
+    height: 38px;
+}
+#paramModelForm .checkbox{
+    margin-top: 9px;
+    margin-bottom: 7px;
+    margin-left: 16px;
+    margin-right: -8px;
 }

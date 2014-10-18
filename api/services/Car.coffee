@@ -38,7 +38,7 @@ exports.getInfoVin = (code, myCallback) ->
         vin: code
       , (err, res) ->     
         console.log "developer", res
-        if res? and res.status? and res.status is "NOT_FOUND"
+        if res? and res.status? and res.status isnt "NOT_FOUND"
           myCallback
             year: res.years[0].year
             make: res.make.name

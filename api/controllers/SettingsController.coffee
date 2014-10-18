@@ -51,11 +51,12 @@ module.exports =
       "/cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"
       "controlScript/settingsIndex.js"
     ]
+    req.setLocale 'ua'
     res.view "settings/index"
     return
 
   getVin: (req, res) ->
-    code = req.query.vin | "1N4AL3AP4DC295509"
+    code = req.query.vin
     Car.getInfoVin code, (result) ->
       res.json result
       return

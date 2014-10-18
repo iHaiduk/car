@@ -2,6 +2,7 @@
 Created by Ihor on 27.09.2014.
 ###
 exports.getInfoVin = (code, myCallback) ->
+  console.log code
   async.waterfall [
     (callback) ->
       AutoVin.findOneByCode code, (err, res) ->
@@ -19,7 +20,7 @@ exports.getInfoVin = (code, myCallback) ->
     (callback) ->
       vin = require("vin") # http://www.decodethis.com/
       vin.lookup code, (vehicle) ->
-        console.log vehicle
+        console.log "decodethis", vehicle
         if vehicle.model?
           myCallback
             year: vehicle.year
@@ -35,8 +36,8 @@ exports.getInfoVin = (code, myCallback) ->
       client = new EdmundsClient(apiKey: "zsx3jzwjkk9ke7zq4ze9mjp3") # zsx3jzwjkk9ke7zq4ze9mjp3
       client.decodeVin
         vin: code
-      , (err, res) ->
-        console.log res
+      , (err, res) ->     
+        console.log "developer", res
         if res? and res.status? and res.status is "NOT_FOUND"
           myCallback
             year: res.years[0].year

@@ -6,6 +6,7 @@ Created by Ihor on 27.09.2014.
 
 (function() {
   exports.getInfoVin = function(code, myCallback) {
+    console.log(code);
     async.waterfall([
       function(callback) {
         return AutoVin.findOneByCode(code, function(err, res) {
@@ -24,7 +25,7 @@ Created by Ihor on 27.09.2014.
         var vin;
         vin = require("vin");
         return vin.lookup(code, function(vehicle) {
-          console.log(vehicle);
+          console.log("decodethis", vehicle);
           if (vehicle.model != null) {
             myCallback({
               year: vehicle.year,
@@ -44,7 +45,7 @@ Created by Ihor on 27.09.2014.
         return client.decodeVin({
           vin: code
         }, function(err, res) {
-          console.log(res);
+          console.log("developer", res);
           if ((res != null) && (res.status != null) && res.status === "NOT_FOUND") {
             myCallback({
               year: res.years[0].year,

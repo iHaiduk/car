@@ -66,14 +66,14 @@ $(document).ready ->
         url: "/get/vin"
         type: "GET"
         data:
-          vin: vinId.val()
+          vin: $(this).val()
 
         dataType: "json"
         success: (data) ->
           console.log data
-          return
 
-    return
+
+
 
   yearSlide.on("slideStop", ->
     $("#settings_year h6").text yearSlide.slider("getValue")

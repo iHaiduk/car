@@ -71,15 +71,15 @@
     });
     vinSend.on("click", function() {
       if ($(this).hasClass("btn-success")) {
-        $.ajax({
+        return $.ajax({
           url: "/get/vin",
           type: "GET",
           data: {
-            vin: vinId.val()
+            vin: $(this).val()
           },
           dataType: "json",
           success: function(data) {
-            console.log(data);
+            return console.log(data);
           }
         });
       }

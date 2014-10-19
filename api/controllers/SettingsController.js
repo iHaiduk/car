@@ -140,7 +140,7 @@ SettingsController
                   _results.push({
                     id: trim.id,
                     model_trim: trim.model_trim,
-                    model_transmission_type: _req.__(trim.model_transmission_type),
+                    model_transmission_type: trim.model_transmission_type != null ? _req.__(trim.model_transmission_type) : void 0,
                     model_body: trim.model_body,
                     region: trim.region,
                     country: trim.model_make_id.country,

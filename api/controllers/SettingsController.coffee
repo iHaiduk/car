@@ -150,7 +150,7 @@ module.exports =
 
               id: trim.id
               model_trim: trim.model_trim
-              model_transmission_type: _req.__(trim.model_transmission_type)
+              model_transmission_type: _req.__(trim.model_transmission_type) if trim.model_transmission_type?
               model_body: trim.model_body #req.__(trim.model_body)
               region: trim.region #req.__(trim.region)
               country: trim.model_make_id.country #req.__("ua")

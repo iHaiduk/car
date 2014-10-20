@@ -66,7 +66,8 @@ Created by gamePC on 26.09.2014.
       model_fuel_cap_l: "float",
       model_lkm_hwy: "float",
       model_lkm_city: "float",
-      model_lkm_mixed: "float"
+      model_lkm_mixed: "float",
+      region: "string"
     }
   };
 

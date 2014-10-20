@@ -1,3 +1,5 @@
+infoObject = {}
+
 reloadModels = (yearSlide) ->
   make = (if $("#selected_make").val() is "" then 0 else $("#selected_make").val())
   year = yearSlide.slider("getValue")
@@ -17,6 +19,35 @@ reloadModels = (yearSlide) ->
 nospace = (str) ->
   str.replace(/\s+/g,'');
 
+currentInfo = (id) ->
+  for inf, val of infoObject
+    if parseInt(id)is val.id
+      val
+    else
+      continue
+
+setInfo = (info) ->
+  $("#model_transmission_type").val info.model_transmission_type
+  $("#model_body").val info.model_body
+  $("#region").val info.region
+  $("#country").val info.country
+  $("#model_drive").val info.model_drive
+  $("#model_engine_type").val info.model_engine_type
+  $("#model_engine_position").val info.model_engine_position
+  $("#model_engine_cyl").val info.model_engine_cyl
+  $("#model_engine_cc").val info.model_engine_cc
+  $("#model_engine_valves_per_cyl").val info.model_engine_valves_per_cyl
+  $("#model_engine_ci").val info.model_engine_ci
+  $("#model_engine_torque_rpm").val info.model_engine_torque_rpm
+  $("#model_engine_fuel").val info.model_engine_fuel
+  $("#model_lkm_hwy").val info.model_lkm_hwy
+  $("#model_lkm_city").val info.model_lkm_city
+  $("#model_fuel_cap_l").val info.model_fuel_cap_l
+  $("#model_length_mm").val info.model_length_mm
+  $("#model_width_mm").val info.model_width_mm
+  $("#model_height_mm").val info.model_height_mm
+  $("#model_weight_kg").val info.model_weight_kg
+
 infoModels = (id, yearSlide) ->
   "use strict"
   type = ""
@@ -26,11 +57,15 @@ infoModels = (id, yearSlide) ->
   else
     type = "name"
   $.get "/get/info/models/" + type + "/" + id + "/" + yearSlide.slider("getValue"), (data) ->
-    trims = data.length
-    selected_models_trim.clearOptions()
-    selected_models_trim.load (callback) ->
-      callback data
-      return
+    lngth = data.length
+    if lngth
+      if lngth == 1
+        setInfo data[0]
+      infoObject = data
+      selected_models_trim.clearOptions()
+      selected_models_trim.load (callback) ->
+        callback data
+        return
 
     return
 
@@ -149,6 +184,9 @@ $(document).ready ->
     hideSelected: true
     onChange: (input) ->
       "use strict"
+      info = currentInfo(input)[0]
+      if info?
+        setInfo info
       return
 
   $("#profileForm").bootstrapValidator

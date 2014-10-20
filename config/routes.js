@@ -62,10 +62,14 @@ module.exports.routes = {
     /*'/user/new':{
         controller: 'UserController',
         action: 'new'
-    },*/
+    },
     '/test':{
         controller: 'UserController',
         action: 'login'
+    },*/
+    '/test':{
+        controller: 'SettingsController',
+        action: 'getParam'
     }
 
     /***************************************************************************

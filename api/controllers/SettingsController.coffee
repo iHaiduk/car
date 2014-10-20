@@ -51,6 +51,33 @@ module.exports =
       "/cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"
       "controlScript/settingsIndex.js"
     ]
+    kpp = {
+      'Manual': req.__('Manual')
+      'Automatic': req.__('Automatic')
+      '4-speed manual': req.__('4-speed manual')
+      '6-speed manual': req.__('6-speed manual')
+      '6-speed automatic': req.__('6-speed automatic')
+      '5-speed manual': req.__('5-speed manual')
+      'Single Speed': req.__('Single Speed')
+      'CVT': req.__('CVT')
+      '7-speed automatic': req.__('7-speed automatic')
+      '5-speed shiftable automatic': req.__('5-speed shiftable automatic')
+      '6-speed automated manual': req.__('6-speed automated manual')
+      '5-speed automated manual': req.__('5-speed automated manual')
+      '8-speed shiftable automatic': req.__('8-speed shiftable automatic')
+      '5-speed automatic': req.__('5-speed automatic')
+      '4-speed automatic': req.__('4-speed automatic')
+      '6-speed shiftable automatic': req.__('6-speed shiftable automatic')
+      '7-speed shiftable automatic': req.__('7-speed shiftable automatic')
+      '7-speed automated manual': req.__('7-speed automated manual')
+      '8-speed automated manual': req.__('8-speed automated manual')
+      '8-speed automatic': req.__('8-speed automatic')
+      '4-speed shiftable automatic': req.__('4-speed shiftable automatic')
+      '7-speed manual': req.__('7-speed manual')
+      'Automated Manual': req.__('Automated Manual')
+      'Direct Drive': req.__('Direct Drive')
+    }
+
     req.setLocale 'ua'
     res.view "settings/index"
     return
@@ -96,6 +123,7 @@ module.exports =
     return
 
   getInfoModels: (req, res) ->
+    _req = req
     id = req.params.id
     year = req.params.year
     type = req.params.type
@@ -116,10 +144,40 @@ module.exports =
           AutoParam.find(
             model_id: id
             model_year: year.id
-          ).exec (err, resul) ->
-            res.json resul
+          ).populate("model_make_id").exec (err, resul) ->
+            _req.setLocale 'ua'
+            ret = for index, trim of resul
+
+              id: trim.id
+              model_trim: trim.model_trim
+              model_transmission_type: _req.__(trim.model_transmission_type)
+              model_body: trim.model_body #req.__(trim.model_body)
+              region: trim.region #req.__(trim.region)
+              country: trim.model_make_id.country #req.__("ua")
+              model_drive: trim.model_drive #req.__(trim.model_drive)
+              model_engine_type: trim.model_engine_type #req.__(trim.model_engine_type)
+              model_engine_position: trim.model_engine_position #req.__(trim.model_engine_position)
+              model_engine_cyl: trim.model_engine_cyl
+              model_engine_cc: trim.model_engine_cc
+              model_engine_ci: trim.model_engine_ci
+              model_engine_valves_per_cyl: trim.model_engine_valves_per_cyl
+              model_engine_torque_rpm: trim.model_engine_torque_rpm
+              model_engine_fuel: trim.model_engine_fuel
+              model_lkm_hwy: trim.model_lkm_hwy
+              model_lkm_city: trim.model_lkm_city
+              model_fuel_cap_l: trim.model_fuel_cap_l
+              model_length_mm: trim.model_length_mm
+              model_width_mm: trim.model_width_mm
+              model_height_mm: trim.model_height_mm
+              model_weight_kg: trim.model_weight_kg
+
+            res.json ret
             return
 
         return
 
     return
+
+  getParam: (req, res) ->
+    transmission = staticVariable.model_transmission_type
+    console.log(transmission)

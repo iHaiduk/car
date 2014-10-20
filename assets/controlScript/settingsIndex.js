@@ -91,7 +91,7 @@
   globalGetreloadModels = null;
 
   $(document).ready(function() {
-    var firstLit, make_select, vinId, vinSend, yearSlide;
+    var firstLit, make_select, socket, vinId, vinSend, yearSlide;
     vinSend = $("#vinSend");
     vinId = $("#vinId");
     yearSlide = $(".slider").slider();
@@ -243,6 +243,14 @@
           }
         }
       }
+    });
+    return;
+    socket = io.connect("http://localhost");
+    socket.on("news", function(data) {
+      console.log(data);
+      return socket.emit("my other event", {
+        my: "data"
+      });
     });
   });
 

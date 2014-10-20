@@ -22,6 +22,17 @@ unique = (arr) ->
     i++
   objs # или собрать ключи перебором для IE<9
 module.exports =
+  init: (req, res)->
+    io.on "connection", (socket) ->
+    socket.emit "news",
+      hello: "world"
+
+    socket.on "my other event", (data) ->
+      console.log data
+      return
+
+    return
+
   index: (req, res) ->
     res.locals.styles = [
       "vendor/slider/css/slider.css"

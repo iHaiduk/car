@@ -29,6 +29,15 @@ SettingsController
   };
 
   module.exports = {
+    init: function(req, res) {
+      io.on("connection", function(socket) {});
+      socket.emit("news", {
+        hello: "world"
+      });
+      socket.on("my other event", function(data) {
+        console.log(data);
+      });
+    },
     index: function(req, res) {
       var kpp;
       res.locals.styles = ["vendor/slider/css/slider.css", "vendor/chosen/chosen.min.css", "vendor/datetimepicker/css/bootstrap-datetimepicker.min.css", "vendor/codemirror/lib/codemirror.css", "vendor/tagsinput/bootstrap-tagsinput.css", "vendor/selectize/selectize.bootstrap3.css", "/cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css", "styles/style.css"];

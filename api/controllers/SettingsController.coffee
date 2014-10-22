@@ -95,98 +95,23 @@ module.exports =
 
   getVin: (req, res) ->
     code = req.query.vin
-    Car.getInfoVin code, (result) ->
+    _Car.getInfoVin code, (result) ->
       res.json result
-      return
-
     return
 
   getMakes: (req, res) ->
-    AutoMake.find().sort("name").exec (err, result) ->
+    _Car.getMakes {}, (err, result) ->
       res.json result
     return
 
   getModels: (req, res) ->
-    condition = {}
-    async.waterfall [
-      (callback) ->
-        if req.params.make?
-          callback null, req.params.make
-        else
-          callback null, null
-      (make, callback) ->
-        if req.params.year?
-          AutoYear.findOneByYear(req.params.year).exec (err, year) ->
-            callback null, make, year
-            return
-
-        else
-          callback null, make, null
-    ], (err, make, year) ->
-      condition["id_make"] = make  if make?
-      condition["idYear"] = year.id  if year?
-      AutoModel.find(condition).sort("name").exec (err, resul) ->
-        res.json unique(resul)
-        return
-
-      return
-
+    _Car.getModels req, (err, result) ->
+      res.json unique(result)
     return
 
   getInfoModels: (req, res) ->
-    _req = req
-    id = req.params.id
-    year = req.params.year
-    type = req.params.type
-    if type is "id"
-      async.waterfall [(callback) ->
-        if req.params.year?
-          AutoYear.findOneByYear(req.params.year).exec (err, year) ->
-            callback null, year
-            return
-
-        else
-          callback null, null
-        return
-      ], (err, year) ->
-        unless year?
-          res.json {}
-        else
-          AutoParam.find(
-            model_id: id
-            model_year: year.id
-          ).populate("model_make_id").exec (err, resul) ->
-            _req.setLocale 'ua'
-            ret = for index, trim of resul
-
-              id: trim.id
-              model_trim: trim.model_trim
-              model_transmission_type: _req.__(trim.model_transmission_type) if trim.model_transmission_type?
-              model_body: trim.model_body #req.__(trim.model_body)
-              region: trim.region #req.__(trim.region)
-              country: trim.model_make_id.country #req.__("ua")
-              model_drive: trim.model_drive #req.__(trim.model_drive)
-              model_engine_type: trim.model_engine_type #req.__(trim.model_engine_type)
-              model_engine_position: trim.model_engine_position #req.__(trim.model_engine_position)
-              model_engine_cyl: trim.model_engine_cyl
-              model_engine_cc: trim.model_engine_cc
-              model_engine_ci: trim.model_engine_ci
-              model_engine_valves_per_cyl: trim.model_engine_valves_per_cyl
-              model_engine_torque_rpm: trim.model_engine_torque_rpm
-              model_engine_fuel: trim.model_engine_fuel
-              model_lkm_hwy: trim.model_lkm_hwy
-              model_lkm_city: trim.model_lkm_city
-              model_fuel_cap_l: trim.model_fuel_cap_l
-              model_length_mm: trim.model_length_mm
-              model_width_mm: trim.model_width_mm
-              model_height_mm: trim.model_height_mm
-              model_weight_kg: trim.model_weight_kg
-
-            res.json ret
-            return
-
-        return
-
+    _Car.getInfoModels req, (err, result) ->
+      res.json result
     return
 
   getParam: (req, res) ->

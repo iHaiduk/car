@@ -1,6 +1,6 @@
 _User =
   login: (req, res) ->
-    User.create
+    _User.create
       email: "ht_hiv@i.ua"
       password: "9322022"
       fio: "HIV"

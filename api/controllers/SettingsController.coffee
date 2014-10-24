@@ -105,11 +105,13 @@ module.exports =
     return
 
   getModels: (req, res) ->
+    _User.setUserCar {session: req.session, make: req.params.make}
     _Car.getModels req, (err, result) ->
       res.json unique(result)
     return
 
   getInfoModels: (req, res) ->
+    _User.setUserCar {session: req.session, model: req.params.id, year: req.params.year}
     _Car.getInfoModels req, (err, result) ->
       res.json result
     return

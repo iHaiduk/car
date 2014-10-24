@@ -59,10 +59,14 @@ module.exports.routes = {
         controller: 'SettingsController',
         action: 'getInfoModels'
     },
-    /*'/user/new':{
+    '/user/new':{
         controller: 'UserController',
         action: 'new'
     },
+    '/user/login':{
+        controller: 'UserController',
+        action: 'login'
+    },/*
     '/test':{
         controller: 'UserController',
         action: 'login'

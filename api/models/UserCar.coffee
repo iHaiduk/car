@@ -27,6 +27,9 @@ module.exports =
     model_id:
       model: "AutoModel"
 
+    position:
+      type: "integer"
+
     make_name:
       type: "string"
 

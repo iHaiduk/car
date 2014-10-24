@@ -1,5 +1,11 @@
-_User =
+
+cUser =
   login: (req, res) ->
+    _User.login req, ->
+      console.log req.session
+      res.send("auth")
+
+  new: (req, res) ->
     _User.create
       email: "ht_hiv@i.ua"
       password: "9322022"
@@ -39,4 +45,4 @@ _User =
         , 404
       return###
 
-module.exports = _User
+module.exports = cUser

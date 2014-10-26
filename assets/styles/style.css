@@ -54,16 +54,37 @@
     padding: 0.5em .6em .5em;
     font-size: 90%;
 }
+#paramModelForm .input-group .form-control{
+    position: static;
+}
 #paramModelForm label{
     cursor: pointer;
 }
-#paramModelForm .input-group-addon {
-    padding: 0 10px;
-    height: 38px;
+#paramModelForm .selectize-control{
+    height: 34px;
 }
 #paramModelForm .checkbox{
     margin-top: 9px;
     margin-bottom: 7px;
     margin-left: 16px;
     margin-right: -8px;
+}
+#paramModelForm .drpdwn-select .checkbox{
+    margin-top: -2px;
+    margin-bottom: -2px;
+    margin-left: 17px;
+    margin-right: -9px;
+    height: 20px;
+}
+#paramModelForm .drpdwn-select .selectize-control, #paramModelForm .drpdwn-select .selectize-control .selectize-input{
+    height: 34px;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+}
+#paramModelForm .drpdwn-select .input-group-addon{
+    padding: 8px 8px;
+}
+#paramModelForm .drpdwn-select .selectize-dropdown{
+    position: absolute;
+    z-index: 9;
 }

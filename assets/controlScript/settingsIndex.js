@@ -142,6 +142,7 @@
         valueField: "id",
         maxItems: 1,
         sortField: "name",
+        searchField: "name",
         persist: false,
         create: function(input) {
           return {
@@ -178,6 +179,7 @@
       valueField: "id",
       maxItems: 1,
       sortField: "name",
+      searchField: "name",
       render: {
         option: function(data, escape) {
           var make, text;
@@ -207,6 +209,7 @@
       valueField: "id",
       maxItems: 1,
       sortField: "model_trim",
+      searchField: "model_trim",
       persist: true,
       hideSelected: true,
       onChange: function(input) {
@@ -216,6 +219,41 @@
         if (info != null) {
           setInfo(info);
         }
+        console.log($('#paramModelForm').serializeJSON());
+      }
+    });
+    $("#model_transmission_type").selectize({
+      maxItems: 1,
+      valueField: "key",
+      labelField: "title",
+      searchField: "title",
+      sortField: "title",
+      options: kpp,
+      create: false,
+      persist: true,
+      hideSelected: true,
+      create: function(input) {
+        return {
+          title: input,
+          key: input
+        };
+      }
+    });
+    $("#model_body").selectize({
+      maxItems: 1,
+      valueField: "key",
+      labelField: "title",
+      searchField: "title",
+      sortField: "title",
+      options: model_body,
+      create: false,
+      persist: true,
+      hideSelected: true,
+      create: function(input) {
+        return {
+          title: input,
+          key: input
+        };
       }
     });
     $("#profileForm").bootstrapValidator({

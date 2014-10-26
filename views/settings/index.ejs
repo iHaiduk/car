@@ -364,7 +364,7 @@
                         </div>
                         <form id="paramModelForm">
                             <div class="row">
-                                <div class="col-md-3 form-group">
+                                <div class="col-md-3 form-group drpdwn-select">
                                     <label class="control-label text-center" data-toggle="tooltip" data-original-title="Тип Коробки Переключения Передач (КПП):" for="model_transmission_type">Тип КПП:</label>
                                     <div class="input-group m-b">
                                         <span class="input-group-addon">
@@ -375,7 +375,7 @@
                                         <input type="text" id="model_transmission_type" name="model_transmission_type" placeholder="Тип КПП" class="form-control">
                                     </div>
                                 </div>
-                                <div class="col-md-3 form-group">
+                                <div class="col-md-3 form-group drpdwn-select">
                                     <label class="control-label text-center" data-toggle="tooltip" data-original-title="Тип кузова" for="model_body">Тип кузова:</label>
                                     <div class="input-group m-b">
                                         <span class="input-group-addon">
@@ -650,5 +650,6 @@
 </section>
 <!-- END Page content-->
 <script>
-var kpp = {};
+var kpp = <%- kpp -%>,
+    model_body = <%- model_body -%>;
 </script>

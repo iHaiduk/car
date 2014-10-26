@@ -23,6 +23,7 @@ unique = (arr) ->
   objs # или собрать ключи перебором для IE<9
 module.exports =
   init: (req, res)->
+
     io.on "connection", (socket) ->
     socket.emit "news",
       hello: "world"
@@ -59,38 +60,22 @@ module.exports =
       "vendor/inputmask/jquery.inputmask.bundle.min.js"
       "vendor/validation/jquery.validate.js"
       "vendor/selectize/selectize.js"
-      "/cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"
+      "vendor/bootstrapvalidator/js/bootstrapValidator.js"
+      "vendor/serializeJSON/jquery.serializejson.js"
       "controlScript/settingsIndex.js"
     ]
-    kpp = {
-      'Manual': req.__('Manual')
-      'Automatic': req.__('Automatic')
-      '4-speed manual': req.__('4-speed manual')
-      '6-speed manual': req.__('6-speed manual')
-      '6-speed automatic': req.__('6-speed automatic')
-      '5-speed manual': req.__('5-speed manual')
-      'Single Speed': req.__('Single Speed')
-      'CVT': req.__('CVT')
-      '7-speed automatic': req.__('7-speed automatic')
-      '5-speed shiftable automatic': req.__('5-speed shiftable automatic')
-      '6-speed automated manual': req.__('6-speed automated manual')
-      '5-speed automated manual': req.__('5-speed automated manual')
-      '8-speed shiftable automatic': req.__('8-speed shiftable automatic')
-      '5-speed automatic': req.__('5-speed automatic')
-      '4-speed automatic': req.__('4-speed automatic')
-      '6-speed shiftable automatic': req.__('6-speed shiftable automatic')
-      '7-speed shiftable automatic': req.__('7-speed shiftable automatic')
-      '7-speed automated manual': req.__('7-speed automated manual')
-      '8-speed automated manual': req.__('8-speed automated manual')
-      '8-speed automatic': req.__('8-speed automatic')
-      '4-speed shiftable automatic': req.__('4-speed shiftable automatic')
-      '7-speed manual': req.__('7-speed manual')
-      'Automated Manual': req.__('Automated Manual')
-      'Direct Drive': req.__('Direct Drive')
-    }
+    stringifyObject = require('stringify-object')
+    req.session.languagePreference = 'ua'
+    req.setLocale req.session.languagePreference
 
-    req.setLocale 'ua'
-    res.view "settings/index"
+    model_transmission_type = _objOption.keyed(_staticVariable.model_transmission_type(req))
+    model_transmission_type = stringifyObject model_transmission_type, {indent: '', singleQuotes: false }
+
+    model_body = _objOption.keyed(_staticVariable.model_body(req))
+    model_body = stringifyObject model_body, {indent: '', singleQuotes: false }
+
+
+    res.view "settings/index", {kpp: model_transmission_type, model_body: model_body}
     return
 
   getVin: (req, res) ->

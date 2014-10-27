@@ -70,12 +70,17 @@ module.exports =
 
     model_transmission_type = _objOption.keyed(_staticVariable.model_transmission_type(req))
     model_transmission_type = stringifyObject model_transmission_type, {indent: '', singleQuotes: false }
-
     model_body = _objOption.keyed(_staticVariable.model_body(req))
     model_body = stringifyObject model_body, {indent: '', singleQuotes: false }
+    region = _objOption.keyed(_staticVariable.region(req))
+    region = stringifyObject region, {indent: '', singleQuotes: false }
+    country = _objOption.keyed(_staticVariable.country(req))
+    country = stringifyObject country, {indent: '', singleQuotes: false }
+    model_drive = _objOption.keyed(_staticVariable.model_drive(req))
+    model_drive = stringifyObject model_drive, {indent: '', singleQuotes: false }
 
 
-    res.view "settings/index", {kpp: model_transmission_type, model_body: model_body}
+    res.view "settings/index", {kpp: model_transmission_type, model_body: model_body, region:region, country:country, model_drive:model_drive}
     return
 
   getVin: (req, res) ->

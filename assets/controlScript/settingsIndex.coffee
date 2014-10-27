@@ -193,32 +193,47 @@ $(document).ready ->
       console.log $('#paramModelForm').serializeJSON();
       return
 
-  $("#model_transmission_type").selectize
+  $("#model_transmission_type, #model_body, #region, #country, #model_drive").selectize
     maxItems: 1
     valueField: "key"
     labelField: "title"
     searchField: "title"
     sortField: "title"
-    options: kpp
     create: false
     persist: true
     hideSelected: true
     create: (input) ->
       title: input
       key: input
-  $("#model_body").selectize
-    maxItems: 1
-    valueField: "key"
-    labelField: "title"
-    searchField: "title"
-    sortField: "title"
-    options: model_body
-    create: false
-    persist: true
-    hideSelected: true
-    create: (input) ->
-      title: input
-      key: input
+
+  model_transmission_type_selectize = $("#model_transmission_type")[0].selectize;
+  model_body_selectize = $("#model_body")[0].selectize;
+  region_selectize = $("#region")[0].selectize;
+  country_selectize = $("#country")[0].selectize;
+  model_drive_selectize = $("#model_drive")[0].selectize;
+
+  model_transmission_type_selectize.clear();
+  model_body_selectize.clear();
+  region_selectize.clear();
+  country_selectize.clear();
+  model_drive_selectize.clear();
+
+  model_transmission_type_selectize.clearOptions();
+  model_body_selectize.clearOptions();
+  region_selectize.clearOptions();
+  country_selectize.clearOptions();
+  model_drive_selectize.clearOptions();
+
+  model_transmission_type_selectize.load (callback) ->
+    callback(kpp)
+  model_body_selectize.load (callback) ->
+    callback(model_body)
+  region_selectize.load (callback) ->
+    callback(region)
+  country_selectize.load (callback) ->
+    callback(country)
+  model_drive_selectize.load (callback) ->
+    callback(model_drive)
 
 
   $("#profileForm").bootstrapValidator

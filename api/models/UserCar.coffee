@@ -30,6 +30,9 @@ module.exports =
     position:
       type: "integer"
 
+    vinCode:
+      type: "string"
+
     make_name:
       type: "string"
 

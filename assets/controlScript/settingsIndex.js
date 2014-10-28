@@ -7,7 +7,7 @@
   reloadModels = function(yearSlide) {
     var globalGetreloadModels, make, selected_models, year, _selected_models;
     make = ($("#selected_make").val() === "" ? 0 : $("#selected_make").val());
-    year = yearSlide.slider("getValue");
+    year = $(document).find("#settings_year h6.text-center").text();
     selected_models = $(document).find("#selected_models");
     _selected_models = selected_models[0].selectize;
     if (typeof globalGetreloadModels !== "undefined" && globalGetreloadModels !== null) {
@@ -40,19 +40,19 @@
   };
 
   setInfo = function(info) {
-    $("#model_transmission_type").val(info.model_transmission_type);
-    $("#model_body").val(info.model_body);
-    $("#region").val(info.region);
-    $("#country").val(info.country);
-    $("#model_drive").val(info.model_drive);
-    $("#model_engine_type").val(info.model_engine_type);
-    $("#model_engine_position").val(info.model_engine_position);
+    $("#model_transmission_type")[0].selectize.setValue(info.model_transmission_type);
+    $("#model_body")[0].selectize.setValue(info.model_body);
+    $("#region")[0].selectize.setValue(info.region);
+    $("#country")[0].selectize.setValue(info.country);
+    $("#model_drive")[0].selectize.setValue(info.model_drive);
+    $("#model_engine_type")[0].selectize.setValue(info.model_engine_type);
+    $("#model_engine_position")[0].selectize.setValue(info.model_engine_position);
     $("#model_engine_cyl").val(info.model_engine_cyl);
     $("#model_engine_cc").val(info.model_engine_cc);
     $("#model_engine_valves_per_cyl").val(info.model_engine_valves_per_cyl);
     $("#model_engine_ci").val(info.model_engine_ci);
     $("#model_engine_torque_rpm").val(info.model_engine_torque_rpm);
-    $("#model_engine_fuel").val(info.model_engine_fuel);
+    $("#model_engine_fuel")[0].selectize.setValue(info.model_engine_fuel);
     $("#model_lkm_hwy").val(info.model_lkm_hwy);
     $("#model_lkm_city").val(info.model_lkm_city);
     $("#model_fuel_cap_l").val(info.model_fuel_cap_l);
@@ -70,7 +70,7 @@
     if ($.isNumeric(id)) {
       type = "id";
     } else {
-      type = "name";
+
     }
     $.get("/get/info/models/" + type + "/" + id + "/" + yearSlide.slider("getValue"), function(data) {
       var lngth;
@@ -91,7 +91,7 @@
   globalGetreloadModels = null;
 
   $(document).ready(function() {
-    var country_selectize, firstLit, make_select, model_body_selectize, model_drive_selectize, model_transmission_type_selectize, region_selectize, socket, vinId, vinSend, yearSlide;
+    var country_selectize, firstLit, make_select, model_body_selectize, model_drive_selectize, model_engine_fuel_selectize, model_engine_position_selectize, model_engine_type_selectize, model_transmission_type_selectize, region_selectize, socket, vinId, vinSend, yearSlide;
     vinSend = $("#vinSend");
     vinId = $("#vinId");
     yearSlide = $(".slider").slider();
@@ -101,7 +101,6 @@
       var alNumRegex, text, _this;
       _this = $(this);
       text = nospace(_this.val());
-      console.log(text);
       _this.val(text.slice(0, 18));
       alNumRegex = /^([a-zA-Z0-9]+)$/;
       $(this).parent().removeClass("has-success has-error");
@@ -195,7 +194,19 @@
       hideSelected: true,
       onChange: function(input) {
         "use strict";
-        infoModels(input, yearSlide);
+        var m, name, p, year, _year;
+        _year = $(document).find("#settings_year h6.text-center");
+        name = this.sifter.items[input].name;
+        p = new RegExp(".*?(\\()(\\d+)", ["i"]);
+        m = p.exec(name);
+        year = m[2];
+        if (new RegExp("(\\d+)", ["i"]).test(year)) {
+          _year.text(year);
+          yearSlide.slider('setValue', parseInt(year));
+          infoModels(input, yearSlide);
+        } else {
+          infoModels(input, yearSlide);
+        }
       },
       create: function(input) {
         return {
@@ -219,10 +230,9 @@
         if (info != null) {
           setInfo(info);
         }
-        console.log($('#paramModelForm').serializeJSON());
       }
     });
-    $("#model_transmission_type, #model_body, #region, #country, #model_drive").selectize({
+    $("#model_transmission_type, #model_body, #region, #country, #model_drive, #model_engine_type, #model_engine_position, #model_engine_fuel").selectize({
       maxItems: 1,
       valueField: "key",
       labelField: "title",
@@ -243,16 +253,25 @@
     region_selectize = $("#region")[0].selectize;
     country_selectize = $("#country")[0].selectize;
     model_drive_selectize = $("#model_drive")[0].selectize;
+    model_engine_type_selectize = $("#model_engine_type")[0].selectize;
+    model_engine_position_selectize = $("#model_engine_position")[0].selectize;
+    model_engine_fuel_selectize = $("#model_engine_fuel")[0].selectize;
     model_transmission_type_selectize.clear();
     model_body_selectize.clear();
     region_selectize.clear();
     country_selectize.clear();
     model_drive_selectize.clear();
+    model_engine_type_selectize.clear();
+    model_engine_position_selectize.clear();
+    model_engine_fuel_selectize.clear();
     model_transmission_type_selectize.clearOptions();
     model_body_selectize.clearOptions();
     region_selectize.clearOptions();
     country_selectize.clearOptions();
     model_drive_selectize.clearOptions();
+    model_engine_type_selectize.clearOptions();
+    model_engine_position_selectize.clearOptions();
+    model_engine_fuel_selectize.clearOptions();
     model_transmission_type_selectize.load(function(callback) {
       return callback(kpp);
     });
@@ -267,6 +286,22 @@
     });
     model_drive_selectize.load(function(callback) {
       return callback(model_drive);
+    });
+    model_engine_type_selectize.load(function(callback) {
+      return callback(model_engine_type);
+    });
+    model_engine_position_selectize.load(function(callback) {
+      return callback(model_engine_position);
+    });
+    model_engine_fuel_selectize.load(function(callback) {
+      return callback(model_engine_fuel);
+    });
+    $("#model_lkm_hwy, #model_lkm_city, #model_fuel_cap_l").numberMask({
+      decimalMark: [".", ","],
+      type: "float"
+    });
+    $("#model_engine_cc, #model_engine_ci, #model_engine_torque_rpm, #model_engine_cyl, #model_length_mm, #model_width_mm, #model_height_mm, #model_weight_kg, #model_engine_valves_per_cyl").numberMask({
+      beforePoint: 5
     });
     $("#profileForm").bootstrapValidator({
       feedbackIcons: {

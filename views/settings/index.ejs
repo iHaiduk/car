@@ -321,7 +321,7 @@
                             <dl class="dl-horizontal" id="controll_make">
                                 <dt>Производитель</dt>
                                 <dd>
-                                    <input type="text" id="selected_make" autofocus="off" autocomplete="off">
+                                    <input type="text" id="selected_make" autofocus="off" autocomplete="off" placeholder="Выбирите или укажите производителя">
                                 </dd>
                             </dl>
                         </div>
@@ -337,7 +337,7 @@
                             <dl class="dl-horizontal" id="controll_model">
                                 <dt>Модель</dt>
                                 <dd>
-                                    <input type="text" id="selected_models" autofocus="off" autocomplete="off">
+                                    <input type="text" id="selected_models" autofocus="off" autocomplete="off" placeholder="Выбирите или укажите модель автомобиля">
                                 </dd>
                             </dl>
                         </div>
@@ -352,14 +352,16 @@
                                 <dl class="dl-horizontal">
                                     <dt><%= __('Modification') %></dt>
                                     <dd>
-                                        <input type="text" id="selected_models_trim" autofocus="off" autocomplete="off">
+                                        <input type="text" id="selected_models_trim" autofocus="off" autocomplete="off" placeholder="Выбирите или укажите модификацию">
                                     </dd>
                                 </dl>
                             </div>
-                            <div class="col-sm-2">
+                            <div class="col-sm-1">
                             </div>
-                            <div class="col-sm-3">
-                                Параметры не совпадают
+                            <div class="col-sm-4" id="info_check">
+                                <blockquote class="text-danger">
+                                    <strong><em>Если параметры не правильные, не указаны или не известны, выделите их галочками</em></strong>
+                                </blockquote>
                             </div>
                         </div>
                         <form id="paramModelForm">
@@ -654,5 +656,8 @@ var kpp = <%- kpp -%>,
     model_body = <%- model_body -%>,
     region = <%- region -%>,
     country = <%- country -%>,
-    model_drive = <%- model_drive -%>
+    model_drive = <%- model_drive -%>,
+    model_engine_type = <%- model_engine_type -%>,
+    model_engine_position = <%- model_engine_position -%>,
+    model_engine_fuel = <%- model_engine_fuel -%>;
 </script>

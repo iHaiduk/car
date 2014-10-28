@@ -62,6 +62,7 @@ module.exports =
       "vendor/selectize/selectize.js"
       "vendor/bootstrapvalidator/js/bootstrapValidator.js"
       "vendor/serializeJSON/jquery.serializejson.js"
+      "vendor/mask/jquery.numberMask.js"
       "controlScript/settingsIndex.js"
     ]
     stringifyObject = require('stringify-object')
@@ -78,9 +79,15 @@ module.exports =
     country = stringifyObject country, {indent: '', singleQuotes: false }
     model_drive = _objOption.keyed(_staticVariable.model_drive(req))
     model_drive = stringifyObject model_drive, {indent: '', singleQuotes: false }
+    model_engine_type = _objOption.keyed(_staticVariable.model_engine_type(req))
+    model_engine_type = stringifyObject model_engine_type, {indent: '', singleQuotes: false }
+    model_engine_position = _objOption.keyed(_staticVariable.model_engine_position(req))
+    model_engine_position = stringifyObject model_engine_position, {indent: '', singleQuotes: false }
+    model_engine_fuel = _objOption.keyed(_staticVariable.model_engine_fuel(req))
+    model_engine_fuel = stringifyObject model_engine_fuel, {indent: '', singleQuotes: false }
 
 
-    res.view "settings/index", {kpp: model_transmission_type, model_body: model_body, region:region, country:country, model_drive:model_drive}
+    res.view "settings/index", {kpp: model_transmission_type, model_body: model_body, region: region, country: country, model_drive: model_drive, model_engine_type: model_engine_type, model_engine_position: model_engine_position, model_engine_fuel: model_engine_fuel}
     return
 
   getVin: (req, res) ->

@@ -89,7 +89,40 @@ class Static
     "Not Available": "Not Available"
     "Rear": "Rear"
     "Rear Wheel Drive": "Rear Wheel Drive"
-
+  model_engine_type: (req) ->
+    "boxer": "boxer"
+    "dual-disk rotary": "dual-disk rotary"
+    "electric": "electric"
+    "Flat": "Flat"
+    "in-line": "in-line"
+    "Inline": "Inline"
+    "Not Available": "Not Available"
+    "single": "single"
+    "V": "V"
+    "W": "W"
+  model_engine_position: (req) ->
+    "Front": "Front"
+    "Middle": "Middle"
+    "Rear": "Rear"
+  model_engine_fuel: (req) ->
+    "Biofuel": "Biofuel"
+    "Diesel": "Diesel"
+    "Diesel / Electric Hybrid": "Diesel / Electric Hybrid"
+    "Electric": "Electric"
+    "Flex Fuel": "Flex Fuel"
+    "Flex-Fuel (Premium Unleaded Reco": "Flex-Fuel (Premium Unleaded Reco"
+    "Flex-Fuel (Premium Unleaded/E85)": "Flex-Fuel (Premium Unleaded/E85)"
+    "Flex-Fuel (Unleaded/E85)": "Flex-Fuel (Unleaded/E85)"
+    "FlexFuel": "FlexFuel"
+    "Gasoline": "Gasoline"
+    "Gasoline - Premium": "Gasoline - Premium"
+    "Gasoline / Electric Hybrid": "Gasoline / Electric Hybrid"
+    "LPG": "LPG"
+    "Natural Gas (CNG)": "Natural Gas (CNG)"
+    "Premium": "Premium"
+    "Premium Unleaded (Recommended)": "Premium Unleaded (Recommended)"
+    "Premium Unleaded (Required)": "Premium Unleaded (Required)"
+    "Regular Unleaded": "Regular Unleaded"
 
 
 module.exports = new Static

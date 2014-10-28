@@ -62,6 +62,7 @@ class _Car
       return
 
   getModels: (param = {}, myCallback) ->
+    _this = this
     condition = {}
     async.waterfall [
       (callback) ->
@@ -70,20 +71,22 @@ class _Car
         else
           callback null, null
       (make, callback) ->
+        console.log(_this.isInteger parseInt(param.params.year))
         if param.params.year?
           AutoYear.findOneByYear(param.params.year).exec (err, year) ->
             callback null, make, year
             return
-
         else
           callback null, make, null
     ], (err, make, year) ->
       condition["id_make"] = make  if make?
       condition["idYear"] = year.id  if year?
-      AutoModel.find(condition).sort("name").exec (err, resul) ->
+      AutoModel.find(condition).populate('idYear').exec (err, resul) ->
+        if not year?
+          for model, key in resul
+            resul[key].name += " ("+model.idYear.year+")"
         myCallback err, resul
         return
-
       return
 
     return
@@ -116,7 +119,7 @@ class _Car
 
               id: trim.id
               model_trim: trim.model_trim
-              model_transmission_type: _req.__(trim.model_transmission_type) if trim.model_transmission_type?
+              model_transmission_type: trim.model_transmission_type
               model_body: trim.model_body #req.__(trim.model_body)
               region: trim.region #req.__(trim.region)
               country: trim.model_make_id.country #req.__("ua")
@@ -143,5 +146,6 @@ class _Car
         return
 
     return
-
+  isInteger: (nVal) ->
+    typeof nVal is "number" and isFinite(nVal) and nVal > -9007199254740992 and nVal < 9007199254740992 and Math.floor(nVal) is nVal
 module.exports = new _Car

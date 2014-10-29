@@ -39,6 +39,8 @@ module.exports.routes = {
     '/panel': {
         view: "homepage"
     },
+
+    /* SETTINGS */
     '/settings': {
         controller: 'SettingsController',
         action: 'index'
@@ -59,6 +61,12 @@ module.exports.routes = {
         controller: 'SettingsController',
         action: 'getInfoModels'
     },
+    '/set/param': {
+        controller: 'SettingsController',
+        action: 'setParam'
+    },
+
+    /* USER */
     '/user/new':{
         controller: 'UserController',
         action: 'new'
@@ -70,11 +78,11 @@ module.exports.routes = {
     '/test':{
         controller: 'UserController',
         action: 'login'
-    },*/
+    },
     '/test':{
         controller: 'SettingsController',
         action: 'getParam'
-    }
+    }*/
 
     /***************************************************************************
      *                                                                          *

@@ -102,17 +102,16 @@ module.exports =
     return
 
   getModels: (req, res) ->
-    _User.setUserCar {session: req.session, make: req.params.make}
+    _User.setUserCar req.session, {make_id: req.params.make}
     _Car.getModels req, (err, result) ->
       res.json unique(result)
     return
 
   getInfoModels: (req, res) ->
-    _User.setUserCar {session: req.session, model: req.params.id, year: req.params.year}
+    _User.setUserCar req.session, {model_id: req.params.id, model_year: req.params.year}
     _Car.getInfoModels req, (err, result) ->
       res.json result
     return
 
-  getParam: (req, res) ->
-    transmission = staticVariable.model_transmission_type
-    console.log(transmission)
+  setParam: (req, res) ->
+    _User.setUserCar req.session, req.body

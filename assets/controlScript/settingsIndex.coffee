@@ -25,28 +25,30 @@ currentInfo = (id) ->
       val
     else
       continue
+clearForm = (info) ->
+
 
 setInfo = (info) ->
-  $("#model_transmission_type")[0].selectize.setValue info.model_transmission_type
-  $("#model_body")[0].selectize.setValue info.model_body
-  $("#region")[0].selectize.setValue info.region
-  $("#country")[0].selectize.setValue info.country
-  $("#model_drive")[0].selectize.setValue info.model_drive
-  $("#model_engine_type")[0].selectize.setValue info.model_engine_type
-  $("#model_engine_position")[0].selectize.setValue info.model_engine_position
-  $("#model_engine_cyl").val info.model_engine_cyl
-  $("#model_engine_cc").val info.model_engine_cc
-  $("#model_engine_valves_per_cyl").val info.model_engine_valves_per_cyl
-  $("#model_engine_ci").val info.model_engine_ci
-  $("#model_engine_torque_rpm").val info.model_engine_torque_rpm
-  $("#model_engine_fuel")[0].selectize.setValue info.model_engine_fuel
-  $("#model_lkm_hwy").val info.model_lkm_hwy
-  $("#model_lkm_city").val info.model_lkm_city
-  $("#model_fuel_cap_l").val info.model_fuel_cap_l
-  $("#model_length_mm").val info.model_length_mm
-  $("#model_width_mm").val info.model_width_mm
-  $("#model_height_mm").val info.model_height_mm
-  $("#model_weight_kg").val info.model_weight_kg
+  $.each info, (key, val) ->
+    if $("#"+key).hasClass "selectized"
+      s = $("#"+key)[0].selectize.getValue()
+      console.log s
+      if s == ""
+        $("#"+key)[0].selectize.setValue val
+    else
+      v = $("#"+key).val()
+      if v == ""
+        $("#"+key).val val
+    return
+  info._csrf = postCode
+  $(document).find("#paramModelForm :checkbox").each ->
+    console.log $(this)[0].id
+    info[$(this)[0].id] = if $(this).is(":checked") then 1 else 0
+    return
+  # TODO get name model and make
+  info["make_name"] = $("#selected_make")[0].selectize.sifter.items[$("#selected_make")[0].getValue()].name
+  info["model_name"] = $("#selected_models")[0].selectize.sifter.items[$("#selected_models")[0].getValue()].name
+  $.post "/set/param", info
 
 infoModels = (id, yearSlide) ->
   "use strict"
@@ -55,6 +57,7 @@ infoModels = (id, yearSlide) ->
   if $.isNumeric(id)
     type = "id"
   else
+    type = "name"
   $.get "/get/info/models/" + type + "/" + id + "/" + yearSlide.slider("getValue"), (data) ->
     lngth = data.length
     if lngth
@@ -155,7 +158,7 @@ $(document).ready ->
     searchField: "name"
     render:
       option: (data, escape) ->
-        make = escape(data.name)
+        make = escape data.name
         text = "<div data-value=\"" + escape(data.id) + "\" data-selectable=\"\" class=\"active-result group-option\">" + make.charAt(0).toUpperCase() + make.substr(1) + "</div>"
         text
 
@@ -166,15 +169,19 @@ $(document).ready ->
     hideSelected: true
     onChange: (input) ->
       "use strict"
-      _year = $(document).find("#settings_year h6.text-center")
-      name = this.sifter.items[input].name
-      p = new RegExp(".*?(\\()(\\d+)", ["i"])
-      m = p.exec(name)
-      year = m[2]
+      _year = $(document).find "#settings_year h6.text-center"
+      name = if this.sifter.items[input]? then this.sifter.items[input].name else null
+      if name?
+        p = new RegExp ".*?(\\()(\\d+)", ["i"]
+        m = p.exec name
+        if m?
+          year = m[2]
+        else
+          name = null
 
-      if new RegExp("(\\d+)", ["i"]).test year
-        _year.text(year)
-        yearSlide.slider 'setValue', parseInt(year)
+      if name? and new RegExp("(\\d+)", ["i"]).test year
+        _year.text year
+        yearSlide.slider 'setValue', parseInt year
         infoModels input, yearSlide
       else
         infoModels input, yearSlide

@@ -1,7 +1,7 @@
 
 class _User
   constructor: (@user = {}) ->
-    @user.id = null
+    @user.id = null;
 
   login: (data = {}, callback) ->
     @user.id = data.session.user = 1
@@ -11,11 +11,11 @@ class _User
     passwordHash = require 'password-hash'
     md5 = require 'MD5'
 
-    md5_gen = md5 Math.random()
+    leng = if 5 < data.email.length < 30 then data.email.length else 21
 
-    password = passwordHash.generate data.password + md5_gen, null, 5
+    md5_gen = md5(data.email + "!Hiv")[0..leng]
 
-    User.create
+    password = passwordHash.generate datate
       email: data.email
       password: password
       fio: data.fio
@@ -25,17 +25,9 @@ class _User
       callback error, response
     return
 
-  setUserCar: (data = {}, callback) ->
-    session = data.session
-    _d = {}
-    if data.make? then _d.make_id = data.make
-    if data.model? then _d.model_id = data.model
-    if data.year? then _d.model_year = data.year
-
+  setUserCar: (session, data, callback) ->
     if @user.id isnt null
-      console.log @user.id
-      UserCar.update({user_id: @user.id, position: 1}, _d).exec (err, result)  ->
-        console.log result
+      UserCar.update({user_id: @user.id, position: 1}, data).exec()
     else
       console.log "Need authorization! "+sails.getBaseurl()+"/user/login"
     #console.log data

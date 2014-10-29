@@ -2,7 +2,7 @@
 cUser =
   login: (req, res) ->
     _User.login req, ->
-      console.log req.session
+      #console.log req.session
       res.send("auth")
 
   new: (req, res) ->

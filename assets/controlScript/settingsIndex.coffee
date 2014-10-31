@@ -1,4 +1,6 @@
 infoObject = {}
+interval_send_info = null
+interval_send_info_k = 1
 
 reloadModels = (yearSlide) ->
   make = (if $("#selected_make").val() is "" then 0 else $("#selected_make").val())
@@ -27,12 +29,31 @@ currentInfo = (id) ->
       continue
 clearForm = (info) ->
 
+sendInfo = ->
+  clearTimeout interval_send_info
+  interval_send_info = null
+  interval_send_info = setTimeout ->
+    info_send = {}
+    $("#paramModelForm").find("input").each ->
+      if $(this).hasClass "selectized"
+        info_send[$(this)[0].id] = $(this)[0].selectize.getValue()
+        return
+      else if $(this).is ":checkbox"
+        info_send[$(this)[0].id] = if $(this).is(":checked") then 1 else 0
+        return
+      else
+        info_send[$(this)[0].id] = $(this).val()
+        return
+    info_send._csrf = postCode
+    $.post "/set/param", info_send
+    return
+  , 1000
+  return
 
 setInfo = (info) ->
   $.each info, (key, val) ->
     if $("#"+key).hasClass "selectized"
       s = $("#"+key)[0].selectize.getValue()
-      console.log s
       if s == ""
         $("#"+key)[0].selectize.setValue val
     else
@@ -42,12 +63,12 @@ setInfo = (info) ->
     return
   info._csrf = postCode
   $(document).find("#paramModelForm :checkbox").each ->
-    console.log $(this)[0].id
     info[$(this)[0].id] = if $(this).is(":checked") then 1 else 0
     return
-  # TODO get name model and make
-  info["make_name"] = $("#selected_make")[0].selectize.sifter.items[$("#selected_make")[0].getValue()].name
-  info["model_name"] = $("#selected_models")[0].selectize.sifter.items[$("#selected_models")[0].getValue()].name
+  select_make = $(document).find("#selected_make")[0].selectize
+  select_model = $(document).find("#selected_models")[0].selectize
+  info["make_name"] = select_make.sifter.items[select_make.getValue()].name
+  info["model_name"] = returnName select_model.sifter.items[select_model.getValue()].name
   $.post "/set/param", info
 
 infoModels = (id, yearSlide) ->
@@ -72,6 +93,12 @@ infoModels = (id, yearSlide) ->
     return
 
   return
+returnName = (text) ->
+  re = "(.*?)(\\()"
+  p = new RegExp re
+  m = p.exec(text)
+  if m? then $.trim m[1] else null
+
 globalGetreloadModels = null
 $(document).ready ->
   vinSend = $("#vinSend")
@@ -79,6 +106,11 @@ $(document).ready ->
   yearSlide = $(".slider").slider()
   make_select = $(".make_select")
   firstLit = null
+  info_car_input = $("#paramModelForm").find "input"
+
+  info_car_input.on "click keyup focusout", ->
+    sendInfo()
+
   vinId.on "keyup focusout", ->
     _this = $(this)
     text = nospace _this.val()
@@ -105,9 +137,6 @@ $(document).ready ->
         dataType: "json"
         success: (data) ->
           console.log data
-
-
-
 
   yearSlide.on("slideStop", ->
     $("#settings_year h6").text yearSlide.slider("getValue")
@@ -217,6 +246,8 @@ $(document).ready ->
     create: (input) ->
       title: input
       key: input
+    onChange: ->
+      sendInfo()
 
   model_transmission_type_selectize = $("#model_transmission_type")[0].selectize;
   model_body_selectize = $("#model_body")[0].selectize;
@@ -293,13 +324,5 @@ $(document).ready ->
           notEmpty:
             message: "The password is required"
 
-
-  return
-
-  socket = io.connect("http://localhost")
-  socket.on "news", (data) ->
-    console.log data
-    socket.emit "my other event",
-      my: "data"
 
   return

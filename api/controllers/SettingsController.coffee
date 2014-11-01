@@ -86,8 +86,12 @@ module.exports =
     model_engine_fuel = _objOption.keyed(_staticVariable.model_engine_fuel(req))
     model_engine_fuel = stringifyObject model_engine_fuel, {indent: '', singleQuotes: false }
 
-
-    res.view "settings/index", {kpp: model_transmission_type, model_body: model_body, region: region, country: country, model_drive: model_drive, model_engine_type: model_engine_type, model_engine_position: model_engine_position, model_engine_fuel: model_engine_fuel}
+    uic = UserCar.find({user_id: req.session.user}).exec (err, resul) ->
+      resul = stringifyObject resul, {indent: '', singleQuotes: false }
+      delete resul.id
+      delete resul.user_id
+      delete resul.inspect
+      res.view "settings/index", {kpp: model_transmission_type, model_body: model_body, region: region, country: country, model_drive: model_drive, model_engine_type: model_engine_type, model_engine_position: model_engine_position, model_engine_fuel: model_engine_fuel, usr_car_param: resul}
     return
 
   getVin: (req, res) ->
@@ -102,16 +106,17 @@ module.exports =
     return
 
   getModels: (req, res) ->
-    _User.setUserCar req.session, {make_id: req.params.make}
+    #_User.setUserCar req.session, {make_id: req.params.make}
     _Car.getModels req, (err, result) ->
       res.json unique(result)
     return
 
   getInfoModels: (req, res) ->
-    _User.setUserCar req.session, {model_id: req.params.id, model_year: req.params.year}
+    #_User.setUserCar req.session, {model_id: req.params.id, model_year: req.params.year}
     _Car.getInfoModels req, (err, result) ->
       res.json result
     return
 
   setParam: (req, res) ->
-    _User.setUserCar req.session, req.body
+    _User.setUserCar req.session, req.body, ()->
+      res.send("true")

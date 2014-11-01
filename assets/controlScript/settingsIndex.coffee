@@ -1,12 +1,14 @@
 infoObject = {}
 interval_send_info = null
 interval_send_info_k = 1
+interval_send_i = true
 
 reloadModels = (yearSlide) ->
   make = (if $("#selected_make").val() is "" then 0 else $("#selected_make").val())
   year = $(document).find("#settings_year h6.text-center").text() #yearSlide.slider("getValue")
   selected_models = $(document).find("#selected_models")
   _selected_models = selected_models[0].selectize
+  clearForm()
   globalGetreloadModels.abort()  if globalGetreloadModels?
   globalGetreloadModels = $.get("/get/models/" + make + "/" + year + "/", (data) ->
     _selected_models.clearOptions()
@@ -27,13 +29,31 @@ currentInfo = (id) ->
       val
     else
       continue
-clearForm = (info) ->
+clearForm = () ->
+  $("#paramModelForm").find("input").each ->
+    if $(this).hasClass "selectized"
+      $(this)[0].selectize.setValue ""
+      return
+    else if $(this).is ":checkbox"
+      $(this).prop 'checked', false
+      return
+    else
+      $(this).val ""
+      return
 
 sendInfo = ->
   clearTimeout interval_send_info
   interval_send_info = null
   interval_send_info = setTimeout ->
     info_send = {}
+    select_make = $(document).find("#selected_make")[0].selectize
+    select_model = $(document).find("#selected_models")[0].selectize
+    selected_models_trim = $(document).find("#selected_models_trim")[0].selectize
+    info_send["make_id"] = select_make.getValue()
+    info_send["model_id"] = select_model.getValue()
+    info_send["make_name"] = select_make.sifter.items[info_send["make_id"]].name
+    info_send["model_name"] = if (_m = select_model.sifter.items[info_send["model_id"]])? then _m.name else null
+    info_send["model_trim"] = if (_t = selected_models_trim.sifter.items[selected_models_trim.getValue()])? then _t.model_trim else null
     $("#paramModelForm").find("input").each ->
       if $(this).hasClass "selectized"
         info_send[$(this)[0].id] = $(this)[0].selectize.getValue()
@@ -45,12 +65,18 @@ sendInfo = ->
         info_send[$(this)[0].id] = $(this).val()
         return
     info_send._csrf = postCode
-    $.post "/set/param", info_send
+    info_send[$("#region")[0].id] = $("#region")[0].selectize.getValue()
+    $(document).find("#carspinner").css "opacity", 1
+    $.post "/set/param", info_send, () ->
+      setTimeout ->
+        $(document).find("#carspinner").css "opacity", 0
+      , 500
+      return
     return
-  , 1000
+  , 750
   return
 
-setInfo = (info) ->
+setInfo = (info, send = true) ->
   $.each info, (key, val) ->
     if $("#"+key).hasClass "selectized"
       s = $("#"+key)[0].selectize.getValue()
@@ -69,24 +95,26 @@ setInfo = (info) ->
   select_model = $(document).find("#selected_models")[0].selectize
   info["make_name"] = select_make.sifter.items[select_make.getValue()].name
   info["model_name"] = returnName select_model.sifter.items[select_model.getValue()].name
-  $.post "/set/param", info
+  info[$("#region")[0].id] = $("#region")[0].selectize.getValue()
+  sendInfo()
 
 infoModels = (id, yearSlide) ->
   "use strict"
   type = ""
-  selected_models_trim = $("#selected_models_trim")[0].selectize
+  _tr = $("#selected_models")[0].selectize
+  selected_models_trim = if (_s = _tr.getValue()) != "" then _s else null
   if $.isNumeric(id)
     type = "id"
   else
     type = "name"
-  $.get "/get/info/models/" + type + "/" + id + "/" + yearSlide.slider("getValue"), (data) ->
+  $.get "/get/info/models/" + type + "/" + selected_models_trim + "/" + yearSlide.slider("getValue"), (data) ->
     lngth = data.length
     if lngth
       if lngth == 1
         setInfo data[0]
       infoObject = data
-      selected_models_trim.clearOptions()
-      selected_models_trim.load (callback) ->
+      $(document).find("#selected_models_trim")[0].selectize.clearOptions()
+      $(document).find("#selected_models_trim")[0].selectize.load (callback) ->
         callback data
         return
 
@@ -109,7 +137,8 @@ $(document).ready ->
   info_car_input = $("#paramModelForm").find "input"
 
   info_car_input.on "click keyup focusout", ->
-    sendInfo()
+    if interval_send_i
+      sendInfo()
 
   vinId.on "keyup focusout", ->
     _this = $(this)
@@ -125,6 +154,10 @@ $(document).ready ->
       $(this).parent().addClass "has-error"
       vinSend.addClass("btn-danger").find("i").addClass "fa-times"
     return
+
+  $("#save").on "click", ->
+    interval_send_i = false
+    sendInfo()
 
   vinSend.on "click", ->
     if $(this).hasClass("btn-success")
@@ -160,7 +193,12 @@ $(document).ready ->
         id: input
 
       onChange: ->
+        clearForm()
         reloadModels yearSlide
+        return
+      onOptionAdd: ->
+        clearForm()
+        sendInfo()
         return
 
       render:
@@ -198,6 +236,7 @@ $(document).ready ->
     hideSelected: true
     onChange: (input) ->
       "use strict"
+      clearForm()
       _year = $(document).find "#settings_year h6.text-center"
       name = if this.sifter.items[input]? then this.sifter.items[input].name else null
       if name?
@@ -218,6 +257,10 @@ $(document).ready ->
     create: (input) ->
       name: input
       id: input
+    onOptionAdd: ->
+      clearForm()
+      sendInfo()
+      return
 
   $("#selected_models_trim").selectize
     labelField: "model_trim"
@@ -228,11 +271,18 @@ $(document).ready ->
     persist: true
     hideSelected: true
     onChange: (input) ->
-      "use strict"
       info = currentInfo(input)[0]
       if info?
+        clearForm()
         setInfo info
       return
+    onOptionAdd: ->
+      clearForm()
+      sendInfo()
+      return
+    create: (input) ->
+      model_trim: input
+      id: input
 
   $("#model_transmission_type, #model_body, #region, #country, #model_drive, #model_engine_type, #model_engine_position, #model_engine_fuel").selectize
     maxItems: 1
@@ -247,7 +297,8 @@ $(document).ready ->
       title: input
       key: input
     onChange: ->
-      sendInfo()
+      if interval_send_i
+        sendInfo()
 
   model_transmission_type_selectize = $("#model_transmission_type")[0].selectize;
   model_body_selectize = $("#model_body")[0].selectize;

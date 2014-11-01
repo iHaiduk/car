@@ -28,9 +28,12 @@ class _User
   setUserCar: (session, data, callback) ->
     if @user.id isnt null
       delete data.id
-      console.log data.id
-      UserCar.update({user_id: @user.id, position: 1}, data).exec ->
-        console.log "up"
+      delete data.user_id
+      delete data.position
+      data.make_id = if not data.make_id? or not _Car.isInteger(data.make_id) then null else data.make_id
+      data.model_id = if not data.make_id? or not data.model_id? or not _Car.isInteger(data.model_id) then null else data.model_id
+      UserCar.update({user_id: @user.id, position: 1}, data).exec (err, res) ->
+        callback(err, null)
     else
       console.log "Need authorization! "+sails.getBaseurl()+"/user/login"
     #console.log data

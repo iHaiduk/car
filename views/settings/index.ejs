@@ -311,7 +311,7 @@
             </div>
             <!-- END Wizard Step inputs -->
             <!-- START Wizard Step inputs -->
-            <div>
+            <div class="mycar">
                 <h4 class="text-center">Информация об автомобиле(-ях)</h4>
                 <hr>
                 <fieldset id="settings_info">
@@ -644,12 +644,18 @@
                     </fieldset>
                     <!-- END row -->
                 </fieldset>
+                <fieldset>
+                <button id="save" type="button" class="btn btn-labeled btn-success">
+                           <span class="btn-label"><i class="fa fa-check"></i>
+                           </span>Сохранить параметры</button>
+                </fieldset>
             </div>
             <!-- END Wizard Step inputs -->
         </div>
     </div>
 </div>
 </section>
+<div class="csspinner" id="carspinner"></div>
 <!-- END Page content-->
 <script>
 var kpp = <%- kpp -%>,
@@ -660,5 +666,6 @@ var kpp = <%- kpp -%>,
     model_engine_type = <%- model_engine_type -%>,
     model_engine_position = <%- model_engine_position -%>,
     model_engine_fuel = <%- model_engine_fuel -%>,
+    usr_car_param = <%- usr_car_param -%>,
     postCode = "<%= _csrf %>";
 </script>

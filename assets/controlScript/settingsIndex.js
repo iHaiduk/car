@@ -67,14 +67,14 @@
     clearTimeout(interval_send_info);
     interval_send_info = null;
     interval_send_info = setTimeout(function() {
-      var info_send, select_make, select_model, selected_models_trim, _m, _t;
+      var info_send, select_make, select_model, selected_models_trim, _m, _mk, _t;
       info_send = {};
       select_make = $(document).find("#selected_make")[0].selectize;
       select_model = $(document).find("#selected_models")[0].selectize;
       selected_models_trim = $(document).find("#selected_models_trim")[0].selectize;
       info_send["make_id"] = select_make.getValue();
       info_send["model_id"] = select_model.getValue();
-      info_send["make_name"] = select_make.sifter.items[info_send["make_id"]].name;
+      info_send["make_name"] = (_mk = select_make.sifter.items[info_send["make_id"]]) != null ? _mk.name : null;
       info_send["model_name"] = (_m = select_model.sifter.items[info_send["model_id"]]) != null ? _m.name : null;
       info_send["model_trim"] = (_t = selected_models_trim.sifter.items[selected_models_trim.getValue()]) != null ? _t.model_trim : null;
       $("#paramModelForm").find("input").each(function() {

@@ -33,8 +33,7 @@
     "stringify-object": "^1.0.0",
     "utils-type": ">=0.8.10",
     "vin": ">=0.0.2",
-    "stringify-object": ">=1.0.0",
-    "npm-check-updates": ">=1.2.0"
+    "stringify-object": ">=1.0.0"
   },
   "scripts": {
     "start": "node app.js",

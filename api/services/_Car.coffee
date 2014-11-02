@@ -3,6 +3,7 @@ Created by Ihor on 27.09.2014.
 ###
 
 class _Car
+  # Вернет инфу по вин коду
   getInfoVin: (code, myCallback) ->
     async.waterfall [
       (callback) ->
@@ -38,7 +39,7 @@ class _Car
         , (err, res) ->
           if res? and res.status? and res.status isnt "NOT_FOUND"
             myCallback
-              year: res.years[0].year
+              year: if res.years? then res.years[0].year else null
               make: res.make.name
               model: res.model.name
 
@@ -53,11 +54,13 @@ class _Car
         model: null
       return
 
+  # Вернет все марки
   getMakes: (param = {}, myCallback) ->
     AutoMake.find().sort("name").exec (err, result) ->
-      myCallback err, result
+      myCallback err, result if myCallback and typeof (myCallback) is "function"
       return
 
+  # Вернет все модели
   getModels: (param = {}, myCallback) ->
     _this = this
     condition = {}
@@ -82,12 +85,13 @@ class _Car
         if not year?
           for model, key in resul
             resul[key].name += " ("+model.idYear.year+")"
-        myCallback err, resul
+        myCallback err, resul if myCallback and typeof (myCallback) is "function"
         return
       return
 
     return
 
+  # Вернет все модификации и параметры модели
   getInfoModels: (param = {}, myCallback) ->
     _req = param
     id = param.params.id
@@ -105,7 +109,7 @@ class _Car
         return
       ], (err, year) ->
         unless year?
-          myCallback null, null
+          myCallback null, null if myCallback and typeof (myCallback) is "function"
         else
           AutoParam.find(
             model_id: id
@@ -137,12 +141,23 @@ class _Car
               model_height_mm: trim.model_height_mm
               model_weight_kg: trim.model_weight_kg
 
-            myCallback null, ret
+            myCallback null, ret if myCallback and typeof (myCallback) is "function"
             return
 
         return
 
     return
+
+  # Вернет айди вин кода, а если таковой отсутсвует то создаст новую запись
+  getIdVin: (code, callback) ->
+    AutoVin.findOne({code: code}).exec (err, result) ->
+      if not result?
+        AutoVin.create({code: code}).exec (err, result) ->
+          callback result if callback and typeof (callback) is "function"
+      else
+        callback result if callback and typeof (callback) is "function"
+
+  # Проверка на число
   isInteger: (nVal) ->
     typeof nVal is "number" and isFinite(nVal) and nVal > -9007199254740992 and nVal < 9007199254740992 and Math.floor(nVal) is nVal
 module.exports = new _Car

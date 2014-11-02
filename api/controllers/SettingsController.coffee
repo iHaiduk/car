@@ -96,7 +96,8 @@ module.exports =
 
   getVin: (req, res) ->
     code = req.query.vin
-    _User.setUserCar req.session, {vinCode: code}
+    _Car.getIdVin code, (vin)->
+      _User.setUserCar req.session, {vinCode: vin.id}
     _Car.getInfoVin code, (result) ->
       if result.make?
         async.waterfall [

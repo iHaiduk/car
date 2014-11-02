@@ -17,7 +17,6 @@ reloadModels = (rCall) ->
       callback data
       rCall()  if rCall and typeof (rCall) is "function"
       return
-
     return
   )
   return
@@ -53,7 +52,7 @@ sendInfo = ->
     selected_models_trim = $(document).find("#selected_models_trim")[0].selectize
     info_send["make_id"] = select_make.getValue()
     info_send["model_id"] = select_model.getValue()
-    info_send["make_name"] = select_make.sifter.items[info_send["make_id"]].name
+    info_send["make_name"] = if (_mk = select_make.sifter.items[info_send["make_id"]])? then _mk.name else null
     info_send["model_name"] = if (_m = select_model.sifter.items[info_send["model_id"]])? then _m.name else null
     info_send["model_trim"] = if (_t = selected_models_trim.sifter.items[selected_models_trim.getValue()])? then _t.model_trim else null
     $("#paramModelForm").find("input").each ->
@@ -369,7 +368,6 @@ $(document).ready ->
 
   $("#model_engine_cc, #model_engine_ci, #model_engine_torque_rpm, #model_engine_cyl, #model_length_mm, #model_width_mm, #model_height_mm, #model_weight_kg, #model_engine_valves_per_cyl").numberMask beforePoint: 5
 
-
   $("#profileForm").bootstrapValidator
     feedbackIcons:
       valid: "glyphicon glyphicon-ok"
@@ -389,6 +387,4 @@ $(document).ready ->
         validators:
           notEmpty:
             message: "The password is required"
-
-
   return

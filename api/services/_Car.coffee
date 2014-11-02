@@ -10,7 +10,6 @@ class _Car
           if not res? or not res.idYear?
             callback()
           else
-            console.log res
             myCallback
               year: res.idYear
               make: res.idMake
@@ -21,7 +20,6 @@ class _Car
       (callback) ->
         vin = require("vin") # http://www.decodethis.com/
         vin.lookup code, (vehicle) ->
-          console.log "decodethis", vehicle
           if vehicle.model?
             myCallback
               year: vehicle.year
@@ -38,7 +36,6 @@ class _Car
         client.decodeVin
           vin: code
         , (err, res) ->
-          console.log "developer", res
           if res? and res.status? and res.status isnt "NOT_FOUND"
             myCallback
               year: res.years[0].year

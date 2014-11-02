@@ -142,7 +142,7 @@ CREATE TABLE IF NOT EXISTS `auto_year` (
 -- Дамп структуры для таблица car.users
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `fio` varchar(255) NOT NULL,
@@ -160,8 +160,11 @@ CREATE TABLE IF NOT EXISTS `user_car` (
   `user_id` int(11) DEFAULT NULL,
   `make_id` int(11) unsigned DEFAULT NULL,
   `model_id` int(11) unsigned DEFAULT NULL,
+  `position` int(11) unsigned DEFAULT NULL,
+  `vinCode` varchar(17) DEFAULT NULL,
   `make_name` varchar(255) DEFAULT NULL,
   `model_name` varchar(255) DEFAULT NULL,
+  `model_trim` varchar(255) DEFAULT NULL,
   `model_year` int(4) DEFAULT NULL,
   `model_transmission_type` varchar(255) DEFAULT NULL,
   `model_transmission_type_check` tinyint(4) DEFAULT NULL,

@@ -96,8 +96,39 @@ module.exports =
 
   getVin: (req, res) ->
     code = req.query.vin
+    _User.setUserCar req.session, {vinCode: code}
     _Car.getInfoVin code, (result) ->
-      res.json result
+      if result.make?
+        async.waterfall [
+          (callback) ->
+            AutoMake.findOne({name:result.make}).exec (err, make) ->
+              callback null, make.id
+            return
+          (make, callback) ->
+            if make?
+              AutoYear.findOne({year:result.year}).exec (err, year) ->
+                callback null, make, year.id
+            else
+              callback null, null, null
+          (make, year, callback) ->
+            if make?
+              AutoModel.findOne({name:result.model, id_make:make, idYear:year}).exec (err, model) ->
+                callback null, make, model.id, year
+              return
+            else
+              callback null, null, null, null
+        ], (err, make_id, model_id, year)->
+          AutoModel.find({id_make: make_id, idYear:year}).exec (err, models) ->
+            res.json
+              year: result.year
+              make: result.make
+              model: result.model
+              make_id: make_id
+              model_id: model_id
+              models: models
+          return
+      else
+        res.json result
     return
 
   getMakes: (req, res) ->

@@ -33,9 +33,11 @@ class _User
       data.make_id = if not data.make_id? or not _Car.isInteger(data.make_id) then null else data.make_id
       data.model_id = if not data.make_id? or not data.model_id? or not _Car.isInteger(data.model_id) then null else data.model_id
       UserCar.update({user_id: @user.id, position: 1}, data).exec (err, res) ->
-        callback(err, null)
+        callback err, null  if callback and typeof (callback) is "function"
+      return
     else
       console.log "Need authorization! "+sails.getBaseurl()+"/user/login"
-    #console.log data
+      callback null, null if callback and typeof (callback) is "function"
+#console.log data
 
 module.exports = new _User

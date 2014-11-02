@@ -2,8 +2,9 @@ infoObject = {}
 interval_send_info = null
 interval_send_info_k = 1
 interval_send_i = true
+vin_load = true
 
-reloadModels = (yearSlide) ->
+reloadModels = (rCall) ->
   make = (if $("#selected_make").val() is "" then 0 else $("#selected_make").val())
   year = $(document).find("#settings_year h6.text-center").text() #yearSlide.slider("getValue")
   selected_models = $(document).find("#selected_models")
@@ -14,6 +15,7 @@ reloadModels = (yearSlide) ->
     _selected_models.clearOptions()
     _selected_models.load (callback) ->
       callback data
+      rCall()  if rCall and typeof (rCall) is "function"
       return
 
     return
@@ -67,11 +69,14 @@ sendInfo = ->
     info_send._csrf = postCode
     info_send[$("#region")[0].id] = $("#region")[0].selectize.getValue()
     $(document).find("#carspinner").css "opacity", 1
-    $.post "/set/param", info_send, () ->
-      setTimeout ->
+    $.ajax
+      url:"/set/param",
+      type: "POST",
+      data: info_send,
+      dataType: "json",
+      success: () ->
         $(document).find("#carspinner").css "opacity", 0
-      , 500
-      return
+        return
     return
   , 750
   return
@@ -160,6 +165,7 @@ $(document).ready ->
     sendInfo()
 
   vinSend.on "click", ->
+    vin_load = false
     if $(this).hasClass("btn-success")
       $.ajax
         url: "/get/vin"
@@ -170,10 +176,19 @@ $(document).ready ->
         dataType: "json"
         success: (data) ->
           console.log data
-
+          yearSlide.slider 'setValue', parseInt data.year
+          $(document).find("#settings_year h6.text-center").text(data.year)
+          $(document).find("#selected_make")[0].selectize.setValue(data.make_id);
+          _selected_models = $(document).find("#selected_models")[0].selectize
+          _selected_models.clearOptions()
+          _selected_models.load (callback) ->
+            callback data.models
+            $(document).find("#selected_models")[0].selectize.setValue(data.model_id);
+          vin_load = true
+      return
   yearSlide.on("slideStop", ->
     $("#settings_year h6").text yearSlide.slider("getValue")
-    reloadModels yearSlide
+    reloadModels()
     return
   ).on "slide", ->
     $("#settings_year h6").text yearSlide.slider("getValue")
@@ -194,7 +209,7 @@ $(document).ready ->
 
       onChange: ->
         clearForm()
-        reloadModels yearSlide
+        reloadModels() if vin_load
         return
       onOptionAdd: ->
         clearForm()

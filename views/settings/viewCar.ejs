@@ -1,0 +1,61 @@
+<div class="panel" id="saved_car">
+    <div class="panel-body">
+        <div href="#" class="media p mt0">
+            <div class="media-body">
+                <div class="media-heading">
+                    <h3 class="mt0"><%= usr_car_param.model_trim %></h3>
+                    <div class="row row-table">
+                        <div class="col-xs-4">
+                            <ul class="list-unstyled">
+                                <li class="mb-sm">
+                                    <em class="fa <% if(usr_car_param.model_transmission_type_check == 0){ %><%- "fa-circle-o" %> <% }else{ %> <%- "fa-circle" %> <% } %> fa-fw"></em><%= __(usr_car_param.model_transmission_type) %></li>
+                                <li class="mb-sm">
+                                    <em class="fa <% if(usr_car_param.model_body_check == 0){ %><%- "fa-circle-o" %> <% }else{ %> <%- "fa-circle" %> <% } %> fa-fw"></em><%= usr_car_param.model_body %></li>
+                                <li class="mb-sm">
+                                    <em class="fa <% if(usr_car_param.country_check == 0 && usr_car_param.region_check == 0){ %><%- "fa-circle-o" %> <% }else{ %> <%- "fa-circle" %> <% } %> fa-fw"></em><%= usr_car_param.country %> (<em title="Предназначение региона"><%= usr_car_param.region %></em>)</li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-4">
+                            <ul class="list-unstyled">
+                                <li class="mb-sm">
+                                    <em class="fa <% if(usr_car_param.model_engine_cc_check == 0){ %><%- "fa-circle-o" %> <% }else{ %> <%- "fa-circle" %> <% } %> fa-fw"></em><%= usr_car_param.model_engine_cc %> мЛ</li>
+                                <li class="mb-sm">
+                                    <em class="fa <% if(usr_car_param.model_engine_ci_check == 0){ %><%- "fa-circle-o" %> <% }else{ %> <%- "fa-circle" %> <% } %> fa-fw"></em><%= usr_car_param.model_engine_ci %> л.с.</li>
+                                <li class="mb-sm">
+                                    <em class="fa <% if(usr_car_param.model_engine_torque_rpm_check == 0){ %><%- "fa-circle-o" %> <% }else{ %> <%- "fa-circle" %> <% } %> fa-fw"></em><%= usr_car_param.model_engine_torque_rpm %> RPM</li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-4">
+                            <ul class="list-unstyled">
+                                <li class="mb-sm">
+                                    <em class="fa <% if(usr_car_param.model_length_mm_check == 0 &&usr_car_param.model_width_mm_check == 0 &&usr_car_param.model_height_mm_check == 0){ %><%- "fa-circle-o" %> <% }else{ %> <%- "fa-circle" %> <% } %> fa-fw"></em><%= usr_car_param.model_length_mm %>х<%= usr_car_param.model_width_mm %>х<%= usr_car_param.model_height_mm %> мм</li>
+                                <li class="mb-sm">
+                                    <em class="fa <% if(usr_car_param.model_weight_kg_check == 0){ %><%- "fa-circle-o" %> <% }else{ %> <%- "fa-circle" %> <% } %> fa-fw"></em><%= usr_car_param.model_weight_kg %> кг</li>
+                            </ul>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body bg-inverse">
+        <div class="row row-table text-center">
+            <div class="col-xs-4">
+                <p class="m0 h3"><%= usr_car_param.vinCode %></p>
+                <p class="m0 text-muted">VIN</p>
+            </div>
+            <div class="col-xs-4">
+                <p class="m0 h3"><%= usr_car_param.make_name +" "+usr_car_param.model_name %></p>
+                <p class="m0 text-muted">Авто</p>
+            </div>
+            <div class="col-xs-4">
+                <p class="m0 h3"><%= usr_car_param.model_year %></p>
+                <p class="m0 text-muted">Год</p>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var usr_car_param = <%- usr_car_param -%>,
+        _save = <%- _save -%>,
+        postCode = "<%= _csrf %>";
+</script>

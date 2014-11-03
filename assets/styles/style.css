@@ -108,3 +108,9 @@
     -o-transition: all 1s ease-in-out;
     transition: all 1s ease-in-out;
 }
+#saved_car .m0.h3{
+    font-size: 20px;
+}
+#saved_car .m0.text-muted{
+    color: #A6A6A6;
+}

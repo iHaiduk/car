@@ -38,10 +38,17 @@ module.exports =
 
     model_name:
       type: "string"
+    model_trim:
+      type: "string"
 
     model_year:
       type: "integer"
       size: 4
+
+    make_id:
+      type: "integer"
+    model_id:
+      type: "integer"
 
     model_transmission_type:
       type: "string"
@@ -182,3 +189,14 @@ module.exports =
       type: "integer"
       defaultsTo: "0"
       max: 1
+
+    save:
+      type: "integer"
+      defaultsTo: "0"
+      max: 1
+
+    сhoice_differences:
+      type: "string"
+
+    text_differences:
+      type: "text"

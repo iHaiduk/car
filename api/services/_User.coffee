@@ -30,8 +30,8 @@ class _User
       delete data.id
       delete data.user_id
       delete data.position
-      data.make_id = if not data.make_id? or not _Car.isInteger(data.make_id) then null else data.make_id
-      data.model_id = if not data.make_id? or not data.model_id? or not _Car.isInteger(data.model_id) then null else data.model_id
+      data.make_id = if not data.make_id? or parseInt(data.make_id) < 1 then null else parseInt(data.make_id)
+      data.model_id = if not data.make_id? or not data.model_id?  or parseInt(data.model_id) < 1 then null else parseInt(data.model_id)
       UserCar.update({user_id: @user.id, position: 1}, data).exec (err, res) ->
         callback err, null  if callback and typeof (callback) is "function"
       return

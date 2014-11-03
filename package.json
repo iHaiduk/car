@@ -33,7 +33,8 @@
     "stringify-object": "^1.0.0",
     "utils-type": ">=0.8.10",
     "vin": ">=0.0.2",
-    "stringify-object": ">=1.0.0"
+    "stringify-object": ">=1.0.0",
+    "to-markdown": ">=0.0.2"
   },
   "scripts": {
     "start": "node app.js",

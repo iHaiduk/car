@@ -45,7 +45,7 @@ module.exports =
       "/cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css"
       "styles/style.css"
     ]
-    res.locals.scripts = [
+    script_array = [
       "vendor/formwizard/js/bwizard.min.js"
       "vendor/codemirror/lib/codemirror.js"
       "vendor/codemirror/addon/mode/overlay.js"
@@ -63,9 +63,9 @@ module.exports =
       "vendor/bootstrapvalidator/js/bootstrapValidator.js"
       "vendor/serializeJSON/jquery.serializejson.js"
       "vendor/mask/jquery.numberMask.js"
-      "controlScript/settingsIndex.js"
     ]
     stringifyObject = require('stringify-object')
+    toMarkdown = require('to-markdown').toMarkdown
     req.session.languagePreference = 'ua'
     req.setLocale req.session.languagePreference
 
@@ -86,12 +86,28 @@ module.exports =
     model_engine_fuel = _objOption.keyed(_staticVariable.model_engine_fuel(req))
     model_engine_fuel = stringifyObject model_engine_fuel, {indent: '', singleQuotes: false }
 
-    uic = UserCar.find({user_id: req.session.user}).exec (err, resul) ->
-      resul = stringifyObject resul, {indent: '', singleQuotes: false }
-      delete resul.id
-      delete resul.user_id
-      delete resul.inspect
-      res.view "settings/index", {kpp: model_transmission_type, model_body: model_body, region: region, country: country, model_drive: model_drive, model_engine_type: model_engine_type, model_engine_position: model_engine_position, model_engine_fuel: model_engine_fuel, usr_car_param: resul}
+    uic = UserCar.findOne({user_id: req.session.user}).exec (err, resul) ->
+      if resul?
+        auto_save = if resul.save? then resul.save else 0
+        delete resul.id
+        delete resul.user_id
+        delete resul.inspect
+        console.log resul.text_differences
+        resul.сhoice_differences = JSON.parse(resul.сhoice_differences)
+        resul.text_differences = if resul.text_differences? then toMarkdown(resul.text_differences) else null
+        AutoVin.findOne(resul.vinCode).exec (err, code) ->
+          resul.vinCode = code.code if resul? and code?
+          resul = stringifyObject resul, {indent: '', singleQuotes: false } if resul? and auto_save is 0
+
+          script_array.push("controlScript/newEditCar.js") if auto_save is 0
+          script_array.push("controlScript/viewCar.js") if auto_save is 1
+          res.locals.scripts = script_array
+          res.view "settings/index", {_save: auto_save, kpp: model_transmission_type, model_body: model_body, region: region, country: country, model_drive: model_drive, model_engine_type: model_engine_type, model_engine_position: model_engine_position, model_engine_fuel: model_engine_fuel, usr_car_param: resul}
+      else
+        script_array.push("controlScript/newEditCar.js")
+        res.locals.scripts = script_array
+        res.view "settings/index", {_save: 0, kpp: model_transmission_type, model_body: model_body, region: region, country: country, model_drive: model_drive, model_engine_type: model_engine_type, model_engine_position: model_engine_position, model_engine_fuel: model_engine_fuel, usr_car_param: "{}"}
+      return
     return
 
   getVin: (req, res) ->

@@ -43,7 +43,7 @@ module.exports =
       "vendor/tagsinput/bootstrap-tagsinput.css"
       "vendor/selectize/selectize.bootstrap3.css"
       "/cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css"
-      "styles/style.css"
+      "styles/styleSettings.css"
     ]
     script_array = [
       "vendor/formwizard/js/bwizard.min.js"

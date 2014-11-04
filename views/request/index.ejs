@@ -1,28 +1,146 @@
-<section id="clients">
-    <div class="container">
-        <h2 class="section-header">Working with the best
-            <br>
-            <small class="text-muted text-center">47Admin makes your life easier. The best choice for your next project.</small>
-        </h2>
-        <div class="row">
-            <div class="col-lg-2 col-md-4 col-xs-6">
-                <img src="../app/img/landing/clients/jquery.png" alt="client" class="img-responsive">
+<section class="main-content" id="requestMain">
+    <div class="row">
+        <h3>Список заявок</h3>
+        <button id="addrequest" type="button" class="btn btn-labeled btn-success">
+            <span class="btn-label"><i class="fa fa-plus"></i></span>
+            Добавить заявку
+        </button>
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+            Launch demo modal
+        </button>
+
+    </div>
+    <!-- START row-->
+    <div class="row">
+        <div class="col-lg-5">
+            <!-- START panel-->
+            <div class="panel panel-default">
+                <div class="panel-heading">Demo Table #4
+                    <a href="#" data-perform="panel-dismiss" data-toggle="tooltip" title="Close Panel" class="pull-right">
+                        <em class="fa fa-times"></em>
+                    </a>
+                    <a href="#" data-perform="panel-collapse" data-toggle="tooltip" title="Collapse Panel" class="pull-right">
+                        <em class="fa fa-minus"></em>
+                    </a>
+                </div>
+                <!-- START table-responsive-->
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th class="text-center">Заказ</th>
+                            <th class="text-center">Автомобиль</th>
+                            <th class="text-center">Результат</th>
+                            <th class="text-center">Отображать на карте</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="text-center">Колесо 17</td>
+                            <td class="text-center">
+                                Porsche
+                            </td>
+                            <td class="text-center">
+                                <div class="label label-danger">Отклонен</div>
+                            </td>
+                            <td class="text-center">
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span></span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">Колесо 18</td>
+                            <td class="text-center">
+                                Porsche
+                            </td>
+                            <td class="text-center">
+                                <div class="label label-success">Завершено</div>
+                            </td>
+                            <td class="text-center">
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span></span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">Колесо 16</td>
+                            <td class="text-center">
+                                Porsche
+                            </td>
+                            <td class="text-center">
+                                <div class="label label-warning">Ожидает</div>
+                            </td>
+                            <td class="text-center">
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span></span>
+                                </label>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- END table-responsive-->
             </div>
-            <div class="col-lg-2 col-md-4 col-xs-6">
-                <img src="../app/img/landing/clients/node.png" alt="client" class="img-responsive">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Classic Map</div>
+                <div class="panel-body">
+
+                    <iframe width='100%' height='300px' frameBorder='0' src='https://a.tiles.mapbox.com/v4/glavar.jgm0inn9/attribution,zoompan,zoomwheel,geocoder,share.html?access_token=pk.eyJ1IjoiZ2xhdmFyIiwiYSI6IjJJcmxGbjAifQ.4j34y5PefJlrHyj-LSYDVw'></iframe>
+                </div>
             </div>
-            <div class="col-lg-2 col-md-4 col-xs-6">
-                <img src="../app/img/landing/clients/gulp.png" alt="client" class="img-responsive">
+
+            <!-- END panel-->
+        </div>
+        <div class="col-lg-7">
+
+            <!-- START DATATABLE 1 -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Список СТО |
+                            <small>Сперва ближайшие</small>
+                        </div>
+                        <div class="panel-body">
+                            <table id="stoList" class="table table-striped table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Rendering engine</th>
+                                    <th>Browser</th>
+                                    <th>Platform(s)</th>
+                                    <th>Engine version</th>
+                                    <th>Date</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                <tr>
+                                    <td>Misc</td>
+                                    <td>PSP browser</td>
+                                    <td>PSP</td>
+                                    <td>-</td>
+                                    <td>2015-05-01</td>
+                                </tr>
+                                <tr>
+                                    <td>Other browsers</td>
+                                    <td>All others</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>2015-06-18</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-lg-2 col-md-4 col-xs-6">
-                <img src="../app/img/landing/clients/jade.png" alt="client" class="img-responsive">
-            </div>
-            <div class="col-lg-2 col-md-4 col-xs-6">
-                <img src="../app/img/landing/clients/less.png" alt="client" class="img-responsive">
-            </div>
-            <div class="col-lg-2 col-md-4 col-xs-6">
-                <img src="../app/img/landing/clients/bootstrap.png" alt="client" class="img-responsive">
-            </div>
+            <!-- END DATATABLE 1 -->
         </div>
     </div>
+    <!-- END row-->
+
 </section>

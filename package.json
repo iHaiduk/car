@@ -25,7 +25,7 @@
     "node-edmunds-api": ">=0.0.0",
     "nodemon": ">=1.2.1",
     "password-hash": ">=1.2.2",
-    "rc": ">=0.5.3",
+    "rc": ">=0.5.4",
     "request": ">=2.47.0",
     "sails": ">=0.10.5",
     "sails-disk": ">=0.10.4",

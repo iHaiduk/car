@@ -30,7 +30,6 @@
     <% } %>
     <% } %>
     <link type="text/css" rel="stylesheet" href="/styles/app.css">
-    <link type="text/css" rel="stylesheet" href="/styles/style.css">
     <!--SCRIPTS UP-->
     <script src="/vendor/modernizr/modernizr.js" type="application/javascript"></script>
     <script src="/vendor/fastclick/fastclick.js" type="application/javascript"></script>
@@ -45,6 +44,9 @@
         <%- body %>
     </section>
 </section>
+<% if (typeof modal != "undefined") { %>
+    <%- include modal %>
+<% } %>
 <!--SCRIPTS-->
 <script src="/js/dependencies/sails.io.js" type="application/javascript"></script>
 <script src="/vendor/jquery/jquery.min.js" type="application/javascript"></script>

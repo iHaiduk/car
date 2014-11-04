@@ -7,6 +7,18 @@ PromoController
 
 _Request=
   getRequest: (req, res)->
+    res.locals.styles = [
+      "styles/styleRequest.css"
+    ]
+    script_array = [
+      "vendor/datatable/media/js/jquery.dataTables.min.js"
+      "vendor/datatable/extensions/datatable-bootstrap/js/dataTables.bootstrap.js"
+      "vendor/datatable/extensions/datatable-bootstrap/js/dataTables.bootstrapPagination.js"
+      "vendor/datatable/extensions/ColVis/js/dataTables.colVis.min.js"
+      "controlScript/requestMain.js"
+    ]
+    res.locals.scripts = script_array
+    res.locals.modal = "modal/addRequest"
     res.view("request/index")
 
 

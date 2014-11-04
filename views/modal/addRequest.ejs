@@ -1,16 +1,73 @@
-<div id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" class="modal fade in">
+<div id="myRequest" tabindex="-1" role="dialog" aria-hidden="false" class="modal fade in">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
-                <h4 id="myModalLabel" class="modal-title">Modal title</h4>
+                <h4 id="myModalLabel" class="modal-title">Добавление новой заявки</h4>
             </div>
-            <div class="modal-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-            <div class="modal-footer">
-                <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+            <form method="get" action="/" class="form-horizontal">
+                <fieldset>
+                    <!-- START row -->
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <dl class="dl-horizontal">
+                                <dt>Требуемая деталь *</dt>
+                                <dd>
+                                    <input type="text" placeholder="Требуемая деталь" class="form-control">
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="col-sm-4">
+                            <dl class="dl-horizontal part_number">
+                                <dt>Её номер</dt>
+                                <dd>
+                                    <input type="text" placeholder="Её номер" id="part_number" class="form-control">
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <dl class="dl-horizontal">
+                                <dt>Группа запчастей</dt>
+                                <dd>
+                                    <select name="group_of_spare_parts" id="group_of_spare_parts" placeholder="Группа запчастей...">
+                                        <option value="0">Другое</option>
+                                        <option value="1">АКПП и КПП</option>
+                                        <option value="2">Вентиляция</option>
+                                        <option value="3">Двери</option>
+                                        <option value="4">Двигатель</option>
+                                        <option value="5">Инструменты</option>
+                                        <option value="6">Колёса и шины</option>
+                                        <option value="7">Кондиционер</option>
+                                        <option value="8">Кузов</option>
+                                        <option value="9">Кузов - внешние компоненты</option>
+                                        <option value="10">Кузов - внутренние компоненты</option>
+                                        <option value="11">Обогреватель</option>
+                                        <option value="12">Ось задняя</option>
+                                        <option value="13">Ось передняя</option>
+                                        <option value="14">Подвеска задняя</option>
+                                        <option value="15">Подвеска передняя</option>
+                                        <option value="16">Рулевое управление</option>
+                                        <option value="17">Сидения</option>
+                                        <option value="18">Система впуска и выпуска</option>
+                                        <option value="19">Система охлаждения</option>
+                                        <option value="20">Система смазки</option>
+                                        <option value="21">Топливная система</option>
+                                        <option value="22">Тормозная система</option>
+                                        <option value="23">Электрика двигателя</option>
+                                        <option value="24">Электрика кузова</option>
+                                    </select>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

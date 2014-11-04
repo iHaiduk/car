@@ -11,3 +11,5 @@ $("#stoList").dataTable
     zeroRecords: "Nothing found - sorry"
     infoEmpty: "No records available"
     infoFiltered: "(filtered from _MAX_ total records)"
+
+$select_state = $("#group_of_spare_parts").selectize()

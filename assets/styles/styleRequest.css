@@ -11,3 +11,25 @@
     display: inline-block;
     float: right;
 }
+#myRequest .form-horizontal {
+    padding: 5px 15px 0 15px;
+}
+#myRequest .form-horizontal .dl-horizontal dt {
+    padding-top: 7px;
+    width: 130px;
+    clear: left;
+    text-align: left;
+}
+#myRequest .form-horizontal .dl-horizontal dd {
+    margin-left: 130px;
+}
+#myRequest .form-horizontal .part_number dt {
+    width: 70px;
+}
+#myRequest .form-horizontal .part_number dd {
+    margin-left: 70px;
+}
+.modal-dialog {
+    width: 65%;
+    margin: 75px auto;
+}

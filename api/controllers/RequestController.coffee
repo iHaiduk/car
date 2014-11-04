@@ -8,6 +8,7 @@ PromoController
 _Request=
   getRequest: (req, res)->
     res.locals.styles = [
+      "vendor/selectize/selectize.bootstrap3.css"
       "styles/styleRequest.css"
     ]
     script_array = [
@@ -15,6 +16,7 @@ _Request=
       "vendor/datatable/extensions/datatable-bootstrap/js/dataTables.bootstrap.js"
       "vendor/datatable/extensions/datatable-bootstrap/js/dataTables.bootstrapPagination.js"
       "vendor/datatable/extensions/ColVis/js/dataTables.colVis.min.js"
+      "vendor/selectize/selectize.js"
       "controlScript/requestMain.js"
     ]
     res.locals.scripts = script_array

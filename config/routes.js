@@ -74,7 +74,12 @@ module.exports.routes = {
     '/user/login':{
         controller: 'UserController',
         action: 'login'
-    },/*
+    },
+    '/myrequest':{
+        controller: 'RequestController',
+        action: 'getRequest'
+    },
+    /*
     '/test':{
         controller: 'UserController',
         action: 'login'

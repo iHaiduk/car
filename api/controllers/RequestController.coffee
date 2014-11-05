@@ -17,6 +17,9 @@ _Request=
       "vendor/datatable/extensions/datatable-bootstrap/js/dataTables.bootstrapPagination.js"
       "vendor/datatable/extensions/ColVis/js/dataTables.colVis.min.js"
       "vendor/selectize/selectize.js"
+      "vendor/mask/jquery.numberMask.js"
+      "vendor/mask/jquery.mask.min.js"
+      "vendor/ajax/upload.js"
       "controlScript/requestMain.js"
     ]
     res.locals.scripts = script_array

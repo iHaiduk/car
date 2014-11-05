@@ -38,6 +38,9 @@ var jsFilesToHead = [
     // Load sails.io before everything else
     'vendor/modernizr/modernizr.js',
     'vendor/fastclick/fastclick.js',
+    'js/dependencies/sails.io.js',
+    'vendor/jquery/jquery.min.js',
+    'vendor/bootstrap/js/bootstrap.min.js',
     //'vendor/validation/localization/*.js'
     // will be injected here in no particular order.
     //'js/**/*.js'
@@ -47,11 +50,8 @@ var jsFilesToHead = [
 // Client-side javascript files to inject in order
 // (uses Grunt-style wildcard/glob/splat expressions)
 var jsFilesToInject = [
-  
-  // Load sails.io before everything else
-  'js/dependencies/sails.io.js',
-    'vendor/jquery/jquery.min.js',
-    'vendor/bootstrap/js/bootstrap.min.js',
+
+    // Load sails.io before everything else
     'vendor/chosen/chosen.jquery.min.js',
     'vendor/slider/js/bootstrap-slider.js',
     'vendor/filestyle/bootstrap-filestyle.min.js',
@@ -61,9 +61,9 @@ var jsFilesToInject = [
     'vendor/validation/jquery.validate.js',
     'vendor/validation/additional-methods.js',
     //'js/app.js',
-  // All of the rest of your client-side js files
-  // will be injected here in no particular order.
-  //'js/**/*.js'
+    // All of the rest of your client-side js files
+    // will be injected here in no particular order.
+    //'js/**/*.js'
 ];
 
 var jsFilesToPromo = [
@@ -84,7 +84,7 @@ var jsFilesToPromo = [
 // templates get spit out to the same file.  Be sure and check out `tasks/README.md`
 // for information on customizing and installing new tasks.
 var templateFilesToInject = [
-  'templates/**/*.html'
+    'templates/**/*.html'
 ];
 
 
@@ -107,5 +107,5 @@ module.exports.jsFilesToHead = jsFilesToHead.map(function(path) {
     return '.tmp/public/' + path;
 });
 module.exports.templateFilesToInject = templateFilesToInject.map(function(path) {
-  return 'assets/' + path;
+    return 'assets/' + path;
 });

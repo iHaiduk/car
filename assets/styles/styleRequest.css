@@ -16,12 +16,12 @@
 }
 #myRequest .form-horizontal .dl-horizontal dt {
     padding-top: 7px;
-    width: 130px;
+    width: 135px;
     clear: left;
     text-align: left;
 }
 #myRequest .form-horizontal .dl-horizontal dd {
-    margin-left: 130px;
+    margin-left: 135px;
 }
 #myRequest .form-horizontal .part_number dt {
     width: 70px;
@@ -29,7 +29,16 @@
 #myRequest .form-horizontal .part_number dd {
     margin-left: 70px;
 }
+#myRequest .form-horizontal .part_half dt {
+    width: 95px;
+}
+#myRequest .form-horizontal .part_half dd {
+    margin-left: 95px;
+}
 .modal-dialog {
     width: 65%;
     margin: 75px auto;
+}
+#myRequest .selectize-input{
+    overflow: visible;
 }

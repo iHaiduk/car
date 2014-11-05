@@ -30,7 +30,6 @@
     "sails": ">=0.10.5",
     "sails-disk": ">=0.10.4",
     "sails-mysql": ">=0.10.7",
-    "stringify-object": "^1.0.0",
     "utils-type": ">=0.8.10",
     "vin": ">=0.0.2",
     "stringify-object": ">=1.0.0",

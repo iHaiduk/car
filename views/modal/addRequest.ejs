@@ -13,7 +13,7 @@
                             <dl class="dl-horizontal">
                                 <dt>Требуемая деталь *</dt>
                                 <dd>
-                                    <input type="text" placeholder="Требуемая деталь" class="form-control">
+                                    <input type="text" placeholder="Требуемая деталь" id="required_item" class="form-control">
                                 </dd>
                             </dl>
                         </div>
@@ -27,7 +27,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-12">
+                        <div class="col-sm-6">
                             <dl class="dl-horizontal">
                                 <dt>Группа запчастей</dt>
                                 <dd>
@@ -60,6 +60,73 @@
                                     </select>
                                 </dd>
                             </dl>
+                        </div>
+                        <div class="col-sm-6">
+                            <dl class="dl-horizontal part_half">
+                                <dt>Тип запчасти</dt>
+                                <dd>
+                                    <select size="1" name="type_of_spare_parts" id="type_of_spare_parts">
+                                        <option value="any">Любая</option>
+                                        <option value="original">Оригинальная</option>
+                                        <option value="not_original">Не оригинальная</option>
+                                    </select>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <dl class="dl-horizontal">
+                                <dt>Состояние запчасти *</dt>
+                                <dd>
+                                    <select size="1" name="condition_parts" id="condition_parts">
+                                        <option value="any">Любая</option>
+                                        <option value="original">Новая</option>
+                                        <option value="not_original">Подержаная</option>
+                                    </select>
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="col-sm-6">
+                            <dl class="dl-horizontal part_half">
+                                <dt>Срок поставки</dt>
+                                <dd>
+                                    <select name="delivery_time" id="delivery_time">
+                                        <option value="any">Любой</option>
+                                        <option value="only_available">Только в наличии</option>
+                                        <option value="up_to_one_week">До одной недели</option>
+                                        <option value="up_to_two_week">До двух недель</option>
+                                        <option value="up_to_three_week">До трёх недель</option>
+                                        <option value="up_to_one_month">До одного месяца</option>
+                                        <option value="up_to_two_month">До двух месяцев</option>
+                                    </select>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <dl class="dl-horizontal">
+                                <dt>Ссылка в Интернет</dt>
+                                <dd>
+                                    <input type="text" placeholder="http://" id="link_item" class="form-control">
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <form id="uploadFiles" action="/upload/file" method="post" enctype="multipart/form-data">
+                                <div id="upload-drop" class="box-placeholder text-center">
+                                    <p>
+                                        <em class="fa fa-cloud-upload fa-2x"></em>
+                                    </p>Upload files by dropping them here or <a href="#" class="form-file">selecting one<input id="upload-select" type="file" name="upfile"></a>
+                                </div>
+                                <div id="progressbar" class="progress hidden">
+                                    <div role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" class="progress-bar"></div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </fieldset>

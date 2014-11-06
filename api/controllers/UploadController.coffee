@@ -2,7 +2,7 @@ _Upload=
   uploadFile: (req, res)->
     res.setTimeout 0
     maxBytes = 50*1024*1024
-    req.file("files[]").on("progress", (event) ->
+    req.file("files").on("progress", (event) ->
       console.log event.written+" / "+event.stream.byteCount
       return event
     ).upload

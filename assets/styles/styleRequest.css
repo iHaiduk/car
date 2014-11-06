@@ -42,3 +42,43 @@
 #myRequest .selectize-input{
     overflow: visible;
 }
+#files .widget {
+    margin-bottom: 5px;
+}
+#files .panel-body {
+    padding: 3px 5px 0 5px;
+}
+#files .panel-body h4, #files .panel-body .h4 {
+    font-size: 14px;
+    margin: 0 0 -3px 0 !important;
+}
+#files .panel-body small {
+    font-size: 11px;
+    font-style: italic;
+    text-transform: uppercase;
+}
+#files .col-xs-1 {
+    width: 5%;
+    cursor: pointer;
+}
+#files .col-xs-2 {
+    width: 17%;
+}
+#files .col-xs-9 {
+    width: 78%;
+}
+#files .fa:not(.fa-2x){
+    font-size: 12px;
+    margin: 0 2px 0 3px
+}
+#files .progress-xs{
+    margin-bottom: 0;
+}
+#files .progress-bar{
+    -webkit-border-top-right-radius: 3px;
+    -webkit-border-bottom-right-radius: 3px;
+    -moz-border-radius-topright: 3px;
+    -moz-border-radius-bottomright: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}

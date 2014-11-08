@@ -20,6 +20,12 @@
     clear: left;
     text-align: left;
 }
+#myRequest .user_car dt{
+    width: 175px !important;
+}
+#myRequest .user_car dd{
+    margin-left: 175px !important;
+}
 #myRequest .form-horizontal .dl-horizontal dd {
     margin-left: 135px;
 }

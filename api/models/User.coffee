@@ -29,3 +29,11 @@ module.exports =
     phone:
       type: 'string'
       size: 15
+
+    cars:
+      collection: "UserCar"
+      via: "user_id"
+
+    files:
+      collection: "Files"
+      via: "uid_user"

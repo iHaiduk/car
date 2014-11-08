@@ -1,11 +1,8 @@
-###*
-PromoController
+module.exports =
 
-@description :: Server-side logic for managing promoes
-@help        :: See http://links.sailsjs.org/docs/controllers
-###
-module.exports = main: (req, res) ->
+  promo: (req, res) ->
+    res.view "promo/main",
+      layout: "layout_promo"
 
-  #console.log(res.view());
-  res.view "promo/main",
-    layout: "layout_promo"
+  index: (req, res) ->
+    res.view "homepage"

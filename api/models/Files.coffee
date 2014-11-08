@@ -12,8 +12,14 @@ module.exports =
       primaryKey: true
       autoIncrement: true
 
+    uid_user:
+      model: "User"
+
     filename:
-        type: "string"
+      type: "string"
+
+    type:
+      type: "string"
 
     size:
       type: 'integer'
@@ -23,3 +29,9 @@ module.exports =
 
     time:
       type: 'integer'
+      defaultsTo: ->
+        new Date().getTime()
+
+    used:
+      type: "boolean"
+      defaultsTo: 0

@@ -12,6 +12,18 @@ _Upload=
       maxBytes: maxBytes
     , (err, uploadedFiles) ->
         return res.send(500, err)  if err
+        textract = require 'mime'
+        file = uploadedFiles[0]
+        console.log textract.lookup(file.fd)
+        Files.create
+          uid_user:req.session.user
+          filename: file.filename
+          type: file.type
+          size: file.size
+          fd: file.fd
+        , (error, response) ->
+          console.log error, response
+
         res.json
           message: uploadedFiles.length + " file(s) uploaded successfully!"
           files: uploadedFiles

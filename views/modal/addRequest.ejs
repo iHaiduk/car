@@ -9,6 +9,21 @@
                 <fieldset>
                     <!-- START row -->
                     <div class="row">
+                        <div class="col-sm-12">
+                            <dl class="dl-horizontal user_car">
+                                <dt>Деталь для автомобиля </dt>
+                                <dd>
+                                    <select size="1" name="user_car" id="user_car" placeholder="Выберите Ваш автомобиль...">
+                                        <%
+                                        for(var i=0; i<user_car.length; i++) { %>
+                                        <option value="<%= user_car[i].id %>"><%= user_car[i].make_name+" "+user_car[i].model_name %></option>
+                                        <% } %>
+                                    </select>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-sm-8">
                             <dl class="dl-horizontal">
                                 <dt>Требуемая деталь *</dt>

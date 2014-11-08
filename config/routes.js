@@ -3,10 +3,11 @@ module.exports.routes = {
     /* TODO MAIN */
     '/': {
         controller: 'PromoController',
-        action: 'main'
+        action: 'promo'
     },
-    '/panel': {
-        view: "homepage"
+    '/panel':  {
+        controller: 'PromoController',
+        action: 'index'
     },
 
     /* TODO SETTINGS */

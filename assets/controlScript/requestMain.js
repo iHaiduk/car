@@ -16,7 +16,7 @@
     }
   });
 
-  $select_state = $("#group_of_spare_parts, #type_of_spare_parts, #condition_parts, #delivery_time").selectize();
+  $select_state = $("#group_of_spare_parts, #type_of_spare_parts, #condition_parts, #delivery_time, #user_car").selectize();
 
   $("#part_number").numberMask({
     beforePoint: 15

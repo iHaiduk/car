@@ -19,9 +19,10 @@
     "grunt-contrib-uglify": ">=0.6.0",
     "grunt-contrib-watch": ">=0.6.1",
     "grunt-sails-linker": ">=0.9.5",
-    "grunt-sync": ">=0.2.0",
+    "grunt-sync": ">=0.2.1",
     "include-all": ">=0.1.6",
     "merge": ">=1.2.0",
+    "mime": "^1.2.11",
     "node-edmunds-api": ">=0.0.0",
     "nodemon": ">=1.2.1",
     "password-hash": ">=1.2.2",
@@ -30,10 +31,10 @@
     "sails": ">=0.10.5",
     "sails-disk": ">=0.10.4",
     "sails-mysql": ">=0.10.7",
-    "utils-type": ">=0.8.10",
-    "vin": ">=0.0.2",
     "stringify-object": ">=1.0.0",
-    "to-markdown": ">=0.0.2"
+    "to-markdown": ">=0.0.2",
+    "utils-type": ">=0.8.10",
+    "vin": ">=0.0.2"
   },
   "scripts": {
     "start": "node app.js",

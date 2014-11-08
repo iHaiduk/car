@@ -3,7 +3,7 @@ cUser =
   login: (req, res) ->
     _User.login req, ->
       #console.log req.session
-      res.send("auth")
+      res.redirect("/panel")
 
   new: (req, res) ->
     _User.create

@@ -12,7 +12,7 @@ $("#stoList").dataTable
     infoEmpty: "No records available"
     infoFiltered: "(filtered from _MAX_ total records)"
 
-$select_state = $("#group_of_spare_parts, #type_of_spare_parts, #condition_parts, #delivery_time").selectize()
+$select_state = $("#group_of_spare_parts, #type_of_spare_parts, #condition_parts, #delivery_time, #user_car").selectize()
 $("#part_number").numberMask beforePoint: 15
 reg = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/
 $("#link_item").on("keyup", ->

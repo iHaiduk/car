@@ -22,9 +22,11 @@ _Request=
       "vendor/ajax/upload.js"
       "controlScript/requestMain.js"
     ]
-    res.locals.scripts = script_array
-    res.locals.modal = "modal/addRequest"
-    res.view("request/index")
+    user_car = UserCar.find({user_id: req.session.user}).exec (err, resul) ->
+      res.locals.scripts = script_array
+      res.locals.modal = "modal/addRequest"
+      console.log user_car
+      res.view("request/index", {user_car: resul})
 
 
 module.exports = _Request

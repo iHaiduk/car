@@ -1,10 +1,4 @@
-###*
-=========================================================
-Module: upload-demo.js
-Upload Demostration
-See file server/upload.php for more details
-=========================================================
-###
+
 (($, window, document) ->
   $ ->
     progressbar = $("#progressbar")
@@ -16,21 +10,13 @@ See file server/upload.php for more details
   return
 ) jQuery, window, document
 
-###*
-=========================================================
-Module: upload.js
-Allow users to upload files through a file input form element or a placeholder area.
-Based on addon from UIKit (http://getuikit.com/docs/addons_upload.html)
-
-Adapted version to work with Bootstrap classes
-=========================================================
-###
 (($, window, document) ->
   fl_k = 0
+  fl_count_load = 0
   fl_arrray = $(document).find "#files"
   xhrupload = (files, settings) ->
     upload = (files, settings) ->
-
+      return false if fl_count_load > 4
       # upload all at once
       formData = new FormData()
       xhr = new XMLHttpRequest()
@@ -204,32 +190,32 @@ Adapted version to work with Bootstrap classes
     allow: "*.(jpg|jpeg|gif|png|txt|doc|docx)"
     type: "text"
     before: (o, files) ->
-      $(document).find("#upload-drop").slideUp 350
-      for val in files
-        html = $('<div class="panel widget">
-          <div class="row row-table row-flush">
-              <div class="col-xs-2 bg-info text-center">
-                  <em class="fa fa-file-text-o fa-2x"></em>
-              </div>
-              <div class="col-xs-9">
-                  <div class="panel-body text-center">
-                      <h4 class="mt0">'+val.name.substr(0, val.name.lastIndexOf('.'))+'</h4>
-                      <small>
-                          <em class="fa fa-inbox"></em>'+bytesToSize(parseInt(val.size))+'
-                          <em class="fa fa-info"></em>'+val.type+'
-                      </small>
-                  </div>
-                  <div class="progress progress-striped progress-xs active">
-                      <div role="progressbar" aria-valuenow="0" aria-valuemin="0" style="width: 0%" aria-valuemax="100" class="progress-bar progress-bar-info">
-                      </div>
-                  </div>
-              </div>
-              <div class="col-xs-1 bg-inverse text-center">
-                  <em class="fa fa-minus"></em>
-              </div>
-          </div>
-      </div>')
-        fl_arrray.append(html)
+      hideLoad fl_count_load
+      file = files[0]
+      html = $('<div class="panel widget">
+        <div class="row row-table row-flush">
+            <div class="col-xs-2 bg-info text-center">
+                <em class="fa fa-file-text-o fa-2x"></em>
+            </div>
+            <div class="col-xs-9">
+                <div class="panel-body text-center">
+                    <h4 class="mt0">'+file.name.substr(0, file.name.lastIndexOf('.'))+'</h4>
+                    <small>
+                        <em class="fa fa-inbox"></em>'+bytesToSize(parseInt(file.size))+'
+                        <em class="fa fa-info"></em>'+file.type+'
+                    </small>
+                </div>
+                <div class="progress progress-striped progress-xs active">
+                    <div role="progressbar" aria-valuenow="0" aria-valuemin="0" style="width: 0%" aria-valuemax="100" class="progress-bar progress-bar-info">
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-1 bg-inverse text-center delete_file">
+                <em class="fa fa-minus"></em>
+            </div>
+        </div>
+    </div>')
+      fl_arrray.append(html)
       return
 
     load: ->
@@ -242,6 +228,8 @@ Adapted version to work with Bootstrap classes
 
     complete: (response, xhr) ->
       console.log "complete", response, xhr
+      fl_count_load++
+      hideLoad fl_count_load
       return
 
     loadstart: (e) ->
@@ -253,7 +241,7 @@ Adapted version to work with Bootstrap classes
       progress_b = $(file_l).find(".progress-bar")
       progress_b.attr("aria-valuenow", percent).css("width", percent+"%")
       if percent==100
-        progress_b.parent().fadeOut 500
+        progress_b.parent().slideUp 500
         fl_k++
       return
 
@@ -268,7 +256,18 @@ Adapted version to work with Bootstrap classes
 
   $.xhrupload = xhrupload
   xhrupload
+  $(document).delegate ".delete_file", "click", ->
+    $(this).parents(".panel").slideUp 500
+    fl_count_load-- if fl_count_load > 0
+    hideLoad fl_count_load
 ) jQuery, window, document
+
+hideLoad = (cnt_upl) ->
+  upload_drp = $(document).find("#upload-drop")
+  if cnt_upl > 4
+    upload_drp.stop().slideUp 500
+  else
+    upload_drp.stop().slideDown 500
 
 bytesToSize = (bytes) ->
   sizes = [

@@ -192,17 +192,17 @@
     before: (o, files) ->
       hideLoad fl_count_load
       file = files[0]
-      html = $('<div class="panel widget">
+      html = $('<div class="panel widget" id="temp_'+file.name.substr(0, 1)+'_'+parseInt(file.size)+'">
         <div class="row row-table row-flush">
             <div class="col-xs-2 bg-info text-center">
-                <em class="fa fa-file-text-o fa-2x"></em>
+                <em class="fa fa-download fa-2x"></em>
             </div>
             <div class="col-xs-9">
                 <div class="panel-body text-center">
                     <h4 class="mt0">'+file.name.substr(0, file.name.lastIndexOf('.'))+'</h4>
                     <small>
                         <em class="fa fa-inbox"></em>'+bytesToSize(parseInt(file.size))+'
-                        <em class="fa fa-info"></em>'+file.type+'
+                        <em class="fa fa-info"></em><span>'+file.type+'</span>
                     </small>
                 </div>
                 <div class="progress progress-striped progress-xs active">
@@ -227,14 +227,24 @@
     abort: ->
 
     complete: (response, xhr) ->
-      console.log "complete", response, xhr
+      response = JSON.parse(response)
+      th_fl = $(document).find("#temp_"+response.files.filename.substr(0, 1)+"_"+parseInt(response.files.size))
+      th_fl.attr "data-id", response.files.id
+      th_fl.find(".delete_file").attr "data-id", response.files.id
+      if response.files.type in ["image/jpeg", "image/gif", "image/png"]
+        th_fl.find(".fa-2x").removeClass("fa-upload").addClass "fa-picture-o"
+      else if response.files.type in ["application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"]
+        th_fl.find(".fa-info").next().text("msword")
+        th_fl.find(".fa-2x").removeClass("fa-upload").addClass "fa-file-text"
+      else
+        th_fl.find(".fa-info").next().text("text")
+        th_fl.find(".fa-2x").removeClass("fa-upload").addClass "fa-list-alt"
+
       fl_count_load++
       hideLoad fl_count_load
       return
 
     loadstart: (e) ->
-      console.log "loadstart", e
-      return
 
     progress: (percent, e) ->
       file_l = fl_arrray.find(".panel")[fl_k]
@@ -246,8 +256,6 @@
       return
 
     allcomplete: (response, xhr) ->
-      console.log "allcomplete", response, xhr
-      return
 
     readystatechange: ->
 
@@ -257,17 +265,25 @@
   $.xhrupload = xhrupload
   xhrupload
   $(document).delegate ".delete_file", "click", ->
-    $(this).parents(".panel").slideUp 500
-    fl_count_load-- if fl_count_load > 0
-    hideLoad fl_count_load
+    $.get "/upload/delete",
+      id: $(this).data().id,
+      ->
+        $(this).parents(".panel").slideUp 500
+        fl_count_load-- if fl_count_load > 0
+        hideLoad fl_count_load
+        return
+    return
+  return
 ) jQuery, window, document
 
 hideLoad = (cnt_upl) ->
   upload_drp = $(document).find("#upload-drop")
   if cnt_upl > 4
     upload_drp.stop().slideUp 500
+    return
   else
     upload_drp.stop().slideDown 500
+    return
 
 bytesToSize = (bytes) ->
   sizes = [

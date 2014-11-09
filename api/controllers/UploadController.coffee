@@ -1,9 +1,8 @@
 _Upload=
   uploadFile: (req, res)->
     res.setTimeout 0
-    maxBytes = 50*1024*1024
+    maxBytes = 6*1024*1024
     req.file("files").on("progress", (event) ->
-      console.log event.written+" / "+event.stream.byteCount
       return event
     ).upload
 
@@ -12,25 +11,16 @@ _Upload=
       maxBytes: maxBytes
     , (err, uploadedFiles) ->
         return res.send(500, err)  if err
-        textract = require 'mime'
-        file = uploadedFiles[0]
-        console.log textract.lookup(file.fd)
-        Files.create
-          uid_user:req.session.user
-          filename: file.filename
-          type: file.type
-          size: file.size
-          fd: file.fd
-        , (error, response) ->
-          console.log error, response
-
-        res.json
-          message: uploadedFiles.length + " file(s) uploaded successfully!"
-          files: uploadedFiles
-
+        _User.addFile uploadedFiles[0], req, (data) ->
+          res.json
+            message: true
+            files: data
 
   upload: (req, res)->
     res.view("upload/index")
+
+  delete: (req, res)->
+    console.log req.query
 
   download: (req, res) ->
     require("fs").createReadStream(req.param("path")).on("error", (err) ->

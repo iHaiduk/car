@@ -28,7 +28,7 @@ module.exports =
       type: 'string'
 
     time:
-      type: 'integer'
+      type: 'string'
       defaultsTo: ->
         new Date().getTime()
 

@@ -24,7 +24,6 @@
     "merge": ">=1.2.0",
     "mime": "^1.2.11",
     "node-edmunds-api": ">=0.0.0",
-    "nodemon": ">=1.2.1",
     "password-hash": ">=1.2.2",
     "rc": ">=0.5.4",
     "request": ">=2.47.0",

@@ -215,7 +215,7 @@
         var file, html;
         hideLoad(fl_count_load);
         file = files[0];
-        html = $('<div class="panel widget"> <div class="row row-table row-flush"> <div class="col-xs-2 bg-info text-center"> <em class="fa fa-file-text-o fa-2x"></em> </div> <div class="col-xs-9"> <div class="panel-body text-center"> <h4 class="mt0">' + file.name.substr(0, file.name.lastIndexOf('.')) + '</h4> <small> <em class="fa fa-inbox"></em>' + bytesToSize(parseInt(file.size)) + '<em class="fa fa-info"></em>' + file.type + '</small> </div> <div class="progress progress-striped progress-xs active"> <div role="progressbar" aria-valuenow="0" aria-valuemin="0" style="width: 0%" aria-valuemax="100" class="progress-bar progress-bar-info"> </div> </div> </div> <div class="col-xs-1 bg-inverse text-center delete_file"> <em class="fa fa-minus"></em> </div> </div> </div>');
+        html = $('<div class="panel widget" id="temp_' + file.name.substr(0, 1) + '_' + parseInt(file.size) + '"> <div class="row row-table row-flush"> <div class="col-xs-2 bg-info text-center"> <em class="fa fa-download fa-2x"></em> </div> <div class="col-xs-9"> <div class="panel-body text-center"> <h4 class="mt0">' + file.name.substr(0, file.name.lastIndexOf('.')) + '</h4> <small> <em class="fa fa-inbox"></em>' + bytesToSize(parseInt(file.size)) + '<em class="fa fa-info"></em><span>' + file.type + '</span> </small> </div> <div class="progress progress-striped progress-xs active"> <div role="progressbar" aria-valuenow="0" aria-valuemin="0" style="width: 0%" aria-valuemax="100" class="progress-bar progress-bar-info"> </div> </div> </div> <div class="col-xs-1 bg-inverse text-center delete_file"> <em class="fa fa-minus"></em> </div> </div> </div>');
         fl_arrray.append(html);
       },
       load: function() {},
@@ -223,13 +223,24 @@
       error: function() {},
       abort: function() {},
       complete: function(response, xhr) {
-        console.log("complete", response, xhr);
+        var th_fl, _ref, _ref1;
+        response = JSON.parse(response);
+        th_fl = $(document).find("#temp_" + response.files.filename.substr(0, 1) + "_" + parseInt(response.files.size));
+        th_fl.attr("data-id", response.files.id);
+        th_fl.find(".delete_file").attr("data-id", response.files.id);
+        if ((_ref = response.files.type) === "image/jpeg" || _ref === "image/gif" || _ref === "image/png") {
+          th_fl.find(".fa-2x").removeClass("fa-upload").addClass("fa-picture-o");
+        } else if ((_ref1 = response.files.type) === "application/msword" || _ref1 === "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
+          th_fl.find(".fa-info").next().text("msword");
+          th_fl.find(".fa-2x").removeClass("fa-upload").addClass("fa-file-text");
+        } else {
+          th_fl.find(".fa-info").next().text("text");
+          th_fl.find(".fa-2x").removeClass("fa-upload").addClass("fa-list-alt");
+        }
         fl_count_load++;
         hideLoad(fl_count_load);
       },
-      loadstart: function(e) {
-        console.log("loadstart", e);
-      },
+      loadstart: function(e) {},
       progress: function(percent, e) {
         var file_l, progress_b;
         file_l = fl_arrray.find(".panel")[fl_k];
@@ -240,20 +251,22 @@
           fl_k++;
         }
       },
-      allcomplete: function(response, xhr) {
-        console.log("allcomplete", response, xhr);
-      },
+      allcomplete: function(response, xhr) {},
       readystatechange: function() {},
       notallowed: function(file, settings) {}
     };
     $.xhrupload = xhrupload;
     xhrupload;
-    return $(document).delegate(".delete_file", "click", function() {
-      $(this).parents(".panel").slideUp(500);
-      if (fl_count_load > 0) {
-        fl_count_load--;
-      }
-      return hideLoad(fl_count_load);
+    $(document).delegate(".delete_file", "click", function() {
+      $.get("/upload/delete", {
+        id: $(this).data().id
+      }, function() {
+        $(this).parents(".panel").slideUp(500);
+        if (fl_count_load > 0) {
+          fl_count_load--;
+        }
+        hideLoad(fl_count_load);
+      });
     });
   })(jQuery, window, document);
 
@@ -261,9 +274,9 @@
     var upload_drp;
     upload_drp = $(document).find("#upload-drop");
     if (cnt_upl > 4) {
-      return upload_drp.stop().slideUp(500);
+      upload_drp.stop().slideUp(500);
     } else {
-      return upload_drp.stop().slideDown(500);
+      upload_drp.stop().slideDown(500);
     }
   };
 

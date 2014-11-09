@@ -7,7 +7,7 @@ class _User
     @user.id = data.session.user = 1
     callback()
 
-  create:  (data = {}, callback) ->
+  create: (data = {}, callback) ->
     passwordHash = require 'password-hash'
     md5 = require 'MD5'
 
@@ -38,6 +38,20 @@ class _User
     else
       console.log "Need authorization! "+sails.getBaseurl()+"/user/login"
       callback null, null if callback and typeof (callback) is "function"
-#console.log data
+
+  addFile:  (data = {}, req, callback) ->
+    textract = require 'mime'
+    console.log data.fd
+    data.type = textract.lookup(data.fd)
+    Files.create
+      uid_user: req.session.user
+      filename: data.filename
+      type: data.type
+      size: data.size
+      fd: data.fd
+    , (error, response) ->
+        callback response
+
+  deleteFile: (id, req, callback) ->
 
 module.exports = new _User

@@ -88,9 +88,14 @@
         i = 0;
         file = void 0;
         while (file = files[i]) {
+          if (parseInt(file.size) > settings.maxsize) {
+            settings.bigsize(file);
+          }
           if (!matchName(settings.allow, file.name)) {
             if (typeof settings.notallowed === "string") {
-              alert(settings.notallowed);
+              $.notify(settings.notallowed, {
+                pos: "top-right"
+              });
             } else {
               settings.notallowed(file, settings);
             }
@@ -209,10 +214,14 @@
       method: "POST",
       param: "files",
       params: {},
+      maxsize: 5 * 1024 * 1024,
       allow: "*.(jpg|jpeg|gif|png|txt|doc|docx)",
       type: "text",
       before: function(o, files) {
         var file, html;
+        if (parseInt(files[0].size) > o.maxsize) {
+          return;
+        }
         hideLoad(fl_count_load);
         file = files[0];
         html = $('<div class="panel widget" id="temp_' + file.name.substr(0, 1) + '_' + parseInt(file.size) + '"> <div class="row row-table row-flush"> <div class="col-xs-2 bg-info text-center"> <em class="fa fa-download fa-2x"></em> </div> <div class="col-xs-9"> <div class="panel-body text-center"> <h4 class="mt0">' + file.name.substr(0, file.name.lastIndexOf('.')) + '</h4> <small> <em class="fa fa-inbox"></em>' + bytesToSize(parseInt(file.size)) + '<em class="fa fa-info"></em><span>' + file.type + '</span> </small> </div> <div class="progress progress-striped progress-xs active"> <div role="progressbar" aria-valuenow="0" aria-valuemin="0" style="width: 0%" aria-valuemax="100" class="progress-bar progress-bar-info"> </div> </div> </div> <div class="col-xs-1 bg-inverse text-center delete_file"> <em class="fa fa-minus"></em> </div> </div> </div>');
@@ -253,7 +262,16 @@
       },
       allcomplete: function(response, xhr) {},
       readystatechange: function() {},
-      notallowed: function(file, settings) {}
+      bigsize: function(file) {
+        return $.notify("Файл: " + file.name.substr(0, file.name.lastIndexOf('.')) + "<br> весит более 5MB", {
+          pos: "top-right"
+        });
+      },
+      notallowed: function(file) {
+        return $.notify("Файл: " + file.name.substr(0, file.name.lastIndexOf('.')) + "<br> имеет не поддерживаемый формат", {
+          pos: "top-right"
+        });
+      }
     };
     $.xhrupload = xhrupload;
     xhrupload;

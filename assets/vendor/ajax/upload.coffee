@@ -79,9 +79,12 @@
       file = undefined
 
       while file = files[i]
+        if parseInt(file.size) > settings.maxsize
+          settings.bigsize file
         unless matchName(settings.allow, file.name)
           if typeof (settings.notallowed) is "string"
-            alert settings.notallowed
+            $.notify settings.notallowed,
+              pos: "top-right"
           else
             settings.notallowed file, settings
           return
@@ -187,9 +190,11 @@
     method: "POST"
     param: "files"
     params: {}
+    maxsize: 5*1024*1024
     allow: "*.(jpg|jpeg|gif|png|txt|doc|docx)"
     type: "text"
     before: (o, files) ->
+      return if parseInt(files[0].size) > o.maxsize
       hideLoad fl_count_load
       file = files[0]
       html = $('<div class="panel widget" id="temp_'+file.name.substr(0, 1)+'_'+parseInt(file.size)+'">
@@ -259,7 +264,12 @@
 
     readystatechange: ->
 
-    notallowed: (file, settings) ->
+    bigsize: (file)->
+      $.notify "Файл: "+file.name.substr(0, file.name.lastIndexOf('.'))+"<br> весит более 5MB",
+        pos: "top-right"
+    notallowed: (file)->
+      $.notify "Файл: "+file.name.substr(0, file.name.lastIndexOf('.'))+"<br> имеет не поддерживаемый формат",
+        pos: "top-right"
 
 
   $.xhrupload = xhrupload

@@ -40,9 +40,6 @@ class _User
       callback null, null if callback and typeof (callback) is "function"
 
   addFile:  (data = {}, req, callback) ->
-    textract = require 'mime'
-    console.log data.fd
-    data.type = textract.lookup(data.fd)
     Files.create
       uid_user: req.session.user
       filename: data.filename

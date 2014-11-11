@@ -26,3 +26,14 @@ $("#link_item").on("keyup", ->
     when reg.test($(this).val()) then $(this).parent().removeClass("has-error has-warning").addClass("has-success")
     else $(this).parent().removeClass("has-success has-warning").addClass("has-error")
 )
+$(document).delegate ".delete_file", "click", ->
+  _this = this
+  $.get("/upload/delete",
+    id: $(_this).data().id
+  ).done (data) ->
+    $(_this).parent().parent().slideUp 500
+    fl_count_load--  if fl_count_load > 0
+    hideLoad fl_count_load
+    return
+
+  return

@@ -24,7 +24,10 @@ module.exports =
     size:
       type: 'integer'
 
-    fd:
+    extname:
+      type: 'string'
+
+    code:
       type: 'string'
 
     time:

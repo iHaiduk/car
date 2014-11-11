@@ -61,7 +61,7 @@ module.exports.routes = {
         controller: 'UploadController',
         action: 'uploadFile'
     },
-    '/upload/delete':{
+    '/upload/delete/:id':{
         controller: 'UploadController',
         action: 'delete'
     }

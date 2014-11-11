@@ -44,4 +44,18 @@
     }
   });
 
+  $(document).delegate(".delete_file", "click", function() {
+    var _this;
+    _this = this;
+    $.get("/upload/delete", {
+      id: $(_this).data().id
+    }).done(function(data) {
+      $(_this).parent().parent().slideUp(500);
+      if (fl_count_load > 0) {
+        fl_count_load--;
+      }
+      hideLoad(fl_count_load);
+    });
+  });
+
 }).call(this);

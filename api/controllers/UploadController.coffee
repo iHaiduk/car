@@ -11,7 +11,7 @@ _Upload=
       return event
     ).upload
     # You can apply a file upload limit (in bytes)
-      dirname: "../../assets/upload"
+      dirname: "../../upload"
       maxBytes: maxBytes
     , (err, uploadedFiles) ->
         return res.send(500, err)  if err
@@ -35,7 +35,8 @@ _Upload=
     res.view("upload/index")
 
   delete: (req, res)->
-    console.log req.query
+    _User.deleteFile {id:req.query.id, uid_user:req.session.user}, req, (result) ->
+      res.json true
 
   download: (req, res) ->
     require("fs").createReadStream(req.param("path")).on("error", (err) ->

@@ -40,15 +40,26 @@ class _User
       callback null, null if callback and typeof (callback) is "function"
 
   addFile:  (data = {}, req, callback) ->
+    path = require('path')
     Files.create
       uid_user: req.session.user
       filename: data.filename
       type: data.type
       size: data.size
-      fd: data.fd
+      code: path.basename data.fd, path.extname(data.fd)
+      extname: path.extname data.fd
     , (error, response) ->
         callback response
+    return
 
-  deleteFile: (id, req, callback) ->
+  deleteFile: (param, req, callback) ->
+    Files.findOne(param).exec (err, data)->
+      if data?
+        Files.destroy(data.id).exec (err) ->
+          fs = require "fs"
+          dd = fs.unlinkSync "./upload/"+data.code+data.extname
+          return
+        return
+    callback()
 
 module.exports = new _User

@@ -1,4 +1,4 @@
-
+@fl_count_load = 0
 (($, window, document) ->
   $ ->
     progressbar = $("#progressbar")
@@ -12,11 +12,10 @@
 
 (($, window, document) ->
   fl_k = 0
-  fl_count_load = 0
   fl_arrray = $(document).find "#files"
   xhrupload = (files, settings) ->
     upload = (files, settings) ->
-      return false if fl_count_load > 4
+      return false if @fl_count_load > 4
       # upload all at once
       formData = new FormData()
       xhr = new XMLHttpRequest()
@@ -195,7 +194,7 @@
     type: "text"
     before: (o, files) ->
       return if parseInt(files[0].size) > o.maxsize
-      hideLoad fl_count_load
+      hideLoad @fl_count_load
       file = files[0]
       html = $('<div class="panel widget" id="temp_'+file.name.substr(0, 1)+'_'+parseInt(file.size)+'">
         <div class="row row-table row-flush">
@@ -245,8 +244,8 @@
         th_fl.find(".fa-info").next().text("text")
         th_fl.find(".fa-2x").removeClass("fa-upload").addClass "fa-list-alt"
 
-      fl_count_load++
-      hideLoad fl_count_load
+      @fl_count_load++
+      @hideLoad @fl_count_load
       return
 
     loadstart: (e) ->
@@ -274,19 +273,9 @@
 
   $.xhrupload = xhrupload
   xhrupload
-  $(document).delegate ".delete_file", "click", ->
-    $.get "/upload/delete",
-      id: $(this).data().id,
-      ->
-        $(this).parents(".panel").slideUp 500
-        fl_count_load-- if fl_count_load > 0
-        hideLoad fl_count_load
-        return
-    return
-  return
 ) jQuery, window, document
 
-hideLoad = (cnt_upl) ->
+@hideLoad = (cnt_upl) ->
   upload_drp = $(document).find("#upload-drop")
   if cnt_upl > 4
     upload_drp.stop().slideUp 500

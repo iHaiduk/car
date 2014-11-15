@@ -47,9 +47,13 @@ module.exports.routes = {
     },
 
     /* TODO REQUEST */
-    '/myrequest':{
+    '/request/my':{
         controller: 'RequestController',
         action: 'getRequest'
+    },
+    '/request/new':{
+        controller: 'RequestController',
+        action: 'newRequest'
     },
 
     /* TODO FILE */

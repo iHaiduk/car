@@ -29,4 +29,8 @@ _Request=
       res.view("request/index", {user_car: resul})
 
 
+  newRequest: (req, res)->
+    Request.create req.body, (err,result) ->
+      res.json(result)
+
 module.exports = _Request

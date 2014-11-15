@@ -5,7 +5,7 @@
                 <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
                 <h4 id="myModalLabel" class="modal-title">Добавление новой заявки</h4>
             </div>
-            <form method="get" action="/" class="form-horizontal">
+            <form method="get" action="/" class="form-horizontal" id="formRequest">
                 <fieldset>
                     <!-- START row -->
                     <div class="row">
@@ -81,9 +81,9 @@
                                 <dt>Тип запчасти</dt>
                                 <dd>
                                     <select size="1" name="type_of_spare_parts" id="type_of_spare_parts">
-                                        <option value="any">Любая</option>
-                                        <option value="original">Оригинальная</option>
-                                        <option value="not_original">Не оригинальная</option>
+                                        <option value="0">Любая</option>
+                                        <option value="1">Оригинальная</option>
+                                        <option value="2">Не оригинальная</option>
                                     </select>
                                 </dd>
                             </dl>
@@ -96,9 +96,9 @@
                                 <dt>Состояние запчасти *</dt>
                                 <dd>
                                     <select size="1" name="condition_parts" id="condition_parts">
-                                        <option value="any">Любая</option>
-                                        <option value="original">Новая</option>
-                                        <option value="not_original">Подержаная</option>
+                                        <option value="0">Любая</option>
+                                        <option value="1">Новая</option>
+                                        <option value="2">Подержаная</option>
                                     </select>
                                 </dd>
                             </dl>
@@ -107,7 +107,7 @@
                             <dl class="dl-horizontal part_half">
                                 <dt>Срок поставки</dt>
                                 <dd>
-                                    <select name="delivery_time" id="delivery_time">
+                                        <select name="delivery_time" id="delivery_time">
                                         <option value="any">Любой</option>
                                         <option value="only_available">Только в наличии</option>
                                         <option value="up_to_one_week">До одной недели</option>
@@ -152,7 +152,7 @@
                 </fieldset>
                 <div class="modal-footer">
                     <button type="button" data-dismiss="modal" class="btn btn-default">Отмена</button>
-                    <button type="button" class="btn btn-primary">Добавить новую</button>
+                    <button type="button" class="btn btn-primary" id="newRequest">Добавить новую</button>
                 </div>
             </form>
         </div>

@@ -118,6 +118,5 @@ nbproject
 .node_history
 *.js.map
 
-tmp
-tmp/restart.txt
+.tmp
 upload/*

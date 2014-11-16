@@ -4,7 +4,6 @@ $(document).ready ->
 
   $("#stoList").dataTable
     paging: true
-    ordering: true
     info: true
     bFilter: false
     oLanguage:
@@ -16,10 +15,10 @@ $(document).ready ->
       infoFiltered: "(filtered from _MAX_ total records)"
   $("#requestList").dataTable
     paging: true
-    ordering: true
     info: true
     bFilter: false
-    "dom": 'rt<"bottom"flp><"clear">'
+    order: [[ 4, "desc" ]]
+    dom: 'rt<"bottom"flp><"clear">'
     oLanguage:
       sSearch: "Search all columns:"
       sLengthMenu: "_MENU_ records per page"

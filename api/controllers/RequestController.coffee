@@ -7,6 +7,8 @@ PromoController
 
 _Request=
   getRequest: (req, res)->
+    require "date-format-lite"
+
     res.locals.styles = [
       "vendor/selectize/selectize.bootstrap3.css"
       "styles/styleRequest.css"
@@ -22,11 +24,32 @@ _Request=
       "vendor/ajax/upload.js"
       "controlScript/requestMain.js"
     ]
-    user_car = UserCar.find({user_id: req.session.user}).exec (err, resul) ->
+    async.series
+      user_car: (callback) ->
+        UserCar.find({user_id: req.session.user}).exec (err, resul) ->
+          callback err, resul
+        return
+
+      request: (callback) ->
+        Request.find({uid_user: req.session.user}).exec (err, resul) ->
+          i = 0
+          len = resul.length
+
+          while i < len
+            now = new Date(parseInt(resul[i].time) * 1000)
+            resul[i].time = now.format("D.M.Y h:m")
+            i++
+          callback err, resul
+        return
+    , (err, results) ->
       res.locals.scripts = script_array
       res.locals.modal = "modal/addRequest"
-      console.log user_car
-      res.view("request/index", {user_car: resul})
+      res.view "request/index",
+        user_car: results.user_car
+        requests: results.request
+
+
+# results is now equal to: {one: 1, two: 2}
 
 
   newRequest: (req, res)->

@@ -88,3 +88,15 @@
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
 }
+#requestTable .dataTables_length{
+    float: left;
+    display: inline-block;
+    margin: 10px 0 0 0;
+}
+#requestTable .dataTables_paginate{
+    float: right;
+    display: inline-block;
+}
+#requestTable .dataTables_paginate .pagination {
+    margin: 10px 0 0 0;
+}

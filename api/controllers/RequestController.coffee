@@ -30,7 +30,17 @@ _Request=
 
 
   newRequest: (req, res)->
+    req.body.uid_car = req.body.user_car
+    req.body.uid_user = req.session.user
+    req.body.part_number = (if req.body.part_number is "" or not req.body.part_number? then null else parseInt(req.body.part_number))
+    req.body.group_of_spare_parts = parseInt(req.body.group_of_spare_parts)
+    req.body.type_of_spare_parts = parseInt(req.body.type_of_spare_parts)
+    req.body.condition_parts = parseInt(req.body.condition_parts)
+    req.body.link_item = null if req.body.link_item is ""
+    req.body.files = null if req.body.files is ""
     Request.create req.body, (err,result) ->
-      res.json(result)
+      res.json
+        error: err
+        result: result
 
 module.exports = _Request

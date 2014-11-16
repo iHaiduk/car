@@ -1,10 +1,25 @@
 $(document).ready ->
+  $.extend true, $.fn.dataTable.defaults,
+    sDom: "<'row'<'col-xs-6'l><'col-xs-6'f>r>" + "t" + "<'row'<'col-xs-6'i><'col-xs-6'p>>"
+
   $("#stoList").dataTable
-    paging: true # Table pagination
-    ordering: true # Column ordering
-    info: true # Bottom left status text
-  # Text translation options
-  # Note the required keywords between underscores (e.g _MENU_)
+    paging: true
+    ordering: true
+    info: true
+    bFilter: false
+    oLanguage:
+      sSearch: "Search all columns:"
+      sLengthMenu: "_MENU_ records per page"
+      info: "Showing page _PAGE_ of _PAGES_"
+      zeroRecords: "Nothing found - sorry"
+      infoEmpty: "No records available"
+      infoFiltered: "(filtered from _MAX_ total records)"
+  $("#requestList").dataTable
+    paging: true
+    ordering: true
+    info: true
+    bFilter: false
+    "dom": 'rt<"bottom"flp><"clear">'
     oLanguage:
       sSearch: "Search all columns:"
       sLengthMenu: "_MENU_ records per page"
@@ -50,6 +65,7 @@ $(document).ready ->
       condition_parts: $("#condition_parts").val()
       delivery_time: $("#delivery_time").val()
       link_item: $("#link_item").val()
+      _csrf: $("#_csrf").val()
       files: (->
         files = []
         $(document).find("#files .panel").each ->
@@ -57,9 +73,13 @@ $(document).ready ->
           return
         files.join(",")
       )()
-    $.post("/request/new",
-      data
-    ).done (data) ->
-      console.log data
+    if data.required_item is ""
+      $.notify "Поле 'Требуемая деталь' не заполнено!",
+        pos: "top-right"
+    else
+      $.post("/request/new",
+        data
+      ).done (data) ->
+        console.log data
 
 

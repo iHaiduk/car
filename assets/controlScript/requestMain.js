@@ -2,10 +2,29 @@
 (function() {
   $(document).ready(function() {
     var $select_state, reg;
+    $.extend(true, $.fn.dataTable.defaults, {
+      sDom: "<'row'<'col-xs-6'l><'col-xs-6'f>r>" + "t" + "<'row'<'col-xs-6'i><'col-xs-6'p>>"
+    });
     $("#stoList").dataTable({
       paging: true,
       ordering: true,
       info: true,
+      bFilter: false,
+      oLanguage: {
+        sSearch: "Search all columns:",
+        sLengthMenu: "_MENU_ records per page",
+        info: "Showing page _PAGE_ of _PAGES_",
+        zeroRecords: "Nothing found - sorry",
+        infoEmpty: "No records available",
+        infoFiltered: "(filtered from _MAX_ total records)"
+      }
+    });
+    $("#requestList").dataTable({
+      paging: true,
+      ordering: true,
+      info: true,
+      bFilter: false,
+      "dom": 'rt<"bottom"flp><"clear">',
       oLanguage: {
         sSearch: "Search all columns:",
         sLengthMenu: "_MENU_ records per page",
@@ -67,6 +86,7 @@
         condition_parts: $("#condition_parts").val(),
         delivery_time: $("#delivery_time").val(),
         link_item: $("#link_item").val(),
+        _csrf: $("#_csrf").val(),
         files: (function() {
           var files;
           files = [];
@@ -76,9 +96,15 @@
           return files.join(",");
         })()
       };
-      return $.post("/request/new", data).done(function(data) {
-        return console.log(data);
-      });
+      if (data.required_item === "") {
+        return $.notify("Поле 'Требуемая деталь' не заполнено!", {
+          pos: "top-right"
+        });
+      } else {
+        return $.post("/request/new", data).done(function(data) {
+          return console.log(data);
+        });
+      }
     });
   });
 

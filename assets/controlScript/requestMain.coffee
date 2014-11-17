@@ -1,4 +1,18 @@
 $(document).ready ->
+  requestList = $("#requestList").DataTable
+    paging: true
+    info: true
+    bFilter: false
+    order: [[ 4, "desc" ]]
+    dom: 'rt<"bottom"flp><"clear">'
+    oLanguage:
+      sSearch: "Search all columns:"
+      sLengthMenu: "_MENU_ records per page"
+      info: "Showing page _PAGE_ of _PAGES_"
+      zeroRecords: "Nothing found - sorry"
+      infoEmpty: "No records available"
+      infoFiltered: "(filtered from _MAX_ total records)"
+
   $.extend true, $.fn.dataTable.defaults,
     sDom: "<'row'<'col-xs-6'l><'col-xs-6'f>r>" + "t" + "<'row'<'col-xs-6'i><'col-xs-6'p>>"
 
@@ -13,19 +27,7 @@ $(document).ready ->
       zeroRecords: "Nothing found - sorry"
       infoEmpty: "No records available"
       infoFiltered: "(filtered from _MAX_ total records)"
-  $("#requestList").dataTable
-    paging: true
-    info: true
-    bFilter: false
-    order: [[ 4, "desc" ]]
-    dom: 'rt<"bottom"flp><"clear">'
-    oLanguage:
-      sSearch: "Search all columns:"
-      sLengthMenu: "_MENU_ records per page"
-      info: "Showing page _PAGE_ of _PAGES_"
-      zeroRecords: "Nothing found - sorry"
-      infoEmpty: "No records available"
-      infoFiltered: "(filtered from _MAX_ total records)"
+
 
   $select_state = $("#group_of_spare_parts, #type_of_spare_parts, #condition_parts, #delivery_time, #user_car").selectize()
   $("#part_number").numberMask beforePoint: 15
@@ -54,7 +56,7 @@ $(document).ready ->
 
     return
 
-  $(document).on "click", "#newRequest", ->
+  $("#newRequest").on "click", ->
     data =
       user_car: $("#user_car").val()
       required_item: $("#required_item").val()
@@ -75,10 +77,26 @@ $(document).ready ->
     if data.required_item is ""
       $.notify "Поле 'Требуемая деталь' не заполнено!",
         pos: "top-right"
+      return
     else
       $.post("/request/new",
         data
       ).done (data) ->
         console.log data
+        requestList.row.add([
+          data.result.required_item
+          data.result.uid_car
+          data.result.type_of_spare_parts
+          data.result.time
+          data.result.time
+          """<label class="switch">
+                                    <input value="<%= requests[num].id %>" type="checkbox">
+                                    <span></span>
+                                </label>"""
+        ]).draw()
+        return
+      return
+  return
 
 
+#result: Objectcondition_parts: 1delivery_time: "only_available"files: nullgroup_of_spare_parts: 2id: 5link_item: nullpart_number: nullrequired_item: "цууцу"time: "1416261476"type_of_spare_parts: 1uid_car: 5uid_user: 1

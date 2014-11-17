@@ -37,7 +37,7 @@ _Request=
 
           while i < len
             now = new Date(parseInt(resul[i].time) * 1000)
-            resul[i].time = now.format("D.M.Y h:m")
+            resul[i].time = now.format("D.M.Y h:M")
             i++
           callback err, resul
         return

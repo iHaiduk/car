@@ -52,6 +52,6 @@
   "homepage": "https://github.com/HTGroup/car",
   "devDependencies": {
     "karma-chrome-launcher": "^0.1.5",
-    "karma-jasmine": "^0.2.3"
+    "karma-jasmine": "^0.3.0"
   }
 }

@@ -31,21 +31,24 @@ _Request=
         return
 
       request: (callback) ->
-        Request.find({uid_user: req.session.user}).exec (err, resul) ->
+        Request.find({uid_user: req.session.user}).populate('uid_car').exec (err, resul) ->
           i = 0
           len = resul.length
 
           while i < len
             now = new Date(parseInt(resul[i].time) * 1000)
-            resul[i].time = now.format("D.M.Y h:M")
+            resul[i].time = now.format("DD.MM.Y h:mm")
             i++
           callback err, resul
         return
     , (err, results) ->
       res.locals.scripts = script_array
-      res.locals.modal = "modal/addRequest"
+      res.locals.modal = {
+        "modal/addRequest"
+        "modal/infoCars"
+      }
       res.view "request/index",
-        user_car: results.user_car
+        user_cars: results.user_car
         requests: results.request
 
 

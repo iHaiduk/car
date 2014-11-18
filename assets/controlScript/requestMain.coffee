@@ -3,7 +3,7 @@ $(document).ready ->
     paging: true
     info: true
     bFilter: false
-    order: [[ 4, "desc" ]]
+    order: [[ 5, "desc" ]]
     dom: 'rt<"bottom"flp><"clear">'
     oLanguage:
       sSearch: "Search all columns:"
@@ -12,6 +12,27 @@ $(document).ready ->
       zeroRecords: "Nothing found - sorry"
       infoEmpty: "No records available"
       infoFiltered: "(filtered from _MAX_ total records)"
+    iDisplayLength: 3
+    aLengthMenu: [
+      [
+        3
+        5
+        10
+        15
+        50
+        100
+        -1
+      ]
+      [
+        3
+        5
+        10
+        15
+        50
+        100
+        "All"
+      ]
+    ]
 
   $.extend true, $.fn.dataTable.defaults,
     sDom: "<'row'<'col-xs-6'l><'col-xs-6'f>r>" + "t" + "<'row'<'col-xs-6'i><'col-xs-6'p>>"
@@ -82,7 +103,6 @@ $(document).ready ->
       $.post("/request/new",
         data
       ).done (data) ->
-        console.log data
         requestList.row.add([
           data.result.required_item
           data.result.uid_car
@@ -94,6 +114,7 @@ $(document).ready ->
                                     <span></span>
                                 </label>"""
         ]).draw()
+        $("#requestList").find("tr").addClass("text-center")
         return
       return
   return

@@ -47,8 +47,14 @@
         <%- body %>
     </section>
 </section>
-<% if (typeof modal != "undefined") { %>
+<% if (typeof modal != "undefined" && typeof modal != "string") { %>
     <%- partial(modal) %>
+<% } %>
+<% console.log("typeof", typeof modal)
+if (typeof modal != "undefined") { %>
+    <% for (var i = 0; i < modal.length; i++) { %>
+        <%- partial(modal[i]) %>
+    <% } %>
 <% } %>
 <!--SCRIPTS-->
 <script src="/vendor/chosen/chosen.jquery.min.js" type="application/javascript"></script>

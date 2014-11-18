@@ -6,7 +6,7 @@
       paging: true,
       info: true,
       bFilter: false,
-      order: [[4, "desc"]],
+      order: [[5, "desc"]],
       dom: 'rt<"bottom"flp><"clear">',
       oLanguage: {
         sSearch: "Search all columns:",
@@ -15,7 +15,9 @@
         zeroRecords: "Nothing found - sorry",
         infoEmpty: "No records available",
         infoFiltered: "(filtered from _MAX_ total records)"
-      }
+      },
+      iDisplayLength: 3,
+      aLengthMenu: [[3, 5, 10, 15, 50, 100, -1], [3, 5, 10, 15, 50, 100, "All"]]
     });
     $.extend(true, $.fn.dataTable.defaults, {
       sDom: "<'row'<'col-xs-6'l><'col-xs-6'f>r>" + "t" + "<'row'<'col-xs-6'i><'col-xs-6'p>>"
@@ -101,8 +103,8 @@
         });
       } else {
         $.post("/request/new", data).done(function(data) {
-          console.log(data);
           requestList.row.add([data.result.required_item, data.result.uid_car, data.result.type_of_spare_parts, data.result.time, data.result.time, "<label class=\"switch\">\n    <input value=\"<%= requests[num].id %>\" type=\"checkbox\">\n    <span></span>\n</label>"]).draw();
+          $("#requestList").find("tr").addClass("text-center");
         });
       }
     });

@@ -35,6 +35,10 @@ module.exports =
       type: 'integer'
       size: 1
 
+    status:
+      type: 'integer'
+      size: 1
+
     delivery_time:
       type: 'string'
       size: 25

@@ -43,10 +43,10 @@ _Request=
         return
     , (err, results) ->
       res.locals.scripts = script_array
-      res.locals.modal = {
+      res.locals.modal = [
         "modal/addRequest"
         "modal/infoCars"
-      }
+      ]
       res.view "request/index",
         user_cars: results.user_car
         requests: results.request
@@ -56,6 +56,7 @@ _Request=
 
 
   newRequest: (req, res)->
+    require "date-format-lite"
     req.body.uid_car = req.body.user_car
     req.body.uid_user = req.session.user
     req.body.part_number = (if req.body.part_number is "" or not req.body.part_number? then null else parseInt(req.body.part_number))
@@ -65,6 +66,8 @@ _Request=
     req.body.link_item = null if req.body.link_item is ""
     req.body.files = null if req.body.files is ""
     Request.create req.body, (err,result) ->
+      now = new Date(parseInt(result.time) * 1000)
+      result.time = now.format("DD.MM.Y h:mm")
       res.json
         error: err
         result: result

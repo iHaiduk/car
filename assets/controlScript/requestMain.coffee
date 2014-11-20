@@ -1,4 +1,4 @@
-$(document).ready ->
+$ ->
   requestList = $("#requestList").DataTable
     paging: true
     info: true
@@ -105,19 +105,23 @@ $(document).ready ->
       ).done (data) ->
         requestList.row.add([
           data.result.required_item
-          data.result.uid_car
+          """<span class="view_car" data-id='"""+data.result.uid_car+"""'>dfdf23323</span>"""
           data.result.type_of_spare_parts
-          data.result.time
+          0
+          '<div class="label label-warning">В поиске</div>'
           data.result.time
           """<label class="switch">
-                                    <input value="<%= requests[num].id %>" type="checkbox">
+                                    <input value='"""+data.result.id+"""' type="checkbox">
                                     <span></span>
                                 </label>"""
-        ]).draw()
+        ]).draw().nodes().to$().addClass( 'text-center' )
         $("#requestList").find("tr").addClass("text-center")
+        $('#myRequest').modal 'hide'
         return
       return
+
+
+  $(document).delegate ".view_car", "click", ->
+    $('#myCars').modal 'show'
+    return
   return
-
-
-#result: Objectcondition_parts: 1delivery_time: "only_available"files: nullgroup_of_spare_parts: 2id: 5link_item: nullpart_number: nullrequired_item: "цууцу"time: "1416261476"type_of_spare_parts: 1uid_car: 5uid_user: 1

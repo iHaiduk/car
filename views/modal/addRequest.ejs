@@ -15,8 +15,8 @@
                                 <dd>
                                     <select size="1" name="user_car" id="user_car" placeholder="Выберите Ваш автомобиль...">
                                         <%
-                                        for(var i=0; i<user_car.length; i++) { %>
-                                        <option value="<%= user_car[i].id %>"><%= user_car[i].make_name+" "+user_car[i].model_name %></option>
+                                        for(var i=0; i<user_cars.length; i++) { %>
+                                        <option value="<%= user_cars[i].id %>"><%= user_cars[i].make_name+" "+user_cars[i].model_name %></option>
                                         <% } %>
                                     </select>
                                 </dd>

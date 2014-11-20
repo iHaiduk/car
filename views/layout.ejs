@@ -47,11 +47,10 @@
         <%- body %>
     </section>
 </section>
-<% if (typeof modal != "undefined" && typeof modal != "string") { %>
+<%
+if (typeof modal != "undefined" && typeof modal == "string") { %>
     <%- partial(modal) %>
-<% } %>
-<% console.log("typeof", typeof modal)
-if (typeof modal != "undefined") { %>
+<% }else if (typeof modal != "undefined" && typeof modal == "object") { %>
     <% for (var i = 0; i < modal.length; i++) { %>
         <%- partial(modal[i]) %>
     <% } %>

@@ -104,3 +104,6 @@
     padding: 0 8px 10px 8px;
     cursor: pointer;
 }
+#requestList .view_car{
+    cursor: pointer;
+}

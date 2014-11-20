@@ -27,8 +27,7 @@
                         <tr class="text-center">
                             <td><%= requests[num].required_item %></td>
                             <td>
-                                <%if(requests[num].uid_car!=null)%>
-                                 <%= requests[num].uid_car.make_name +" "+ requests[num].uid_car.model_name %>
+                                <span class="view_car" data-id="<%if(requests[num].uid_car!=null)%><%= requests[num].uid_car.id%>"><%if(requests[num].uid_car!=null)%><%= requests[num].uid_car.make_name +" "+ requests[num].uid_car.model_name %></span>
                             </td>
                             <td>0</td>
                             <td>0</td>
@@ -71,10 +70,6 @@
             <!-- END panel-->
         </div>
         <div class="col-lg-7">
-
-            <!-- START DATATABLE 1 -->
-            <div class="row">
-                <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">Список СТО |
                             <small>Сперва ближайшие</small>
@@ -110,9 +105,6 @@
                             </table>
                         </div>
                     </div>
-                </div>
-            </div>
-            <!-- END DATATABLE 1 -->
         </div>
     </div>
     <!-- END row-->

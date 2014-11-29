@@ -39,6 +39,24 @@ class _User
       console.log "Need authorization! "+sails.getBaseurl()+"/user/login"
       callback null, null if callback and typeof (callback) is "function"
 
+  getUserCar: (param, callback) ->
+    param.body.uid_car = param.body.user_car
+    param.body.uid_user = param.session.user
+    param.body.part_number = (if param.body.part_number is "" or not param.body.part_number? then null else parseInt(param.body.part_number))
+    param.body.group_of_spare_parts = parseInt(param.body.group_of_spare_parts)
+    param.body.type_of_spare_parts = parseInt(param.body.type_of_spare_parts)
+    param.body.condition_parts = parseInt(param.body.condition_parts)
+    param.body.link_item = null if param.body.link_item is ""
+    param.body.files = null if param.body.files is ""
+    Request.create param.body, (err,result) ->
+      now = new Date(parseInt(result.time) * 1000)
+      result.time = now.format("DD.MM.Y h:mm")
+      UserCar.find(result.uid_car).exec (err, car) ->
+        callback
+          error: err
+          result: result
+          car: car[0].make_name + " " + car[0].model_name
+
   addFile:  (data = {}, req, callback) ->
     path = require('path')
     Files.create

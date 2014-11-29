@@ -2,6 +2,31 @@ module.exports =
   connection: "someMysqlServer"
   tableName: "users"
   schema: true
+
+  autoCreatedAt: false
+  autoUpdatedAt: false
+  attributes:
+    username:
+      type: "string"
+      required: true
+      unique: true
+
+    password:
+      type: "string"
+      required: true
+
+    toJSON: ->
+      obj = @toObject()
+      delete obj.password
+
+      obj
+
+
+###
+module.exports =
+  connection: "someMysqlServer"
+  tableName: "users"
+  schema: true
   autoPK: false
 
   autoCreatedAt: false
@@ -37,3 +62,8 @@ module.exports =
     files:
       collection: "Files"
       via: "uid_user"
+
+    passports:
+      collection: "Passport"
+      via: "user"
+###

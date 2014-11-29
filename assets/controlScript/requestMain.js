@@ -103,7 +103,7 @@
         });
       } else {
         $.post("/request/new", data).done(function(data) {
-          requestList.row.add([data.result.required_item, "<span class=\"view_car\" data-id='" + data.result.uid_car + "'>dfdf23323</span>", data.result.type_of_spare_parts, 0, '<div class="label label-warning">В поиске</div>', data.result.time, "<label class=\"switch\">\n<input value='" + data.result.id + "' type=\"checkbox\">\n    <span></span>\n</label>"]).draw().nodes().to$().addClass('text-center');
+          requestList.row.add([data.result.required_item, "<span class=\"view_car\" data-id='" + data.result.uid_car + "'>" + data.car + "</span>", data.result.type_of_spare_parts, 0, '<div class="label label-warning">В поиске</div>', data.result.time, "<label class=\"switch\">\n<input value='" + data.result.id + "' type=\"checkbox\">\n    <span></span>\n</label>"]).draw().nodes().to$().addClass('text-center');
           $("#requestList").find("tr").addClass("text-center");
           $('#myRequest').modal('hide');
         });

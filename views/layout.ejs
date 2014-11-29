@@ -47,14 +47,7 @@
         <%- body %>
     </section>
 </section>
-<%
-if (typeof modal != "undefined" && typeof modal == "string") { %>
-    <%- partial(modal) %>
-<% }else if (typeof modal != "undefined" && typeof modal == "object") { %>
-    <% for (var i = 0; i < modal.length; i++) { %>
-        <%- partial(modal[i]) %>
-    <% } %>
-<% } %>
+
 <!--SCRIPTS-->
 <script src="/vendor/chosen/chosen.jquery.min.js" type="application/javascript"></script>
 <script src="/vendor/slider/js/bootstrap-slider.js" type="application/javascript"></script>

@@ -105,7 +105,7 @@ $ ->
       ).done (data) ->
         requestList.row.add([
           data.result.required_item
-          """<span class="view_car" data-id='"""+data.result.uid_car+"""'>dfdf23323</span>"""
+          """<span class="view_car" data-id='"""+data.result.uid_car+"""'>"""+data.car+"""</span>"""
           data.result.type_of_spare_parts
           0
           '<div class="label label-warning">В поиске</div>'
